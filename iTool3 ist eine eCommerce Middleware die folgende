@@ -1,0 +1,50 @@
+iTool3 ist eine eCommerce Middleware die folgende Kernfunktionalitäten bietet:
+
+- Anbindung an verschiedene Verkaufsplattformen wie z.B. eBay und Amazon
+- Integration eines Onlineshops
+- 
+
+
+iTool3 bietet als Multi Channel Markteing Solution bzw. eCommerce Middleware folgende Möglichkeiten:
+
+- das Anlegen von mehreren Benutzern und Konten
+- Verwaltung und Import von Produkten
+- Anbindung an verschiedene Verkaufsplattformen wie z.B. eBay und Amazon
+- Integration eines Onlineshops (z.B. eines Magento Shops)
+
+
+
+Das i-Tool ist eine eCommerce Software Lösung zur Steuerung von
+Produktsortimenten auf verschiedenen Marktplätzen mit dem Ziel, den
+Vertriebsprozess zu automatisieren. Es ermöglicht dem User über eine einzelne
+Benutzeroberfläche Produkte auf Marktplätzen wie eBay, Amazon oder einem Magento Store
+zu verwalten. Produkte können dabei händisch erstellt oder aus bestehenden Listen in die Software
+eingepflegt werden. Im Anschluss ist es möglich diese Produkte auf einem oder mehreren Marktplätzen anzubieten.
+Die Verwaltung und Abwicklung der eingehenden Bestellungen läuft dabei komplett über das iTool.
+Für jeden Marktplatz können unterschiedliche Attribute mit wiederum unterschiedlichen Werten angelegt werden.
+Die Produktverwaltung der Software folgt dabei dem Entity-Attribute-Value Modell.
+
+
+Ziel der Arbeit ist die Erweiterung der Software um eine Schnittstelle zum Mercateo Marktplatz.
+Im Fokus liegen dabei 1. die Erstellung eines Produktkataloges entsprechend der Spezifikationen von Mercateo, sowie 2.
+die Bereitstellung eines Webservices zur automatisierten Abfrage der Lagerbestände seitens Mercateo. 
+Mercateo verwendet für den Datentransfer das vom Bundesverband Materialwirtschaft, Einkauf und Logistik e. V. (BME) spezifizierte BMECat Format in der Version 1.2.
+
+BMECat ist ein Standard für den Austausch von Katalogdaten zwischen Lieferanten und beschaffenden Unternehmen, basiert auf XML und definiert eine Reihe von MUSS und KANN Feldern,
+die dazugehörigen Datentypen und Feldlängen sowie 3 verschiedene Katalogtransaktionnen (Erstellen eines neuen Kataloges, Aktualisierung von Produkten eines bestehenden Kataloges, sowie die Aktualisierung von Preisen bestehender Produkte).
+
+
+Ein BMECat Dokument ist dabei folgendermaßen aufgebaut:
+
+1. XML-Deklaration und Header-Bereich (mit Informationen über Kataloganbieter und Empfänger, Bezeichnung und Erstellungsdatum des Kataloges etc.  )
+2. Produktgruppensystem (Baumstruktur der Produktgruppen mit den Elementen Root, Node und Leaf)
+3. Artikel (mit Attributen und Werten)
+4. Zuordnung der Artikel zu den Produktgruppen.
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+Bewertung von theoretischen Ansätzen, Konzepten, Methoden, Verfahren:
+
+Hier können die der Software zugrundeliegenden Techniken angesprochen werden. z.B.
+	- die Datenhaltung in (MySQL) Datenbanken
+	- das MVC Prinzip
+	- das EAV Prinzip
+	- das Cake Framework
+	- (die Cake Console)
+	- GET und POST für die Lagerstandsabfrage (also HTTP Requests)
+	- vll. Softwarearchitekturansätze (was auch immer)

@@ -1,0 +1,11 @@
+Bewertung von theoretischen Ansätzen, Konzepten, Methoden, Verfahren
+
+-> CakePHP kurz erläutern, die Shell erläutern, diskutieren warum das geeigent ist
+-> vll auch XML und insbesondere natürlcih den BMECat erläutern und warum der geeignet ist
+
+
+XML über FTP -> uncool (Übertragungsfehler können auftauchen, keine Prüfsummen)
+SOAP oder REST wären besser 
+
+Konzept
+

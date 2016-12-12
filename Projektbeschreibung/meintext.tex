@@ -1,0 +1,167 @@
+% ----------------------------------------------------------------------------------------------------------
+% Kapitel
+% ----------------------------------------------------------------------------------------------------------
+\section{Projektbeschreibung}
+Gegenstand der Arbeit ist die Anbindung der von der Firma iWays Sales Solutions entwickelten Software iTool3 an den Mercateo Marketplace. \\\\
+iTool3 ist eine auf dem CakePHP 3.3 - Framework basierende eCommerce Software Lösung zur Steuerung von
+Produktsortimenten auf verschiedenen Marktplätzen mit dem Ziel, den
+Vertriebsprozess zu automatisieren. Es ermöglicht dem User über eine einzelne
+Benutzeroberfläche Produkte auf Marktplätzen wie eBay, Amazon oder einem Magento Store
+zu verwalten. Produkte können dabei händisch erstellt oder aus bestehenden Datenquellen in die Software
+eingepflegt werden. Im Anschluss ist es möglich diese Produkte auf einem oder mehreren Marktplätzen anzubieten.
+Die Verwaltung und Abwicklung der eingehenden Bestellungen läuft dabei komplett über das iTool.
+Da für jeden Marktplatz unterschiedliche Daten benötigt werden um auf ihm erfolgreich zu verkaufen, können für jedes Produkt unterschiedliche Attribute mit wiederum unterschiedlichen Werten angelegt werden.
+Die Produktverwaltung der Software folgt daher dem Entity-Attribute-Value Modell.
+
+
+Ziel der Arbeit ist die Erweiterung der Software um eine Schnittstelle zum Mercateo Marktplatz.
+Im Fokus liegen dabei 
+\begin{enumerate}
+\item die Erstellung eines Produktkataloges entsprechend der Spezifikationen von Mercateo
+\item die Bereitstellung eines Webservices zur automatisierten Abfrage der Lagerbestände seitens Mercateo
+\end{enumerate}
+
+Mercateo verwendet für den Datentransfer das vom Bundesverband Materialwirtschaft, Einkauf und Logistik e. V. (BME) spezifizierte BMECat Format in der Version 1.2.
+
+BMECat ist ein Standard für den Austausch von Katalogdaten zwischen Lieferanten und beschaffenden Unternehmen, basiert auf XML und definiert eine Reihe von MUSS und KANN Feldern,
+die dazugehörigen Datentypen und Feldlängen, sowie 3 verschiedene Katalogtransaktionen:
+
+\begin{itemize}
+\item Erstellen eines neuen Kataloges
+\item Aktualisierung von Produkten eines bestehenden Kataloges
+\item Aktualisierung von Preisen bestehender Produkte
+\end{itemize}
+
+
+
+Ein BMECat Dokument ist dabei folgendermaßen aufgebaut:
+	
+	\begin{enumerate}
+	
+		\item XML-Deklaration und Header-Bereich (mit Informationen über Kataloganbieter und Empfänger, Bezeichnung und Erstellungsdatum des Kataloges etc.  )
+			\\Bsp. für einen Header:
+		\begin{lstlisting}
+		<HEADER>
+			<GENERATOR_INFO> Kann </GENERATOR_INFO>
+			<CATALOG> Muss </CATALOG>
+			<BUYER> Kann </BUYER>
+			<SUPPLIER> Muss </SUPPLIER>
+		</HEADER>
+		\end{lstlisting}
+		Bsp. für XML Deklaration:
+		\begin{lstlisting}
+		<?xml version="1.0" encoding="UTF-8"?>
+		<!DOCTYPE BMECAT SYSTEM "bmecat_new_catalog.dtd">
+		<BMECAT version="1.2" xml:lang="de" xmlns="http://www.bmecat.org/bmecat/1.2/bmecat_new_catalog">
+		\end{lstlisting}
+		\item Produktgruppensystem (Baumstruktur der Produktgruppen mit den Elementen Root, Node und Leaf)
+		\begin{lstlisting}
+		<CATALOG_STRUCTURE type="root">
+		   <GROUP_ID>1</GROUP_ID>
+		   <GROUP_NAME>Katalog</GROUP_NAME>
+		   <PARENT_ID>0</PARENT_ID>
+		   <GROUP_ORDER>1</GROUP_ORDER>
+		</CATALOG_STRUCTURE>
+		  <CATALOG_STRUCTURE type="node">
+		   <GROUP_ID>2</GROUP_ID>
+		   <GROUP_NAME>Spiele &amp; Konsolen</GROUP_NAME>
+		   <PARENT_ID>1</PARENT_ID>
+		 </CATALOG_STRUCTURE>
+		 <CATALOG_STRUCTURE type="leaf">
+		   <GROUP_ID>7</GROUP_ID>
+		   <GROUP_NAME>PlayStation 4</GROUP_NAME>
+		   <PARENT_ID>2</PARENT_ID>
+		 </CATALOG_STRUCTURE>
+		\end{lstlisting}
+		
+		
+		
+		\item Artikel (mit Attributen und Werten)
+		
+		\begin{lstlisting}
+		<ARTICLE mode="new">
+			<SUPPLIER_AID>9057320097280</SUPPLIER_AID>
+			<ARTICLE_DETAILS>
+			   	<DESCRIPTION_SHORT>GTA 5</DESCRIPTION_SHORT>
+				<DESCRIPTION_LONG>Das tolle neue Spiel</DESCRIPTION_LONG>
+				<EAN>87126723434</EAN>
+			... weitere Attribute ...
+			</ARTICLE_DETAILS>
+			...weitere Felder ...
+		</ARTICLE>
+		\end{lstlisting}
+		
+
+		\item Zuordnung der Artikel zu den Produktgruppen.
+		\begin{lstlisting}
+		<ARTICLE_TO_CATALOGGROUP_MAP>
+			<ART_ID>9057320097280</ART_ID>
+			<CATALOG_GROUP_ID>7</CATALOG_GROUP_ID>
+		</ARTICLE_TO_CATALOGGROUP_MAP>
+		\end{lstlisting}
+	
+	\end{enumerate}
+	
+	\textbf{Teil 1} der Arbeit wird sich mit der Überführung der im iTool hinterlegten Produktdaten in das oben vorgestellte Format befassen. Alle vorhandenen Funktionalitäten bezüglich der Pflege und Änderung von Artikeln müssen dabei berücksichtigt und entsprechend der BMECat Spezifikation umgesetzt werden. Die Erzeugung der Produktkataloge erfolgt dabei über den CakePHP CLI-Client.  \\\\
+
+
+
+	\textbf{Teil 2} der Arbeit befasst sich mit der Bereitstellung eines Webservices, um Mercateo zu ermöglichen, die Lagerbestände der einzelnen Produkte abzurufen.\\
+	Die Anforderungen dafür sind:
+	
+	\begin{itemize}
+	\item Auf Anfrage der Artikelnummer mit HTTP muss eine Zahl zurückgegeben werden.
+	\item Die zurückgegebene Zahl entspricht dem Lagerstandswert.
+	\item Der Rückgabewert ist eine positive ganze Zahl (einschließlich 0).
+
+
+	\end{itemize}
+	
+	Die Abfrage erfolgt dabei über das HTTP Protokoll in folgender Form:
+	\begin{lstlisting}[language=Python]						
+		http://suppliername.de/availibility?Beispielartikelnummer
+	\end{lstlisting}
+	
+	
+	
+\pagebreak	
+	
+\section{Arbeitsplan}
+
+ca. 10 Arbeitspakete zu je 40 Stunden
+\subsection{Praktischer Teil}
+
+\begin{enumerate}
+\item Anforderungsdefinition, Analyse	
+\item Entwurf 
+\item Implementierung
+\item Test
+
+\end{enumerate}	
+
+\subsection{Schriftlicher Teil}
+
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item Einleitung
+\item Grundlagen , Analyse der Aufgabe und der Anforderungen,  Definition	
+\item Entwurf,  Implementierung,  Test
+\item Ergebnis  
+\item Literatur, Verzeichnisse, Anhang
+\end{enumerate}	
+\subsection{Abschluss}
+\begin{enumerate}
+\setcounter{enumi}{9}
+\item Redaktion \& Drucklegung
+
+\end{enumerate}
+
+\section{Zeitplan}
+
+Auflistung der geplanten Arbeitszeit je Einheit:
+\begin{enumerate}
+\item Praktischer Teil : 5 Wochen
+\item Schriftlicher Teil : 4 Wochen
+\item Abschluss : 1 Woche
+\end{enumerate}
+

@@ -1,0 +1,33 @@
+Klar formulierte Zielstellung:
+
+
+Implementierung folgender Funktionalitäten:
+
+
+	- Die in iTool hinterlegten Produkt- bzw. Herstellerdaten sollen in ein gültiges und vollständiges BMECat Dokument entsprechend der 
+	  Mercateo Anfoderungen überführt werden.
+	  Dabei ist insbesondere auf die Unterschiede und Besonderheiten der notwendigen beiden Transaktionsarten "T_NEW_CATALOG" - also die 
+	  Erstellung eines neuen Kataloges - und "T_UPDATE_PRODUCTS" - also der Änderungen von Produktdaten, sowie dem löschen und neu erstellen von Produkten - zu achten .
+
+	- Gültig bedeutet in diesem Fall, dass Struktur und Inhalt des Dokuments fehlerfrei gegen die entsprechende XSD Datei laufen, d.h. die 
+	  Felder müssen in der richtigen Reihenfolge unter Beachtung der Datentypen und Längenbegrenzungen sowie Formatlimitierungen (z.B. keine Sonderzeichen in der SKU (o.ä.)) geschrieben werden. 
+
+	- Vollständig heißt, dass zum einen mindestens jene Felder im BMECat Dokument vorkommen, die die BMECat Spezifikation verlangt.
+	  Zusätzlich müssen jene Felder vorkommen, die die Mercateo Spezifikation erfordert und zwar unter zusätzlicher Beachtung der Limitierungen bzw. Besonderheiten jener Spezifikation. 
+
+	- Die Produktkategoriestruktur des iTool soll in das Kataloggruppensystem ("CATALOG_GROUP_SYSTEM") des BMECat überführt werden.
+
+	- die Implementierung der Katalogerstellungslogik erfolgt in einer Cake Shell. 
+	- Liegt noch kein Katalog vor, wird ein neuer Katalog erstellt; ein Updatekatalog wird erstellt, wenn es Änderungen bei den Produktdaten 
+	  gab. 
+
+	- Kataloge können für unterschiedliche Verkäufer erstellt werden.
+
+	- Die Produkt und Katalogdaten können über die Benutzeroberfläche des iTool eingesehen bzw. verändert werden. 
+
+	- Es soll Mercateo ermöglicht werden Bestandsdaten zu den im Katalog vermerkten Produkten über ein Webinerface abzurufen.
+
+	- Bei der Katalogerstellung ist darauf zu achten, dass es zu keinen Arbeitsspeicherüberläufen kommen kann.
+
+
+
