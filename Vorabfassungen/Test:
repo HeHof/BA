@@ -1,0 +1,6 @@
+Test:
+
+	- wie und wo teste ich? -> bis jetzt nur gegen XSD File
+	- gibt es Methoden die ich testen sollte? -> welche ?
+	- habe einen Selenium Test geschrieben um den Update Prozess zu automatisieren.
+	

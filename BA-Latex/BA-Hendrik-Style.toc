@@ -4,5 +4,7 @@
 \contentsline {subsubsection}{\numberline {1.1.1}Terminologie}{1}{subsubsection.1.1.1}
 \contentsline {subsubsection}{\numberline {1.1.2}Transaktionen}{1}{subsubsection.1.1.2}
 \contentsline {subsubsection}{\numberline {1.1.3}Aufbau}{1}{subsubsection.1.1.3}
-\contentsline {subsection}{\numberline {1.2}Informelle Aufgabenbeschreibung}{8}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}Zielstellung}{9}{subsection.1.3}
+\contentsline {section}{\numberline {2}Analyse der Aufgabe und der Anforderungen}{8}{section.2}
+\contentsline {subsection}{\numberline {2.1}Bewertung von theoretischen Ans\IeC {\"a}tzen, Konzepten, Methoden, Verfahren}{8}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Informelle Aufgabenbeschreibung}{9}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Zielstellung}{9}{subsection.2.3}
