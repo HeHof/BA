@@ -1,4 +1,52 @@
 \section{Grundlagen}
+	
+	\subsection{iTool3}
+	
+	iTool3 ist eine auf dem CakePHP 3.3 - Framework basierende eCommerce Software Lösung zur Steuerung von Produktsortimenten auf verschiedenen Marktplätzen mit dem Ziel, den
+	Vertriebsprozess zu automatisieren. Es ermöglicht dem Benutzer über eine einzelne Benutzeroberfläche Produkte auf Marktplätzen wie eBay, Amazon oder einem Magento Store
+	zu verwalten. Produkte können dabei händisch erstellt oder aus bestehenden Datenquellen in die Software	eingepflegt werden. Im Anschluss ist es möglich diese Produkte auf einem oder mehreren Marktplätzen anzubieten. Die Verwaltung und Abwicklung der eingehenden Bestellungen läuft dabei komplett über das iTool.
+	Da für jeden Marktplatz unterschiedliche Daten benötigt werden um auf ihm erfolgreich zu verkaufen, können für jedes Produkt unterschiedliche Attribute mit wiederum unterschiedlichen Werten angelegt werden. Die Produktverwaltung der Software folgt daher dem Entity-Attribute-Value Modell.
+	
+	
+	\subsubsection{Verkäufer und Benutzer}
+	
+	Es wird unterschieden zwischen Verkäufern (Seller) und Benutzern (User). Ein Verkäufer ist z.B. "Markisenshop 2000". Diesem Verkäufer werden Benutzer zugeordnet, die mit mehr oder weniger Rechten ausgestattet, die Produkte z.B. nur einsehen können oder Kontrolle über die gesamte Produkt- und Bestellverwaltung haben.\\
+	\begin{minipage}{\linewidth}
+		\vspace{1em}
+		\centering
+		\includegraphics[width=0.6\linewidth]{img/ERD_Seller_User_complete}
+		\captionof{figure}[ERD]{ER-Diagramm: Verkäufer - Benutzer}
+		\label{fig:header}
+		\vspace{1em}
+	\end{minipage}
+
+	 
+	
+	\subsubsection{Produktverwaltung}
+	
+	Die Produktverwaltung ist aufgeteilt in Produkte und Kategorien. \textbf{Produkte} besitzen Attribute wie Titel, Preis, Beschreibung etc. die für jeden Marktplatz auf denen diese angeboten werden sollen unterschiedlich ausfallen können. Zudem kann gewählt werden ob ein Produkt auf einem bestimmten Marktplatz angeboten werden soll oder nicht. Ein Produkt kann dabei mehreren \textbf{Kategorien} zugeordnet sein.\\
+	\begin{minipage}{\linewidth}
+		\vspace{1em}
+		\centering
+		\includegraphics[width=0.6\linewidth]{img/ERD_Category_Product}
+		\captionof{figure}[ERD]{ER-Diagramm: Kategorie - Produkt}
+		\label{fig:header}
+		\vspace{1em}
+	\end{minipage}
+	Eine Kind-Kategorie hat jeweils genau eine Eltern-Kategorie. Eine Eltern-Kategorie kann aber mehrere Kinder haben. Produkte sind genau einem Verkäufer zugeordnet. \\
+	\begin{minipage}{\linewidth}
+		\vspace{1em}
+		\centering
+		\includegraphics[width=0.6\linewidth]{img/ERD_Seller_Product}
+		\captionof{figure}[ERD]{ER-Diagramm: Verkäufer - Benutzer}
+		\label{fig:header}
+		\vspace{1em}
+	\end{minipage}
+	
+	\subsubsection{Dashboard}
+	
+	Auf dem Dashboard werden Informationen über die Anzahl der insgesamt eingegangenen Bestellungen, den durchschnittlichen Bestellwert, die Gesamtzahl der Kunden, den insgesamt erwirtschafteten Umsatz, eine Übersicht der zuletzt eingegangenen Bestellungen sowie eine graphische Übersicht der während eines Jahres erwirtschafteten Umsätze angezeigt. 
+	
 	\subsection{Der BMECat}
 	
 	Der BMECat ist ein vom 'Bundesverband Materialwirtschaft, Einkauf und Logistik e.V' in Zusammenarbeit mit dem 'eBusiness Standardization Committee' entwickelter XML

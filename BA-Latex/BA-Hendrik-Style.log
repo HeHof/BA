@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.9.5)  13 DEC 2016 16:23
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.9.5)  20 DEC 2016 15:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -841,6 +841,15 @@ LaTeX Warning: Label `fig:header' multiply defined.
 
 LaTeX Warning: Label `fig:header' multiply defined.
 
+
+LaTeX Warning: Label `fig:header' multiply defined.
+
+
+LaTeX Warning: Label `fig:header' multiply defined.
+
+
+LaTeX Warning: Label `fig:header' multiply defined.
+
 ))
 \openout1 = `BA-Hendrik-Style.aux'.
 
@@ -946,7 +955,7 @@ LaTeX Info: Redefining \nameref on input line 64.
 
 \c@lstlisting=\count148
 
-<img/HTW-quer-rgb.pdf, id=40, 725.71124pt x 172.645pt>
+<img/HTW-quer-rgb.pdf, id=56, 725.71124pt x 172.645pt>
 File: img/HTW-quer-rgb.pdf Graphic file (type pdf)
 
 <use img/HTW-quer-rgb.pdf>
@@ -995,280 +1004,352 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 1.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 2.
+(babel)             in language  on input line 3.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 2.
+(babel)             in language  on input line 3.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 7.
+(babel)             in language  on input line 11.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 7.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 10.
+(babel)             in language  on input line 11.
+
+<img/ERD_Seller_User_complete.png, id=88, 1129.21875pt x 466.74374pt>
+File: img/ERD_Seller_User_complete.png Graphic file (type png)
+
+<use img/ERD_Seller_User_complete.png>
+Package pdftex.def Info: img/ERD_Seller_User_complete.png used on input line 17
+.
+(pdftex.def)             Requested size: 273.14923pt x 112.9039pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 18.
+See the caption package documentation for explanation.
+
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 25.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 25.
+<img/ERD_Category_Product.png, id=90, 1204.5pt x 286.06876pt>
+File: img/ERD_Category_Product.png Graphic file (type png)
+
+<use img/ERD_Category_Product.png>
+Package pdftex.def Info: img/ERD_Category_Product.png used on input line 31.
+(pdftex.def)             Requested size: 273.14923pt x 64.8734pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 32.
+See the caption package documentation for explanation.
+
+<img/ERD_Seller_Product.png, id=91, 1092.08pt x 406.51875pt>
+File: img/ERD_Seller_Product.png Graphic file (type png)
+
+<use img/ERD_Seller_Product.png>
+Package pdftex.def Info: img/ERD_Seller_Product.png used on input line 40.
+(pdftex.def)             Requested size: 273.14923pt x 101.67905pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 41.
+See the caption package documentation for explanation.
+
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 45.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 45.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 45.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 45.
+[1
+
+ <./img/ERD_Seller_User_complete.png>]
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 46.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 46.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 50.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 50.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 55.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 55.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 58.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 10.
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 58.
 
-Overfull \hbox (37.19711pt too wide) in paragraph at lines 8--13
+Overfull \hbox (37.19711pt too wide) in paragraph at lines 56--61
 \OT1/cmr/m/n/10.95 kel zu-ge-ord-net wer-den k[]onnen. Die-se wird im BMEcat-Fo
 rmat durch das Ele-ment \OT1/pcr/b/n/10.95 CATALOG[]STRUCTURE
  []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 14.
+(babel)             in language  on input line 61.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 14.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 17.
+(babel)             in language  on input line 61.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 61.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 61.
+[2 <./img/ERD_Category_Product.png> <./img/ERD_Seller_Product.png>]
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 62.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 62.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 65.
+
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 17.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 65.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 23.
+(babel)             in language  on input line 71.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 23.
+(babel)             in language  on input line 71.
 
-Overfull \hbox (27.37782pt too wide) in paragraph at lines 29--31
+Overfull \hbox (27.37782pt too wide) in paragraph at lines 77--79
 []\OT1/cmr/m/n/10.95 XML-Deklaration und Header-Bereich (mit In-for-ma-tio-nen 
 []uber Ka-ta-lo-gan-bie-ter und Empf[]anger,
  []
 
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 31.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 31.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 31.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 31.
-[1
+LaTeX Font Info:    Try loading font information for OML+cmss on input line 80.
 
-]
-LaTeX Font Info:    Try loading font information for OML+cmss on input line 32.
-
-LaTeX Font Info:    No file OMLcmss.fd. on input line 32.
-
+LaTeX Font Info:    No file OMLcmss.fd. on input line 80.
 
 LaTeX Font Warning: Font shape `OML/cmss/m/n' undefined
 (Font)              using `OML/cmm/m/it' instead
-(Font)              for symbol `textless' on input line 32.
+(Font)              for symbol `textless' on input line 80.
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 87.
+(babel)             in language  on input line 98.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 87.
+(babel)             in language  on input line 98.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 87.
+(babel)             in language  on input line 98.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 87.
-[2] <img/BMECat_Header.png, id=133, 1882.03125pt x 1016.79875pt>
+(babel)             in language  on input line 98.
+[3]
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 147.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 147.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 147.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 147.
+ [4] <img/BMECat_Header.png, id=177, 1882.03125pt x 1016.79875pt>
 File: img/BMECat_Header.png Graphic file (type png)
 
 <use img/BMECat_Header.png>
-Package pdftex.def Info: img/BMECat_Header.png used on input line 103.
+Package pdftex.def Info: img/BMECat_Header.png used on input line 151.
 (pdftex.def)             Requested size: 455.24411pt x 245.94504pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 104.
+(caption)                particular \caption on input line 152.
 See the caption package documentation for explanation.
 
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 115.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 115.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 115.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 115.
-[3 <./img/BMECat_Header.png>]
-<img/newCatalog.png, id=148, 1317.92375pt x 451.6875pt>
+<img/newCatalog.png, id=178, 1317.92375pt x 451.6875pt>
 File: img/newCatalog.png Graphic file (type png)
 
 <use img/newCatalog.png>
-Package pdftex.def Info: img/newCatalog.png used on input line 120.
+Package pdftex.def Info: img/newCatalog.png used on input line 168.
 (pdftex.def)             Requested size: 364.19667pt x 124.8175pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 121.
+(caption)                particular \caption on input line 169.
 See the caption package documentation for explanation.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--127
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
 
  []
 
-<img/updateProducts.png, id=150, 1393.205pt x 339.2675pt>
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 180.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 180.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 180.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 180.
+[5 <./img/BMECat_Header.png> <./img/newCatalog.png>]
+<img/updateProducts.png, id=190, 1393.205pt x 339.2675pt>
 File: img/updateProducts.png Graphic file (type png)
 
 <use img/updateProducts.png>
-Package pdftex.def Info: img/updateProducts.png used on input line 136.
+Package pdftex.def Info: img/updateProducts.png used on input line 184.
 (pdftex.def)             Requested size: 364.19667pt x 88.68373pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 137.
+(caption)                particular \caption on input line 185.
 See the caption package documentation for explanation.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
+Underfull \hbox (badness 10000) in paragraph at lines 198--199
 
  []
 
 
-Overfull \hbox (23.83392pt too wide) in paragraph at lines 152--153
+Overfull \hbox (23.83392pt too wide) in paragraph at lines 200--201
 []\OT1/cmr/m/n/10.95 Im Ele-ment \OT1/pcr/m/n/10.95 CATALOG[]GROUP[]SYSTEM \OT1
 /cmr/m/n/10.95 wer-den die \OT1/pcr/m/n/10.95 GROUP[]SYSTEM[]ID \OT1/cmr/m/n/10
 .95 und der \OT1/pcr/m/n/10.95 GROUP[]SYSTEM[]NAME
  []
 
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 153.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 153.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 153.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 153.
-[4 <./img/newCatalog.png> <./img/updateProducts.png>]
-<img/catalogGroupSystem.png, id=162, 1806.75pt x 815.045pt>
+<img/catalogGroupSystem.png, id=191, 1806.75pt x 815.045pt>
 File: img/catalogGroupSystem.png Graphic file (type png)
 
 <use img/catalogGroupSystem.png>
-Package pdftex.def Info: img/catalogGroupSystem.png used on input line 157.
+Package pdftex.def Info: img/catalogGroupSystem.png used on input line 205.
 (pdftex.def)             Requested size: 318.66948pt x 143.7543pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 158.
+(caption)                particular \caption on input line 206.
 See the caption package documentation for explanation.
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 162.
+(babel)             in language  on input line 210.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 162.
+(babel)             in language  on input line 210.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 162.
+(babel)             in language  on input line 210.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 162.
-[5 <./img/catalogGroupSystem.png>]
-Overfull \hbox (42.42735pt too wide) in paragraph at lines 163--165
+(babel)             in language  on input line 210.
+[6 <./img/updateProducts.png>]
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 210.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 210.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 210.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 210.
+ [7 <./img/catalogGroupSystem.png>]
+Overfull \hbox (42.42735pt too wide) in paragraph at lines 211--213
 \OT1/cmr/m/n/10.95 nar-ti-kel, so bil-det sich die Ar-ti-kel-num-mer aus der \O
 T1/pcr/m/n/10.95 SUPPLIER[]AID \OT1/cmr/m/n/10.95 und der \OT1/pcr/m/n/10.95 SU
 PPLIER[]AID[]SUPPLEMENT\OT1/cmr/m/n/10.95 .
  []
 
-<img/Article.png, id=170, 2410.00375pt x 2116.90875pt>
+<img/Article.png, id=207, 2410.00375pt x 2116.90875pt>
 File: img/Article.png Graphic file (type png)
  <use img/Article.png>
-Package pdftex.def Info: img/Article.png used on input line 169.
+Package pdftex.def Info: img/Article.png used on input line 217.
 (pdftex.def)             Requested size: 455.24411pt x 399.85884pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 170.
+(caption)                particular \caption on input line 218.
 See the caption package documentation for explanation.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 185--186
+Underfull \hbox (badness 10000) in paragraph at lines 233--234
 
  []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 187.
+(babel)             in language  on input line 235.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 187.
+(babel)             in language  on input line 235.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 187.
+(babel)             in language  on input line 235.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 187.
-[6 <./img/Article.png>]
-Overfull \hbox (42.97502pt too wide) in paragraph at lines 187--188
+(babel)             in language  on input line 235.
+[8 <./img/Article.png>]
+Overfull \hbox (42.97502pt too wide) in paragraph at lines 235--236
 []\OT1/cmr/m/n/10.95 Um Pro-duk-te ih-ren Ka-te-go-ri-en zu-ord-nen zu k[]onnen
  wird das Ele-ment \OT1/pcr/m/n/10.95 ARTICLE[]TO[]CATALOGGROUP[]MAP
  []
 
-<img/articleGroupMap.png, id=182, 1355.0625pt x 339.2675pt>
+<img/articleGroupMap.png, id=219, 1355.0625pt x 339.2675pt>
 File: img/articleGroupMap.png Graphic file (type png)
 
 <use img/articleGroupMap.png>
-Package pdftex.def Info: img/articleGroupMap.png used on input line 192.
+Package pdftex.def Info: img/articleGroupMap.png used on input line 240.
 (pdftex.def)             Requested size: 318.66948pt x 79.7848pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 193.
+(caption)                particular \caption on input line 241.
 See the caption package documentation for explanation.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 206--207
+Underfull \hbox (badness 10000) in paragraph at lines 254--255
 
  []
 
-<img/newCatalogLogik.png, id=183, 2145.01375pt x 1589.94pt>
+<img/newCatalogLogik.png, id=220, 2145.01375pt x 1589.94pt>
 File: img/newCatalogLogik.png Graphic file (type png)
 
 <use img/newCatalogLogik.png>
-Package pdftex.def Info: img/newCatalogLogik.png used on input line 213.
+Package pdftex.def Info: img/newCatalogLogik.png used on input line 261.
 (pdftex.def)             Requested size: 295.90588pt x 219.31491pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 214.
+(caption)                particular \caption on input line 262.
 See the caption package documentation for explanation.
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 221.
+(babel)             in language  on input line 269.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 221.
+(babel)             in language  on input line 269.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 221.
+(babel)             in language  on input line 269.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 221.
-[7 <./img/articleGroupMap.png> <./img/newCatalogLogik.png>]
+(babel)             in language  on input line 269.
+[9 <./img/articleGroupMap.png> <./img/newCatalogLogik.png>]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 230.
+(babel)             in language  on input line 278.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 230.
+(babel)             in language  on input line 278.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 232.
+(babel)             in language  on input line 280.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 232.
+(babel)             in language  on input line 280.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 237.
+(babel)             in language  on input line 285.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 237.
+(babel)             in language  on input line 285.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 243.
+(babel)             in language  on input line 291.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 243.
+(babel)             in language  on input line 291.
 
-Overfull \hbox (11.78125pt too wide) in paragraph at lines 248--250
+Overfull \hbox (11.78125pt too wide) in paragraph at lines 296--298
 []\OT1/cmr/m/n/10.95 Die in iTool hin-ter-leg-ten Produkt- bzw. Her-stel-ler-da
 -ten sol-len in ein g[]ultiges und vollst[]andiges
  []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 250.
+(babel)             in language  on input line 298.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 250.
+(babel)             in language  on input line 298.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 250.
+(babel)             in language  on input line 298.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 250.
-[8])
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 187.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 187.
+(babel)             in language  on input line 298.
+[10])
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 187.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 187.
- [9]
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 187.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 187.
+ [11]
 No file BA-Hendrik-Style.bbl.
 
 Overfull \hbox (3.59807pt too wide) in paragraph at lines 214--215
@@ -1284,7 +1365,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 219.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 219.
-[10
+[12
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 225.
@@ -1293,7 +1374,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 225.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 225.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 225.
 Package rerunfilecheck Info: File `BA-Hendrik-Style.out' has not changed.
-(rerunfilecheck)             Checksum: A8D8E17568D8F2F185C54509067BD3DA;649.
+(rerunfilecheck)             Checksum: 95AB103182102C2E0F978734C80D3551;936.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1304,13 +1385,13 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 225.
  ) 
 Here is how much of TeX's memory you used:
- 13369 strings out of 494976
- 197894 string characters out of 6179138
- 461664 words of memory out of 5000000
- 16260 multiletter control sequences out of 15000+600000
+ 13399 strings out of 494976
+ 198588 string characters out of 6179138
+ 428664 words of memory out of 5000000
+ 16278 multiletter control sequences out of 15000+600000
  16339 words of font info for 61 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 50i,12n,54p,655b,1963s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 50i,12n,54p,655b,1965s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist
@@ -1327,10 +1408,10 @@ ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /urw/courier/ucrr8a.pfb>
-Output written on BA-Hendrik-Style.pdf (12 pages, 576255 bytes).
+Output written on BA-Hendrik-Style.pdf (14 pages, 617214 bytes).
 PDF statistics:
- 287 PDF objects out of 1000 (max. 8388607)
- 238 compressed objects within 3 object streams
- 95 named destinations out of 1000 (max. 500000)
- 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 327 PDF objects out of 1000 (max. 8388607)
+ 270 compressed objects within 3 object streams
+ 104 named destinations out of 1000 (max. 500000)
+ 160 words of extra memory for PDF output out of 10000 (max. 10000000)
 
