@@ -8,7 +8,11 @@
 \contentsline {subsubsection}{\numberline {1.2.1}Terminologie}{2}{subsubsection.1.2.1}
 \contentsline {subsubsection}{\numberline {1.2.2}Transaktionen}{3}{subsubsection.1.2.2}
 \contentsline {subsubsection}{\numberline {1.2.3}Aufbau}{3}{subsubsection.1.2.3}
-\contentsline {section}{\numberline {2}Analyse der Aufgabe und der Anforderungen}{10}{section.2}
-\contentsline {subsection}{\numberline {2.1}Bewertung von theoretischen Ans\IeC {\"a}tzen, Konzepten, Methoden, Verfahren}{10}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Informelle Aufgabenbeschreibung}{10}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Zielstellung}{10}{subsection.2.3}
+\contentsline {subsection}{\numberline {1.3}Das Cake-PHP Framework}{10}{subsection.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1}Convention over Configuration in CakePHP}{10}{subsubsection.1.3.1}
+\contentsline {subsubsection}{\numberline {1.3.2}Model}{10}{subsubsection.1.3.2}
+\contentsline {subsubsection}{\numberline {1.3.3}View}{11}{subsubsection.1.3.3}
+\contentsline {section}{\numberline {2}Analyse der Aufgabe und der Anforderungen}{11}{section.2}
+\contentsline {subsection}{\numberline {2.1}Bewertung von theoretischen Ans\IeC {\"a}tzen, Konzepten, Methoden, Verfahren}{11}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Informelle Aufgabenbeschreibung}{11}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Zielstellung}{12}{subsection.2.3}

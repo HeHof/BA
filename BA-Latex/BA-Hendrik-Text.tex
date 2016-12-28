@@ -274,6 +274,44 @@
 	
 	---- Übersicht, tabellarisch oder nicht über die wichtigsten Felder und ihre Einschränkungen, vor allem die von Mercateo ----
 	
+	\subsection{Das Cake-PHP Framework}
+	
+	Cake PHP ist ein Webframework, das dem MVC (Model-View-Controller) Schema folgt und dabei die Softwaredesignparadigmen DRY (Don't repeat yourself) und 'Convention over configuration' umsetzt. 
+	
+	\subsubsection{Convention over Configuration in CakePHP}
+	
+	%Hier noch eine Erklärung zu COC von den Big Five einfügen
+	In CakePHP wird das Softwaredesign-Paradigma der 'Konvention vor Konfiguration' konsequent umgesetzt.
+	 Die Klassennamen von \textbf{Controllern} sind im Plural verfasst, 'CamelCased' und enden auf \textit{Controller}. \texttt{UsersController} und \texttt{ArticleCategoriesController} sind Beispiele dafür. Eine öffentliche Methode eines solchen Controllers kann über einen Webbrowser aufgerufen werden. Per Konvention werden URLs klein geschrieben und mit Bindestrich verbunden.
+	\url{http://samplesite.com/article-categorie/view} ruft demnach die öffentliche \texttt{view()} Methode des ArticleCategoriesControllers auf.\\
+	\newline
+	Die Namen von \textbf{Model} Klassen sind 'CamelCased' und im Plural. Der Name der zum Model gehörenden Tabelle ist im Plural verfasst und mit einem Unterstrich verbunden.\\
+	\texttt{article\_categories} ist die dem Model \texttt{ArticleCategories} zugrundeliegende Tabelle. Um einen Fremdschlüssel auf eine Tabelle zu vergeben genügt es das Suffix \texttt{\_id} an den kleingeschriebenen Namen dieser Tabelle anzuhängen.
+	Wenn Users eine hasMany Beziehung  Articles hat, kann mit dem Fremdschlüssel user\_id in der articles-Tabelle auf den entsprechenden Eintrag in der users-Tabelle verwiesen werden. 
+	
+	\subsubsection{Model}
+	
+	Das Backend einer CakePHP Anwendung wird von einer SQL Datenbank gebildet. Das Model repräsentiert die Daten einer Anwendung und enthält die Geschäftslogik zur Datenmanipulation. Nach der CakePHP Konvention wird die Datenbankverbindung einmal in der \texttt{config/app.php} konfiguriert. Die Model-Klasse stellt dabei Methoden zur Verfügung, über die es möglich ist, den Zustand der Daten abzufragen, die Daten zu filtern und zu verändern. Die CRUD-Funktionalität (CREATE-READ-UPDATE-DELETE) ist so direkt im Model integriert.\footnote{vgl. hierzu: Webentwicklung mit CakePHP, 2. Auflage, O'Reilly, Seite 7}. 
+	Die Beziehungen einzelner Models zueinander werden über \textit{Associations} hergestellt. Die vier Assoziationstypen in CakePHP sind:\\
+
+	
+		\begin{tabularx}{\textwidth}{p{1cm} X X p{8cm}}
+		\cline{2-4}
+		\rowcolor[HTML]{EFEFEF} 
+		 Nr. & Beziehung & Typ & Beispiel \\ \cline{1-4} \addlinespace
+		1. & one to one & hasOne & Ein Museum hat eine Adresse. \\
+		2. & one to many & hasMany & In einem Museum hängen mehrere Kunstwerke. \\
+		3. & many to one & belongsTo & Mehrere Bilder gehören zu einem Museum. \\  
+		4. & many to many & belongsToMany & Ein Student hat mehrere Professoren. Ein Professor hat mehrere Hörer. \\ \addlinespace \cline{1-4}     
+		\end{tabularx}
+	\\
+	
+	
+	Es ist möglich ein \textit{Model} um ein oder mehrere \textit{Behavior} zu erweitern. Dabei handelt es sich um Klassen, in denen, ähnlich einem Trait, Funktionen zur Erweiterung des Models gekapselt sind. Ein Beispiel hierfür ist das Tree-Behavior, das es ermöglicht hierarchische Datenstrukturen in der Datenbank zu pflegen. Anwendung hierfür kann z.B. die Abbildung einer Kategoriestruktur sein. \footnote{vgl. hierzu: http://book.cakephp.org/3.0/en/orm/behaviors/tree.html\#namespace-Cake/ORM/Behavior}
+	
+	\subsubsection{View}
+	
+	Die View ist für die Darstellung der Daten in der Anwendung zuständig. Eine View ist in CakePHP immer auf ein bestimmtes Model bezogen und wird nicht für die Darstellung anderer Daten verwendet.\footnote{ebd.}
 	
 	\section{Analyse der Aufgabe und der Anforderungen}
 	
