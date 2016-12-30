@@ -32,10 +32,11 @@
 
 
 \usepackage{listings}
-\lstset{language=[Sharp]C, 
+\lstset{language=XML, 
 	basicstyle=\scriptsize\sffamily, 
 	keywordstyle=\color{RedViolet}\sffamily, 
 	identifierstyle=, 
+	captionpos=b,
 	commentstyle=\color{OliveGreen}, 
 	stringstyle=\sffamily, 
 	breaklines=true, 
@@ -43,6 +44,12 @@
 	%numberstyle=\small, 
 	frame=single, 
 	stringstyle=\ttfamily, 
+%	frame = lrbt,
+%	numbers = left,
+	showstringspaces = false,
+	breaklines = true,
+%	xleftmargin = 30pt,
+%	xrightmargin = 30pt,
 }
 	 
 	 
@@ -50,6 +57,8 @@
 \makeatletter
 \def\l@lstlisting#1#2{\@dottedtocline{1}{0em}{1em}{\hspace{1,5em} Lst. #1}{#2}}
 \makeatother
+
+
 
 \geometry{a4paper, top=27mm, left=25mm, right=25mm, bottom=35mm, headsep=10mm, footskip=12mm}
 

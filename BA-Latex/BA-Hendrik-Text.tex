@@ -24,7 +24,7 @@
 	
 	\subsubsection{Produktverwaltung}
 	
-	Die Produktverwaltung ist aufgeteilt in Produkte und Kategorien. \textbf{Produkte} besitzen Attribute wie Titel, Preis, Beschreibung etc. die für jeden Marktplatz auf denen diese angeboten werden sollen unterschiedlich ausfallen können. Zudem kann gewählt werden ob ein Produkt auf einem bestimmten Marktplatz angeboten werden soll oder nicht. Ein Produkt kann dabei mehreren \textbf{Kategorien} zugeordnet sein.\\
+	Die Produktverwaltung ist aufgeteilt in Produkte und Kategorien. \textbf{Produkte} besitzen Attribute wie Titel, Preis, Beschreibung etc. die für jeden Marktplatz auf denen diese angeboten werden sollen unterschiedlich ausfallen können. Es kann gewählt werden ob ein Produkt auf einem bestimmten Marktplatz angeboten werden soll oder nicht. Ein Produkt kann dabei mehreren \textbf{Kategorien} zugeordnet sein.\\
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
@@ -202,11 +202,11 @@
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
-		\includegraphics[width=0.7\linewidth]{img/catalogGroupSystem}
+		\includegraphics[width=0.6\linewidth]{img/catalogGroupSystem}
 		\captionof{figure}[CATALOG\_GROUP\_SYSTEM und CATALOG\_STRUCTURE]{CATALOG\_GROUP\_SYSTEM und CATALOG\_STRUCTURE}
 		\label{fig:header}
 		\vspace{1em}
-	\end{minipage} \pagebreak
+	\end{minipage} 
 	
 	\textbf{\underline{Das Element ARTICLE}}\\
 	Das Artikelelement schließlich enthält Informationen über einen Artikel, wie Überschrift, Beschreibung, Bilder, Preisinformationen, eine \textbf{eindeutige} Artikelnummer usw. Die Artikelnummer wird über das Element \texttt{SUPPLIER\_AID} bekanntgegeben, handelt es sich um einen Variantenartikel, so bildet sich die Artikelnummer aus der \texttt{SUPPLIER\_AID} und der \texttt{SUPPLIER\_AID\_SUPPLEMENT}. Dies ist hier jedoch nicht umgesetzt. Die als \textit{eCl@ass} und \textit{Zolltarifnummer} zusammengefassten \texttt{ARTICLE\_FEATURES} werden explizit von Mercateo verlangt.
@@ -264,7 +264,7 @@
 		\vspace{1em}
 	\end{minipage}
 	
-	Kommt die Transaktion \texttt{T\_UPDATE\_PRODUCTS} zur Anwendung, gilt es folgendes zu beachten:\footnote{vgl. hierzu BMECat V 1.2 Spezifikation, Seite 52} 
+	Kommt die Transaktion \texttt{T\_UPDATE\_PRODUCTS} zur Anwendung, gilt es folgendes zu beachten:\footnote{vgl. hierzu: BMECat V 1.2 Spezifikation, Seite 52} 
 	\begin{itemize}
 		\item Die übertragene \texttt{CATALOG\_ID} des jeweiligen Lieferanten und die dazugehörige\\ \texttt{CATALOG\_VERSION} müssen im Zielsystem bereits vorhanden sein.
 		\item Das Attribut \texttt{prev\_version} muss bei der ersten anderen Transaktionsart nach\\ \texttt{T\_NEW\_CATALOG}, (\texttt{T\_UPDATE\_PRODUCTS},\texttt{T\_UPDATE\_PRICES}) auf '0' gesetzt werden.
@@ -281,13 +281,15 @@
 	\subsubsection{Convention over Configuration in CakePHP}
 	
 	%Hier noch eine Erklärung zu COC von den Big Five einfügen
-	In CakePHP wird das Softwaredesign-Paradigma der 'Konvention vor Konfiguration' konsequent umgesetzt.
+	In CakePHP wird das Softwaredesign-Paradigma der 'Konvention vor Konfiguration' konsequent umgesetzt.\newline 
+	
 	 Die Klassennamen von \textbf{Controllern} sind im Plural verfasst, 'CamelCased' und enden auf \textit{Controller}. \texttt{UsersController} und \texttt{ArticleCategoriesController} sind Beispiele dafür. Eine öffentliche Methode eines solchen Controllers kann über einen Webbrowser aufgerufen werden. Per Konvention werden URLs klein geschrieben und mit Bindestrich verbunden.
 	\url{http://samplesite.com/article-categorie/view} ruft demnach die öffentliche \texttt{view()} Methode des ArticleCategoriesControllers auf.\\
 	\newline
 	Die Namen von \textbf{Model} Klassen sind 'CamelCased' und im Plural. Der Name der zum Model gehörenden Tabelle ist im Plural verfasst und mit einem Unterstrich verbunden.\\
-	\texttt{article\_categories} ist die dem Model \texttt{ArticleCategories} zugrundeliegende Tabelle. Um einen Fremdschlüssel auf eine Tabelle zu vergeben genügt es das Suffix \texttt{\_id} an den kleingeschriebenen Namen dieser Tabelle anzuhängen.
-	Wenn Users eine hasMany Beziehung  Articles hat, kann mit dem Fremdschlüssel user\_id in der articles-Tabelle auf den entsprechenden Eintrag in der users-Tabelle verwiesen werden. 
+	\texttt{article\_categories} ist die dem Model \texttt{ArticleCategories} zugrundeliegende Tabelle. Um einen Fremdschlüssel auf eine Tabelle zu vergeben genügt es das Suffix \texttt{\_id} an den kleingeschriebenen Namen dieser Tabelle anzuhängen. Wenn Users eine hasMany Beziehung zu Articles hat, kann mit dem Fremdschlüssel \texttt{user\_id} in der \texttt{articles}-Tabelle auf den entsprechenden Eintrag in der \texttt{users}-Tabelle verwiesen werden. \newline
+	
+	Die Template Datei einer \textbf{View} ist nach der entsprechenden Methode im Controller benannt die sie darstellen soll. Die \texttt{view()} Methode der \texttt{ArticlesController} Klasse würde demnach unter \texttt{src/Template/Articles/view.ctp} nach einem View-Template suchen\footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/intro/conventions.html}}.
 	
 	\subsubsection{Model}
 	
@@ -307,17 +309,111 @@
 	\\
 	
 	
-	Es ist möglich ein \textit{Model} um ein oder mehrere \textit{Behavior} zu erweitern. Dabei handelt es sich um Klassen, in denen, ähnlich einem Trait, Funktionen zur Erweiterung des Models gekapselt sind. Ein Beispiel hierfür ist das Tree-Behavior, das es ermöglicht hierarchische Datenstrukturen in der Datenbank zu pflegen. Anwendung hierfür kann z.B. die Abbildung einer Kategoriestruktur sein. \footnote{vgl. hierzu: http://book.cakephp.org/3.0/en/orm/behaviors/tree.html\#namespace-Cake/ORM/Behavior}
+	Es ist möglich ein \textit{Model} um ein oder mehrere \textit{Behavior} zu erweitern. Dabei handelt es sich um Klassen, in denen, ähnlich einem Trait, Funktionen zur Erweiterung des Models gekapselt sind. Ein Beispiel hierfür ist das Tree-Behavior, das es ermöglicht hierarchische Datenstrukturen in der Datenbank zu pflegen. Anwendung hierfür kann z.B. die Abbildung einer Kategoriestruktur sein \footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/orm/behaviors/tree.html}}.
+	
+	Mit Hilfe von im Model definierten Validatoren können zu speichernde Daten auf Vollständigkeit und Konsistenz geprüft werden. 
+	
+	 Später bei der Beschreibung des Codes auf eigenen Validator verweisen. (MercateoAccountsTable::validateCatalogVersionFormat)
+	\lstset{language=PHP}
+	\begin{lstlisting}
+
+	$validator
+     	->requirePresence('catalog_name', 'create')
+     	->notEmpty('catalog_name')
+     	->add('catalog_name', [
+	         'maxLength' => [
+	             'rule' => ['maxLength', 100],
+	             'message' => 'maxLength = 100.'
+	         ]
+     ]);
+	
+	\end{lstlisting}
 	
 	\subsubsection{View}
 	
-	Die View ist für die Darstellung der Daten in der Anwendung zuständig. Eine View ist in CakePHP immer auf ein bestimmtes Model bezogen und wird nicht für die Darstellung anderer Daten verwendet.\footnote{ebd.}
+	Die View ist für die Darstellung der Daten in der Anwendung zuständig. Eine View ist in CakePHP immer auf ein bestimmtes Model bezogen und wird nicht für die Darstellung anderer Daten verwendet\footnote{vgl. hierzu: Webentwicklung mit CakePHP, 2. Auflage, O'Reilly, Seite 7}. CakePHP View Template Dateien Enden auf '.ctp' und bedienen sich der alternativen PHP Syntax für Kontrollstrukturen und Ausgabe. 
+	In einer View kann direkt auf Variablen zugegriffen werden die in der entsprechenden Controller Methode gesetzt wurden:\\ 
+   \lstset{language=PHP} 
+	\begin{lstlisting}
+	$this->set('articleCategories',  $articleCategories);
+	\end{lstlisting}
+	  Die Codebeispiele zeigen, wie die Variable \texttt{\$articleCategories} im Controller für die View freigegeben wird und dort z.B. mit einer foreach-Schleife durchlaufen werden kann um ihren Inhalt auszugeben. 
+		\lstset{language=PHP}
+		\begin{lstlisting}[caption={Alternative PHP Syntax}] 	
+		<ul>
+	   	<?php foreach ($todo as $item): ?>
+		  <li><?= $item ?></li>
+		<?php endforeach; ?>
+		</ul>
+		\end{lstlisting}
+	 Eine View ist dabei nicht auf das Anzeigen von HTML Inhalten beschränkt, sondern kann auch dazu verwandt werden XML- oder JSON- Repräsentationen der angefragten Daten zurückzuliefern.
+	\subsubsection{Controller}
+	Der Controller regelt den Ablauf der Benutzerinteraktion.
+	Er ist dafür zuständig, dass das richtige Model aufgerufen und die entsprechende Antwort oder View erzeugt wird. Er dient dabei als eine Art Vermittler zwischen dem Model und der View. Normalerweise ist in CakePHP ein Controller für ein Model verantwortlich, es ist dennoch möglich, oft auch nötig, dass ein Controller mit mehreren Models arbeitet.
+	
+	Der Controller enthält eine Reihe von  Methoden die HTTP Anfragen verarbeiten. Diese Methoden werden in CakePHP \textit{actions} genannt. Per Definition ist jede öffenliche Methode in einem Controller eine \textit{action} und über eine URL der Form \url{http://samplesite.com/article-categorie/view} erreichbar.
+	Eine \textit{action} ist für die Verarbeitung der Anfrage und das zurückliefern einer Antwort zuständig. Im normalfall wird dabei eine View erzeugt, es können aber auch (wie im Abschnitt Model erläutert) auch XML oder JSON Daten zurückgeliefert werden.\footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/controllers.html}}
+	
+	\subsubsection{Component}
+	Komponenten (Components) sind in sich geschlossene Bereiche innerhalb einer Applikation, die eine bestimmte Funktionalität kapseln und über die Grenzen eines Controllers hinaus verfügbar machen. Sollen bestimmte logische Prozesse in verschiedenen Teilen einer Anwendung zur Verfügung stehen - insbesondere in unterschiedlichen Controllern- so ist es sinnvoll diese in eine Komponente auszulagern.\footnote{vgl hierzu: CakeBuch Webentwcik, Seite 223}
+	Die Möglichkeit mit Komponenten zu arbeiten setzt das DRY Paradigma konsequent um.
+	
+	\subsubsection{Shell}	
+	CakePHP bietet die Möglichkeit Konsolenanwendungen zu schreiben. Dies ist nützlich für Anwendungen die per Cronjob ausgeführt werden sollen oder für solche die nicht aus einem Browser erreicht werden müssen bzw. sollen. \texttt{vgl. hierzu \url{http://book.cakephp.org/3.0/en/console-and-shells.html}}
+	Eine der wichtigsten Funktionalität der Cake Shell ist das 'Backen' (Baking). Gemeint ist damit die automatische Generierung von Code. Der Befehl \texttt{bin/cake bake} erstellt, je nach gewählter Option, ganze MVC Grundgerüste, Controller- oder Model- Klassen, Plugin Verzeichnisstrukturen oder Shell-Klassen. Einzelne Funktionalitäten einer Shell Klasse können in Tasks ausgelagert werden.  
+	
+	\subsubsection{Einschätzung}
+	
+	
 	
 	\section{Analyse der Aufgabe und der Anforderungen}
 	
 	\subsection{Bewertung von theoretischen Ansätzen, Konzepten, Methoden, Verfahren}
-		Was gehört hier rein?
+		Im folgenden sollen die verwendeten Technologien bewertet werden. 
+		Wie gut sind sie jeweils für den Einsatzzweck geeignet?
+		Bewertungskriterien sind: 
 		
+		
+	\subsubsection{CakePHP-Framework}
+	
+	
+	
+	\subsubsection{SQL Datenbank}
+	
+	
+	\subsubsection{BMECat Format}
+	
+	Allgemeine Vorteile die sich aus dem XML-Format ergeben sind die gleichzeitige Mensch- und Maschinenlesbarkeit sowie die Möglichkeit das Dokument gegen ein XML-Schema testen zu können. So kann schon direkt nach der Erzeugung des BMECat Dokumentes überprüft werden, ob die geschriebenen Elemente vom richtigen Datentyp sind und das Dokument der in der XSD Datei festgelegten Struktur folgt. Weitere Vorteile speziell des BMECat Standards sind\footnote{vgl. hierzu: \url{http://wiki.prozeus.de/index.php/BMEcat}}:
+	
+	\begin{itemize}
+	\item konfigurierbare Produkte sind abbildbar
+	\item mehrsprachige Kataloge sind in einem Katalogdokument abbildbar
+	\item Übermittlung multimedialer Datenelemente ist möglich (z.B. Produktvideos)	
+	\item gilt zumindest in Deutschland als etabliertes Katalogaustauschformat	
+	\end{itemize}
+	
+	
+	
+	\subsubsection{Datenübertragung zu Mercateo}
+	
+	Die Übertragung der Katalogdatei zum Mercateo-Server geschieht über FTP. Neue Dateien werden alle 30 Minuten vom Mercateo-System verarbeitet.\\
+	\textbf{Vorteile:}
+ 	\begin{itemize}
+   	\item einfach anzuwenden.
+   	\item Eine korrekte Datenübertragung ist durch die Fehlerbehandlung von TCP gewährleistet.
+   	\end{itemize}
+	\textbf{Nachteile:}
+   	\begin{itemize}
+   	\item Datenübertragung nicht nach außen abgesichert.
+   	\item Übertragene Daten können mitgelesen und manipuliert werden.
+   	\item Benutzerkennung und Passwort können abgefangen werden
+   	\end{itemize}
+   	\textbf{Fazit:}\\
+	Nicht optimal, vor allem aus Sicherheitsgründen. Zudem Fehleranfällig, wenn die Ordnerstruktur- und Dateinamenskonventionen von Mercateo nicht eingehalten werden \footnote{vgl. hierzu \url{http://www.mercateo.com/support/verkaufen/katalog-allgemeine-informationen/datenuebertragung-per-ftp/}}.
+
+		
+		
+	\subsection{Funktionale und nichtfunktionale Anforderungen}	
 			- 
 	
 	\subsection{Informelle Aufgabenbeschreibung}
@@ -331,7 +427,7 @@
 	Folgende Funktionalitäten sollen implementiert werden:
 	
 	\begin{itemize}
-	\item Die in iTool hinterlegten Produkt- bzw. Herstellerdaten sollen in ein gültiges und vollständiges BMECat Dokument entsprechend der Mercateo Anfoderungen überführt werden. Dabei ist insbesondere auf die Unterschiede und Besonderheiten der notwendigen beiden Transaktionsarten "T\_NEW\_CATALOG" - also die Erstellung eines neuen Kataloges - und "T\_UPDATE\_PRODUCTS" - also der Änderungen von Produktdaten, sowie dem löschen und neu erstellen von Produkten - zu achten .
+	\item Die in iTool hinterlegten Produkt- bzw. Herstellerdaten sollen in ein gültiges und vollständiges BMECat Dokument entsprechend der Mercateo Anfoderungen überführt werden. Dabei ist insbesondere auf die Unterschiede und Besonderheiten der notwendigen beiden Transaktionsarten \texttt{T\_NEW\_CATALOG} - also die Erstellung eines neuen Kataloges - und \texttt{T\_UPDATE\_PRODUCTS} - also der Änderungen von Produktdaten, sowie dem löschen und neu erstellen von Produkten - zu achten .
 		\begin{itemize}
 		\item Gültig bedeutet in diesem Fall, dass Struktur und Inhalt des Dokuments fehlerfrei gegen die entsprechende XSD Datei laufen, d.h. die Felder müssen in der richtigen Reihenfolge unter Beachtung der Datentypen und Längenbegrenzungen sowie Formatlimitierungen (z.B. keine Sonderzeichen in der SKU (o.ä.)) geschrieben werden.
 		\item Vollständig heißt, dass zum einen mindestens jene Felder im BMECat Dokument vorkommen, die die BMECat Spezifikation verlangt.Zusätzlich müssen jene Felder vorkommen, die die Mercateo Spezifikation erfordert und zwar unter zusätzlicher Beachtung der Limitierungen bzw. Besonderheiten jener Spezifikation. 	
@@ -345,7 +441,16 @@
 	\item Bei der Katalogerstellung ist darauf zu achten, dass es zu keinen Arbeitsspeicherüberläufen kommen kann.
 	\end{itemize}
 	
-
+	\section{Entwurf}
 	
+	Hier kommt wirklich nur der Entwurf rein, also wie ich mir die Funktionsweise der Software vorstelle. Dazu muss ich vielleicht meine Diagramme ändern oder vereinfachen.
+	
+	\section{Implementierung}
+	
+	Hier kommt die Umsetzung des Ganzen rein, also der tatsächliche Programmablauf
+	
+	\section{Test}
+
+	Hier kann vielleicht auch die Validation rein (MercateoAccountsTable)
 	
 
