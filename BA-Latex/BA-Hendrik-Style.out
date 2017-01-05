@@ -25,12 +25,21 @@
 \BOOKMARK [2][-]{subsection.2.3}{Informelle Aufgabenbeschreibung}{section.2}% 25
 \BOOKMARK [2][-]{subsection.2.4}{Zielstellung}{section.2}% 26
 \BOOKMARK [1][-]{section.3}{Entwurf}{}% 27
-\BOOKMARK [2][-]{subsection.3.1}{BMECat Component}{section.3}% 28
-\BOOKMARK [2][-]{subsection.3.2}{Der Katalogerstellungszyklus}{section.3}% 29
-\BOOKMARK [2][-]{subsection.3.3}{XML schreiben}{section.3}% 30
-\BOOKMARK [3][-]{subsubsection.3.3.1}{SimpleXML}{subsection.3.3}% 31
-\BOOKMARK [3][-]{subsubsection.3.3.2}{DOMDocument}{subsection.3.3}% 32
-\BOOKMARK [3][-]{subsubsection.3.3.3}{XMLWriter}{subsection.3.3}% 33
-\BOOKMARK [2][-]{subsection.3.4}{Erstellung eines neuen BMECat Dokumentes}{section.3}% 34
+\BOOKMARK [2][-]{subsection.3.1}{Katalogerstellung}{section.3}% 28
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Die Tabelle mercateo\137accounts}{subsection.3.1}% 29
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Die Tabelle mercateo\137products}{subsection.3.1}% 30
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Allgemeiner Programmablauf}{subsection.3.1}% 31
+\BOOKMARK [3][-]{subsubsection.3.1.4}{Katalogerstellungslogik bei der Transaktion T\137NEW\137CATALOG}{subsection.3.1}% 32
+\BOOKMARK [3][-]{subsubsection.3.1.5}{Katalogerstellungslogik bei der Transaktion T\137UPDATE\137PRODUCTS}{subsection.3.1}% 33
+\BOOKMARK [2][-]{subsection.3.2}{Bestandsdatenabfrage}{section.3}% 34
 \BOOKMARK [1][-]{section.4}{Implementierung}{}% 35
-\BOOKMARK [1][-]{section.5}{Test}{}% 36
+\BOOKMARK [2][-]{subsection.4.1}{Die BMECat Creator Shell}{section.4}% 36
+\BOOKMARK [2][-]{subsection.4.2}{XMLWriterComponent}{section.4}% 37
+\BOOKMARK [2][-]{subsection.4.3}{BMECatComponent}{section.4}% 38
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Erstellen des BMECat Dokumentes}{subsection.4.3}% 39
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Schreiben der Header Sektion}{subsection.4.3}% 40
+\BOOKMARK [3][-]{subsubsection.4.3.3}{Schreiben des Kataloggruppensystems}{subsection.4.3}% 41
+\BOOKMARK [3][-]{subsubsection.4.3.4}{Artikelerstellung}{subsection.4.3}% 42
+\BOOKMARK [3][-]{subsubsection.4.3.5}{Kategoriemapping}{subsection.4.3}% 43
+\BOOKMARK [1][-]{section.5}{prepareCatalogTask}{}% 44
+\BOOKMARK [1][-]{section.6}{Test}{}% 45

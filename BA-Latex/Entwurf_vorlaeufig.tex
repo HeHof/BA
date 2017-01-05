@@ -1,0 +1,47 @@
+Die Erstellung der BMECat Dokumente wird über eine CakePHP Shell realisiert. Das hat den Vorteil, dass diese über einen Cronjob automatisoert werden kann werden kann. Um die Shell im Bedarfsfall leicht erweitern zu können und nicht zu überladen wird die Logik in einen Shell-Task \texttt{prepareCatalog} ausgelagert. Bei Aufruf des Tasks wird die ID des Core-Sellers übergeben. So ist gewährleistet, dass nur die Produkte dieses Verkäufers exportiert werden. Die Spezifikation des BMECat verlangt, dass im Katalogdokument bestimmte Informationen zur Katalogversion, dem Katalognamen, der Währung \textit{etc.} aufgeführt werden. Diese Daten werden in einer Tabelle \texttt{mercateo\_accounts} gespeichert und können über die GUI des iTool eingesehen, erstellt, gelöscht und geändert werden. 
+	
+	\subsection{BMECat Component}
+	Die Funktionen zum schreiben der einzelnen BMECat Abschnitte (\texttt{HEADER,T\_NEW\_CATALOG, CATALOG\_GROUP\_SYSTEM, ARTICLE, ARTICLE\_TO\_CATALOG\_GROUP\_MAP}) sind, aus Gründen der Übersicht und Wiederverwendbarkeit in ein Component ausgelagert. 
+	
+	\subsection{Der Katalogerstellungszyklus}
+	
+	Soll ein neues BMECat Dokument erstellt werden wird der Shell Task mit dem Befehl \texttt{bin/cake bme\_cat\_creator prepareCatalog 5} aufgerufen. Die dem Befehl nachgestellte Zahl dient als Aufrufparameter und repräsentiert die \textit{id} des Core-Sellers, dessen Produkte exportiert werden.
+	
+	Die zu exportierenden Produkte werden in einer Tabelle \texttt{mercateo\_products} zwischengespeichert. Diese Tabelle enthält neben der \texttt{core\_product\_id},  \texttt{core\_category\_id}, \texttt{sku} und den \texttt{title}, also die \texttt{DESCRIPTION\_SHORT} des Artikels auch den \texttt{status} des Produkts.
+	
+	Diese Zwischenspeicherung ist notwendig um die korrekte Funktion der Operationen \textit{update} und \textit{delete} zu gewährleisten. Wird ein neues BMECat Dokument erstellt so werden zunächst alle zu exportierenden Produkte mit den oben erwähnten Feldern in die \texttt{mercateo\_products} Tabelle geschrieben und ihr Status auf \texttt{active} gesetzt. Ändert sich der Zustand eines der in der \texttt{core\_products} Tabelle hinterlegten Produkte so wird der Status in der \texttt{mercateo\_products} Tabelle entsprechend auf \texttt{update} bzw. \texttt{delete} gesetzt.
+	
+	HIER DERN ZYKLUS MODELLIEREN
+	
+	Beim erneuten durchlaufen des Zyklus werden nur jene Produkte in den Update Katalog geschrieben, deren Status ungleich \texttt{active} ist. Produkte deren Status \texttt{delete} war, werden anschließend aus der \texttt{mercateo\_products} Tabelle gelöscht und der Status der übrigen wieder auf \texttt{active} gesetzt.
+	
+	
+	
+	
+	\subsection{XML schreiben}
+		
+	Um mit PHP XML schreiben zu können gibt es verschiedene, mehr oder weniger umfangreiche Klassen die hier kurz vorgestellt und eingeschätzt werden.
+	Die zu erfüllenden Anforderungen sind:
+	\begin{itemize}
+	\item Elemente, Kindelemente und Attribute können geschrieben werden
+	\item XML Datei kann gespeichert werden
+	\item XML Datei kann gegen ein XSD Schema validiert werden.
+	\end{itemize}
+	
+	\subsubsection{SimpleXML}
+	
+	SimpleXML ist eine sehr kompakte Klasse zum Lesen und Schreiben von XML Elementen und Attributen. Bietet die Möglichkeit generiertes XML in eine Datei zu schreiben.
+	Eine Validierung ist nicht möglich.
+	
+	\subsubsection{DOMDocument}
+
+	Die DOMDocument Klasse bietet sehr umfangreiche Möglichkeiten XML und HTML Dateien zu lesen, zu schreiben und zu bearbeiten. Elemente können über ihre \textit{id} oder \textit{tag} angesprochen werden. XML Dateien können geschrieben und validiert werden.
+	
+	\subsubsection{XMLWriter}
+	Die XML Writer Klasse bietet, ihrem Namen entsprechend, die Möglichkeit XML zu schreiben und ist ein Wrapper für den in C geschriebenen libxml XML Parser.
+	Ok....blablabla---Valeri Fragen warum er das verwendet hat....
+	Die XMLWriter Klasse bietet die Möglichkeit, XML Dateien zu schreiben. XML kann nicht validiert werden.
+	
+	Um XML zu schreiben wird ein bereits vorhandener, komfortabel und einfach zu nutzender, CakePHP Component (\texttt{XMLWriterComponent}) verwendet, der die Funktionalitäten der PHP XMLWriter Klasse benutzt. Um das XML Dokument zu validieren kann die \texttt{XMLReaderComponetn}-Klasse verwendet werden.
+	
+	\subsection{Erstellung eines neuen BMECat Dokumentes}

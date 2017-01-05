@@ -19,6 +19,8 @@
 		\label{fig:header}
 		\vspace{1em}
 	\end{minipage}
+	
+	Benutzerdaten werden in der Tabelle \texttt{core\_users} gespeichert, Verkäuferdaten in \texttt{core\_sellers}.
 
 	 
 	
@@ -43,6 +45,8 @@
 		\vspace{1em}
 	\end{minipage}
 	
+	Alle Produktdaten sind in der Tabelle \texttt{core\_products} und den damit verknüpften Tabellen hinterlegt.
+	
 	\subsubsection{Dashboard}
 	
 	Auf dem Dashboard werden Informationen über die Anzahl der insgesamt eingegangenen Bestellungen, den durchschnittlichen Bestellwert, die Gesamtzahl der Kunden, den insgesamt erwirtschafteten Umsatz, eine Übersicht der zuletzt eingegangenen Bestellungen sowie eine graphische Übersicht der während eines Jahres erwirtschafteten Umsätze angezeigt. 
@@ -61,7 +65,7 @@
 	
 	\subsubsection{Transaktionen}
 	Im BMECat wird zwischen den 3 verschiedenen Transaktionsarten
-	\begin{itemize}
+	\begin{itemize}[noitemsep]
 	\item \texttt{\textbf{T\_NEW\_CATALOG}} - Übertragung eines neuen Produktkataloges
 	\item \texttt{\textbf{T\_UPDATE\_PRODUCTS}} - Aktualisierung von Produktdaten
 	\item \texttt{\textbf{T\_UPDATE\_PRICES}} - Aktualisierung von Preisinformationen
@@ -116,13 +120,13 @@
 			
 			\begin{lstlisting}
 			<ARTICLE mode="new">
-				<SUPPLIER_AID>9057320097280</SUPPLIER_AID>
-				<ARTICLE_DETAILS>
-				   	<DESCRIPTION_SHORT>GTA 5</DESCRIPTION_SHORT>
-					<DESCRIPTION_LONG>Das tolle neue Spiel</DESCRIPTION_LONG>
-					<EAN>87126723434</EAN>
+			  <SUPPLIER_AID>9057320097280</SUPPLIER_AID>
+			    <ARTICLE_DETAILS>
+			      <DESCRIPTION_SHORT>GTA 5</DESCRIPTION_SHORT>
+			      <DESCRIPTION_LONG>Das tolle neue Spiel</DESCRIPTION_LONG>
+			      <EAN>87126723434</EAN>
 				... weitere Attribute ...
-				</ARTICLE_DETAILS>
+			    </ARTICLE_DETAILS>
 				...weitere Felder ...
 			</ARTICLE>
 			\end{lstlisting}
@@ -131,8 +135,8 @@
 			\item Zuordnung der Artikel zu den Produktgruppen.
 			\begin{lstlisting}
 			<ARTICLE_TO_CATALOGGROUP_MAP>
-				<ART_ID>9057320097280</ART_ID>
-				<CATALOG_GROUP_ID>7</CATALOG_GROUP_ID>
+			  <ART_ID>9057320097280</ART_ID>
+			  <CATALOG_GROUP_ID>7</CATALOG_GROUP_ID>
 			</ARTICLE_TO_CATALOGGROUP_MAP>
 			\end{lstlisting}
 		
@@ -140,7 +144,7 @@
 		
 	--- Übersicht der im BMECat verwendeten Datentypen --- noch einfügen ---
 	
-	Im folgenden Abschnitt wird jeder Teilbereich mit seinen Unterelementen, wie sie in vorliegender Arbeit verwandt wurden, graphisch dargestellt und kurz erläutert. Rot hervorgehoben sind jeweils die MUSS-Felder, welche zwingend in einem gültigen BMECat Dokument vorkommen müssen, grün die KANN-Felder. Ein Plus \(+\) Zeichen hinter dem Elementnamen indiziert, dass dieses Element mehrfach an dieser Stelle vorkommen kann, jedoch mindestens einmal. Ein Asterisk \(*\) zeigt an, dass dieses Element einmal, mehrfach oder nicht vorkommen kann. Das 
+	Im folgenden Abschnitt wird jeder Teilbereich mit seinen Unterelementen, wie sie in vorliegender Arbeit verwandt wurden, graphisch dargestellt und kurz erläutert. Rot hervorgehoben sind jeweils die MUSS-Felder, welche zwingend in einem gültigen BMECat Dokument vorkommen müssen, grün die KANN-Felder. Ein Plus \(+\) Zeichen hinter dem Elementnamen indiziert, dass dieses Element mehrfach an dieser Stelle vorkommen kann, jedoch mindestens einmal. Ein Asterisk \(*\) zeigt an, dass dieses Element einmal, mehrfach oder nicht vorkommen kann.  
 	
 	\textbf{\underline{Header}}\\
 	Im Header werden allgemeine Informationen über das Katalogdokument hinterlegt und Default Werte gesetzt. Das Element \texttt{\textbf{CATALOG}} enthält dabei Informationen zur Identifikation und Beschreibung des Produktkataloges, wie z.B. die Katalog Id, die Katalogversion oder die für das Dokument geltende Sprache sowie Elemente zum setzten von Standard-Werten wie z.B. die für das Katalogdokument geltende Währungsangabe \footnote{BMECat V 1.2 Spezifikation, Seite 27,29} 
@@ -187,7 +191,7 @@
 		\vspace{1em}
 	\end{minipage}
 	
-	Das Element \texttt{T\_UPDATE\_PRODUCTS} verfügt zusätzlich über das Attribut \texttt{prev\_version}, welches die Anzahl der vorausgegangenen Updates bzw. die Nummer des übertragenen Updates enthält. 
+	Das Element \texttt{T\_UPDATE\_PRODUCTS} verfügt zusätzlich über das Attribut \texttt{prev\_version}, welches die Anzahl der vorausgegangenen Updates bzw. die Nummer des übertragenen Updates enthält. Der Wer dieses Attributes wird nach jedem Katalogupdate um 1 erhöht.
 	
 	\begin{lstlisting}
 	<T_UPDATE_PRODUCTS prev_version="91">...</T_UPDATE_PRODUCTS>
@@ -385,7 +389,7 @@
 	
 	Allgemeine Vorteile die sich aus dem XML-Format ergeben sind die gleichzeitige Mensch- und Maschinenlesbarkeit sowie die Möglichkeit das Dokument gegen ein XML-Schema testen zu können. So kann schon direkt nach der Erzeugung des BMECat Dokumentes überprüft werden, ob die geschriebenen Elemente vom richtigen Datentyp sind und das Dokument der in der XSD Datei festgelegten Struktur folgt. Weitere Vorteile speziell des BMECat Standards sind\footnote{vgl. hierzu: \url{http://wiki.prozeus.de/index.php/BMEcat}}:
 	
-	\begin{itemize}
+	\begin{itemize}[noitemsep]
 	\item konfigurierbare Produkte sind abbildbar
 	\item mehrsprachige Kataloge sind in einem Katalogdokument abbildbar
 	\item Übermittlung multimedialer Datenelemente ist möglich (z.B. Produktvideos)	
@@ -398,12 +402,12 @@
 	
 	Die Übertragung der Katalogdatei zum Mercateo-Server geschieht über FTP. Neue Dateien werden alle 30 Minuten vom Mercateo-System verarbeitet.\\
 	\textbf{Vorteile:}
- 	\begin{itemize}
+ 	\begin{itemize}[noitemsep]
    	\item einfach anzuwenden.
    	\item Eine korrekte Datenübertragung ist durch die Fehlerbehandlung von TCP gewährleistet.
    	\end{itemize}
 	\textbf{Nachteile:}
-   	\begin{itemize}
+   	\begin{itemize}[noitemsep]
    	\item Datenübertragung nicht nach außen abgesichert.
    	\item Übertragene Daten können mitgelesen und manipuliert werden.
    	\item Benutzerkennung und Passwort können abgefangen werden
@@ -426,9 +430,9 @@
 	
 	Folgende Funktionalitäten sollen implementiert werden:
 	
-	\begin{itemize}
+	\begin{itemize}[noitemsep]
 	\item Die in iTool hinterlegten Produkt- bzw. Herstellerdaten sollen in ein gültiges und vollständiges BMECat Dokument entsprechend der Mercateo Anfoderungen überführt werden. Dabei ist insbesondere auf die Unterschiede und Besonderheiten der notwendigen beiden Transaktionsarten \texttt{T\_NEW\_CATALOG} - also die Erstellung eines neuen Kataloges - und \texttt{T\_UPDATE\_PRODUCTS} - also der Änderungen von Produktdaten, sowie dem löschen und neu erstellen von Produkten - zu achten .
-		\begin{itemize}
+		\begin{itemize}[noitemsep]
 		\item Gültig bedeutet in diesem Fall, dass Struktur und Inhalt des Dokuments fehlerfrei gegen die entsprechende XSD Datei laufen, d.h. die Felder müssen in der richtigen Reihenfolge unter Beachtung der Datentypen und Längenbegrenzungen sowie Formatlimitierungen (z.B. keine Sonderzeichen in der SKU (o.ä.)) geschrieben werden.
 		\item Vollständig heißt, dass zum einen mindestens jene Felder im BMECat Dokument vorkommen, die die BMECat Spezifikation verlangt.Zusätzlich müssen jene Felder vorkommen, die die Mercateo Spezifikation erfordert und zwar unter zusätzlicher Beachtung der Limitierungen bzw. Besonderheiten jener Spezifikation. 	
 		\end{itemize}
@@ -442,58 +446,308 @@
 	\end{itemize}
 	
 	\section{Entwurf}	
+	
+	
+	
+	\subsection{Katalogerstellung}
+	
+	Die Erstellung der BMECat Dokumente wird über eine CakePHP Shell realisiert. Das hat den Vorteil, dass diese über einen Cronjob automatisiert werden kann werden kann. Um die Shell im Bedarfsfall leicht erweitern zu können und nicht zu überladen wird die Logik in einen Shell-Task \texttt{prepareCatalog} ausgelagert.Es soll möglich sein beim Aufruf des Tasks die \textit{id} des \texttt{core\_sellers} zu übergeben, dessen Produkte exportiert werden sollen. Die Spezifikation des BMECat verlangt, dass im Katalogdokument bestimmte Informationen zur Katalogversion, dem Katalognamen, der Währung \textit{etc.} aufgeführt werden. Diese Daten werden in der Tabelle \texttt{mercateo\_accounts} gespeichert und können über die GUI des iTool eingesehen, erstellt, gelöscht und geändert werden. 
+	
+	\subsubsection{Die Tabelle \texttt{mercateo\_accounts}}
+	
+	Eine Übersicht der in \texttt{mercateo\_accounts} gespeicherten Werte bietet folgende Tabelle, wenn nicht anders angegeben entspricht das BMECat Element der Spaltenbezeichnung (\texttt{catalog\_id} == \textless CATALOG\_ID \textgreater )
 
-	Die Erstellung der BMECat Dokumente wird über eine CakePHP Shell realisiert. Das hat den Vorteil, dass die Erstellung per CronJob gesteuert werden kann. Um die Shell im Bedarfsfall leicht erweitern zu können und nicht zu überladen wird die Logik in einen Shell-Task \texttt{prepareCatalog} ausgelagert. Bei Aufruf des Tasks wird die ID des Core-Sellers übergeben. So ist gewährleistet, dass nur die Produkte dieses Verkäufers exportiert werden. Die Spezifikation des BMECat verlangt, dass im Katalogdokument bestimmte Informationen zur Katalogversion, dem Katalognamen, der Währung \textit{etc.} aufgeführt werden. Diese Daten werden in einer Tabelle \texttt{mercateo\_accounts} gespeichert und können über die GUI des iTool eingesehen, erstellt, gelöscht und geändert werden. 
-	
-	\subsection{BMECat Component}
-	Die Funktionen zum schreiben der einzelnen BMECat Abschnitte (\texttt{HEADER,T\_NEW\_CATALOG, CATALOG\_GROUP\_SYSTEM, ARTICLE, ARTICLE\_TO\_CATALOG\_GROUP\_MAP}) sind, aus Gründen der Übersicht und Wiederverwendbarkeit in ein Component ausgelagert. 
-	
-	\subsection{Der Katalogerstellungszyklus}
-	
-	Soll ein neues BMECat Dokument erstellt werden wird der Shell Task mit dem Befehl \texttt{bin/cake bme\_cat\_creator prepareCatalog 5} aufgerufen. Die dem Befehl nachgestellte Zahl dient als Aufrufparameter und repräsentiert die \textit{id} des Core-Sellers, dessen Produkte exportiert werden.
-	
-	Die zu exportierenden Produkte werden in einer Tabelle \texttt{mercateo\_products} zwischengespeichert. Diese Tabelle enthält neben der \texttt{core\_product\_id},  \texttt{core\_category\_id}, \texttt{sku} und den \texttt{title}, also die \texttt{DESCRIPTION\_SHORT} des Artikels auch den \texttt{status} des Produkts.
-	
-	Diese Zwischenspeicherung ist notwendig um die korrekte Funktion der Operationen \textit{update} und \textit{delete} zu gewährleisten. Wird ein neues BMECat Dokument erstellt so werden zunächst alle zu exportierenden Produkte mit den oben erwähnten Feldern in die \texttt{mercateo\_products} Tabelle geschrieben und ihr Status auf \texttt{active} gesetzt. Ändert sich der Zustand eines der in der \texttt{core\_products} Tabelle hinterlegten Produkte so wird der Status in der \texttt{mercateo\_products} Tabelle entsprechend auf \texttt{update} bzw. \texttt{delete} gesetzt.
-	
-	HIER DERN ZYKLUS MODELLIEREN
-	
-	Beim erneuten durchlaufen des Zyklus werden nur jene Produkte in den Update Katalog geschrieben, deren Status ungleich \texttt{active} ist. Produkte deren Status \texttt{delete} war, werden anschließend aus der \texttt{mercateo\_products} Tabelle gelöscht und der Status der übrigen wieder auf \texttt{active} gesetzt.
-	
-	
-	
-	
-	\subsection{XML schreiben}
+
+	\begin{tabularx}{\textwidth \small}{p{4cm} X p{3cm} }
+		\rowcolor[HTML]{EFEFEF} 
+		Spalte & Erläuterung & BMECat Element \\ \cline{1-3} \addlinespace[7pt]
+		id & Primärschlüssel & \multicolumn{1}{c}{\normalsize$\times$} \\
+		core\_seller\_id & Fremdschlüssel auf \texttt{core\_sellers}  & \multicolumn{1}{c}{\normalsize$\times$}  \\ 
+		core\_marketplace\_id & Fremdschlüssel auf \texttt{core\_marketplaces} & \multicolumn{1}{c}{\normalsize$\times$} \\ 
+		core\_currency\_id & Fremdschlüssel auf \texttt{core\_marketplaces}  & \textless CURRENCY \textgreater \\ 
+		supplier\_name & Name des verkaufenden Unternehmens & \multicolumn{1}{c}{\normalsize \checked}   \\
+		catalog\_id & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked}  \\
+		catalog\_version & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked} \\
+		catalog\_name & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked} \\
+		group\_system\_id & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked}  \\
+		group\_system\_name & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked}  \\
+		group\_system\_description & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked} \\
 		
-	Um mit PHP XML schreiben zu können gibt es verschiedene, mehr oder weniger umfangreiche Klassen die hier kurz vorgestellt und eingeschätzt werden.
-	Die zu erfüllenden Anforderungen sind:
-	\begin{itemize}
-	\item Elemente, Kindelemente und Attribute können geschrieben werden
-	\item XML Datei kann gespeichert werden
-	\item XML Datei kann gegen ein XSD Schema validiert werden.
-	\end{itemize}
+		
+		
+		
+		
+		created & Timestamp, wann der Eintrag erzeugt wurde & text \\
+		modified & Timestamp, wann der Eintrag geändert wurde & text \\\addlinespace[7pt] \cline{1-3} 
+		\end{tabularx}%
 	
-	\subsubsection{SimpleXML}
 	
-	SimpleXML ist eine sehr kompakte Klasse zum Lesen und Schreiben von XML Elementen und Attributen. Bietet die Möglichkeit generiertes XML in eine Datei zu schreiben.
-	Eine Validierung ist nicht möglich.
 	
-	\subsubsection{DOMDocument}
 
-	Die DOMDocument Klasse bietet sehr umfangreiche Möglichkeiten XML und HTML Dateien zu lesen, zu schreiben und zu bearbeiten. Elemente können über ihre \textit{id} oder \textit{tag} angesprochen werden. XML Dateien können geschrieben und validiert werden.
 	
-	\subsubsection{XMLWriter}
-	Die XML Writer Klasse bietet, ihrem Namen entsprechend, die Möglichkeit XML zu schreiben und ist ein Wrapper für den in C geschriebenen libxml XML Parser.
-	Ok....blablabla---Valeri Fragen warum er das verwendet hat....
-	Die XMLWriter Klasse bietet die Möglichkeit, XML Dateien zu schreiben. XML kann nicht validiert werden.
 	
-	Um XML zu schreiben wird ein bereits vorhandener, komfortabel und einfach zu nutzender, CakePHP Component (\texttt{XMLWriterComponent}) verwendet, der die Funktionalitäten der PHP XMLWriter Klasse benutzt. Um das XML Dokument zu validieren kann die \texttt{XMLReaderComponetn}-Klasse verwendet werden.
 	
-	\subsection{Erstellung eines neuen BMECat Dokumentes}
+	
+	 
+	\subsubsection{Die Tabelle \texttt{mercateo\_products}}
+
+	Im Zentrum der Katalogerstellung steht die Tabelle mercateo\_products. Sie dient als Zwischenspeicher für die in \texttt{core\_products} gespeicherten Daten und gibt Auskunft darüber, ob (und wann) Produkte geändert, gelöscht oder neu hinzugefügt wurden. Dadurch wird sie zum zentralen Element zur Umsetzung der Transaktionen \texttt{T\_NEW\_CATALOG} und \texttt{T\_UPDATE\_PRODUCTS}. 
+	
+	\begin{tabularx}{\textwidth}{p{4cm} X}
+	\rowcolor[HTML]{EFEFEF} 
+	Spalte & Erläuterung \\ \cline{1-2} \addlinespace[7pt]
+	id & Primärschlüssel \\
+	core\_product\_id & Fremdschlüssel auf core\_products Tabelle \\
+	core\_categorie\_id & Kategorie ID  \\
+	status & Der Status des Eintrages \\
+	sku & Die SKU des Artikels \\
+	title & Die 'DESCRITION\_SHORT' des Artikels  \\ 
+	created & Timestamp, wann der Eintrag erzeugt wurde  \\
+	modified & Timestamp, wann der Eintrag geändert wurde  \\\addlinespace[7pt] \cline{1-2} 
+	\end{tabularx}%
+	
+	Die Spalten 'sku','core\_category\_id' \& 'title' sind notwendig einen Artikel in einem BMECat Dokument als \textit{gelöscht} auszeichnen zu können. Die Spalte 'status' akzeptiert vier  \textit{Zustände}: 
+	
+
+	\begin{tabularx}{\textwidth}{p{3cm} X}
+	\rowcolor[HTML]{EFEFEF} 
+	Zustand & Erläuterung \\ \cline{1-2} \addlinespace[7pt]
+	\texttt{new} & Produktdaten wurden neu in \texttt{core\_products} angelegt. \\
+	\texttt{update} & Produktdaten wurden geändert. \\
+	\texttt{delete} & Produktdaten wurde aus \texttt{core\_products} gelöscht. \\
+	\texttt{active} & Produktdaten wurden in das aktuelle BMECat Dokument übernommen. \\
+	   \addlinespace[7pt] \cline{1-2} 
+	\end{tabularx}%
+		
+	Diese Zustände sind die Werte die das Attribut \texttt{mode} des BMECat Elements \texttt{ARTICLE} annehmen kann. Gleichzeitig geben sie an dieser Stelle Auskunft darüber ob ein in \texttt{core\_products} gespeicherter Datensatz neu ist bzw. gelöscht oder verändert wurde. Jene Datensätze die in das aktuelle BMECat Dokument geschrieben wurden, werden mit 'active' markiert.
+	
+	\subsubsection{Allgemeiner Programmablauf}
+	
+	
+	
+	\subsubsection{Katalogerstellungslogik bei der Transaktion \texttt{T\_NEW\_CATALOG}}
+	
+	Mit dem ersten Programmaufruf wird die \texttt{mercateo\_products} Tabelle mit den entsprechenden Werten aus \texttt{core\_products} initialisiert. Allen Einträgen wird dabei zunächst der Status \texttt{new} zugewiesen. Zugleich werden Datum \& Uhrzeit der Initialisierung in die Tabelle \texttt{core\_configurations} geschrieben. Diese Tabelle ist bereits in iTool angelegt und dient als zentraler Ort um Konfigurationsdaten abzulegen. Anschließend wird eine BMECat Datei mit der Transaktion \texttt{T\_NEW\_CATALOG} erstellt, die Katalogversion in \texttt{core\_configurations} geschrieben und der Status aller Einträge in \texttt{mercateo\_products} auf \texttt{active} gesetzt. 
+	
+	\begin{minipage}{\linewidth}
+		\vspace{1em}
+		\centering
+		\includegraphics[width=0.7 \linewidth]{img/newCatalogFlow}
+		\captionof{figure}[BasicLogic]{Programmlogik  bei der Transaktion \texttt{T\_NEW\_CATALOG}}
+		\vspace{1em}
+	\end{minipage}\\
+	
+	Nachdem das Katalogdokument geschrieben wurde wird es mithilfe des  XSD-Schemas (\texttt{bmecat\_new\_catalog\_1\_2.xsd}) überprüft. 
+		
+	\subsubsection{Katalogerstellungslogik bei der Transaktion \texttt{T\_UPDATE\_PRODUCTS}}
+	
+	Bei jedem erneuten Aufruf des Programmes wird zunächst überprüft ob Einträge in der \texttt{core\_products} Tabelle gelöscht, neu hinzugefügt oder geändert wurden. Letzteres geschieht mit Hilfe der Tabelle \texttt{core\_product\_updates} in der jede Änderung an einem \texttt{core\_product} mit dem Zeitstempel der Änderung erfasst wird. Ist einer der Fälle eingetreten wird der Status des Eintrages in der \texttt{mercateo\_products} Tabelle entsprechend gesetzt.
+	
+	\begin{minipage}{\linewidth}
+		\vspace{1em}
+		\centering
+		\includegraphics[width=0.7 \linewidth]{img/updateCatalogFlow}
+		\captionof{figure}[BasicLogic]{Programmlogik  bei der Transaktion \texttt{T\_UPDATE\_PRODUCTS}}
+		\vspace{1em}
+	\end{minipage}\\
+	
+	
+	Anschließend werden wiederum Datum \& Uhrzeit der Erstellung des Katalogdokumentes gesetzt und selbiges erstellt. Jene Einträge in \texttt{mercateo\_products}, die den Status \texttt{delete} haben, werden gelöscht, danach wird der Status der Übrigen auf \texttt{active} gesetzt und das Attribut \texttt{prev\_version} des Elementes \texttt{T\_UPDATE\_PRODUCTS} mit dem initialen Wert von '0' in die \texttt{core\_configurations} Tabelle geschrieben. Dieser Wert wird bei jedem Updatevorgang um '1' erhöht.	Abschließend erfolgt die Validierung des Dokumentes mithilfe des Schemas \texttt{bmecat\_update\_products\_1\_2.xsd}.
+	
+	\subsection{Bestandsdatenabfrage}
+	
+	Die Bestandsdatenabfrage wird mit einem einfachen Controller realisiert dessen \texttt{index()} Funktion als Parameter die angefragte SKU hat.
+	Von Seiten Mercateo kann so eine URL der Form \url{http://itool.local/mercateo/availability/12} aufgerufen werden. Ist die SKU System vorhanden, wird die Bestandsmenge als Integer Wert zurückgeliefert, ist die angefragte SKU nicht im System, wird eine Fehlermeldung ausgegeben.
 	
 	\section{Implementierung}
 	
-	Hier kommt die Umsetzung des Ganzen rein, also der tatsächliche Programmablauf
+	Die Implementierung gliedert sich in 2 Bereiche, die Konsolenanwendung zur Generierung des Katalogdokumentes und die Bestandsdatenabfrage.
+	
+	\subsection{Die BMECat Creator Shell}
+	
+	Mit der BMECat Creator Shell wird der Entwurf zur Erzeugung eine BMECat Katalogdokumentes umgesetzt. Die eigentliche Shell Klasse \texttt{BmeCatCreatorShell} dient in der Implementierung nur dazu das Subcommando \texttt{prepareCatalogTask} aufzurufen und sicherzustellen, dass die notwendigen Argumente übergeben werden.
+	\lstset{basicstyle=\scriptsize\ttfamily}
+	\begin{lstlisting}
+	Usage:
+	cake mercateo.bme_cat_creator [subcommand] [-h] [-q] [-v] <Core Seller Id> [<Delete flag>]
+	Subcommands:
+	prepareCatalog  Creates or updates a BMECat Catalog file.
+	
+	To see help on a subcommand use `cake mercateo.bme_cat_creator [subcommand] --help`
+	
+	Options:	
+	--help, -h     Display this help.
+	--quiet, -q    Enable quiet output.
+	--verbose, -v  Enable verbose output.
+	
+	Arguments:	
+	Core Seller Id  The ID of the Seller for whom the BMECat shall be
+	                created
+	Delete flag     If "del" is set as second Argument, the
+	                mercateo_products table will be truncated
+	                (optional)
+	\end{lstlisting}
+	
+	Dabei liegt dem Programm folgende Aufrufhierarchie zugrunde:\\
+	\begin{minipage}{\linewidth}
+		\vspace{1em}
+		\centering
+		\includegraphics[width=1 \linewidth]{img/shellFlow}
+		\captionof{figure}[BasicLogic]{Aufrufhierarchie BMECatCreatorShell}
+		\vspace{1em}
+	\end{minipage}\\
+	
+	Im Folgenden werden die einzelnen Klassen vorgestellt.
+	
+	\subsection{XMLWriterComponent}
+	
+	Die XMLWriterComponent Klasse ist insofern wichtiger Bestandteil der Implementierung, als das ohne sie nur auf umständlicherem Wege XML geschrieben werden kann. Hier seien nun in Kürze jene Methoden vorgestellt, die von der Klasse BMECatComponent genutzt werden:
+	
+	\begin{enumerate}[noitemsep]
+	\item public function openXmlWriter($filePath, $rootElement, $attributes = null, $doctype = null) \\
+		  Ermöglicht das Anlegen einer neuen XML Datei mit der Option Attribute ( z.B. die BMECat Version) zu übergeben, sowie über den DOCTYPE eine entsprechende .dtd Datei zu referenzieren.
+	\item public function closeXmlWriter() \\
+		  Schließt das XML Dokument ab.
+	\item writeXmlElement($name, $value, $type = "text", $attributes = [])\\
+		  Schreibt ein XML Element mit dem übergebenen Wert und den dazugehörigen Attributen und schließt es sogleich ab. (Schreibt Start- und End Tag)
+	\item public function writeStartXmlElement($name, $attributes = [])\\
+		  Öffnet ein XML Element und setzt die übergebenen Attribute. (Schreibt den Start-Tag)
+	\item public function writeEndXmlElement()\\
+		  Schließt das zuvor geöffnete Element ab. (Schreibt den End-Tag)
+	\end{enumerate}
+	
+	VORTEILE? 
+	
+	\subsection{BMECatComponent}
+	
+	Die Klasse BMECatComponent dient dazu ein wohlgeformtes und gültiges XML Dokument entsprechend den BMECat- und Mercateo Vorgaben zu erstellen. Wie im Kapitel Grundlagen bereits beschrieben gliedert sich ein BMECat Dokument in 4 Bereiche und zwar den Header, das Kataloggruppensystem, die Auflistung der einzelnen Artikel und die Zuordnung der Artikel zu ihren Kategorien. Der BMECat Komponent stellt für jeden dieser Teilbereiche Funktionen bereit die in Folge erläutert werden sollen.
+	Zur Orientierung dient eine Übersicht der Aufrufhierarchie.\\
+	
+	\begin{minipage}{\linewidth}
+		\vspace{1em}
+		\centering
+		\includegraphics[width=0.7 \linewidth]{img/createBMECatHierarchie}
+		\captionof{figure}[BasicLogic]{Aufrufhierarchie createBMECatXMLDocument}
+		\vspace{1em}
+	\end{minipage}
+	
+	
+	
+	
+	
+	\subsubsection{Erstellen des BMECat Dokumentes}
+	
+	Die Funktion \texttt{createBMECatXMLDocument(\$sellerName, \$sellerId, \$transactionType, \$prevVersion)} dient der Erzeugung eines BMECat Dokumentes. Sie legt die die XML Datei mit der Namenskonvention \texttt{'Verkäufername\_Erzeugungsdatum\_Erzeugungszeit.xml'} an und schreibt Informationen zum XML Namensraum (xmlns) und zur Dokumenttypdefinition (dtd) in die XML-Deklaration. Von ihr werden die Methoden zur Erzeugung des Headers und der restlichen Abschnitte des BMECat Dokumentes aufgerufen.
+	Anhand des Parameters \texttt{\$transactionType} wird entschieden ob bei dem zu erzeugenden Dokument die Transaktion \texttt{T\_NEW\_CATALOG} oder \texttt{T\_UPDATE\_PRODUCTS} umgesetzt werden soll.
+	
+	\subsubsection{Schreiben der Header Sektion}
+
+	Die Methode \texttt{createHeader(\$sellerId)} schreibt die BMECat-Header-Sektion des Dokumentes. Alle benötigten Informationen, wie z.B. Herstellername oder Katalogversion werden dabei anhand der \texttt{sellerId} aus der \texttt{mercate\_accounts} Tabelle geladen.
+	
+	\subsubsection{Schreiben des Kataloggruppensystems}
+	
+	Die Methode \texttt{createCatalogGroupSystem(\$sellerId)} steuert die Erzeugung des Kataloggruppensystems. Die von ihr aufgerufenen Methoden sind im wesentlichen für das Schreiben bestimmter XML Elemente zuständig.\\
+	\begin{minipage}{\linewidth}
+		\vspace{1em}
+		\centering
+		\includegraphics[width=0.7 \linewidth]{img/CreateCatalogGroupSystemHierarchie}
+		\captionof{figure}[BasicLogic]{Aufrufhierarchie createCatalogGroupSystem}
+		\vspace{1em}
+	\end{minipage}
+	
+	 Das tatsächliche Abbilden der Katalogstruktur erfolgt in der Methode \texttt{categoryToNode(\ \$category,\$sellerId)}.
+	 
+	\begin{addmargin}[1cm]{1cm}
+	\underline{Dazu ein kleiner Exkurs:}\\
+		 CakePHP bietet die Möglichkeit einem Model ein sogenanntes Tree-Behaviour hinzuzufügen. Dieses basiert auf dem Nested-Set-Konzept, das es ermöglicht hierarchische Strukturen in relationalen Datenbanken abzubilden\footnote{vgl. hierzu\url{https://www.sitepoint.com/hierarchical-data-database-2/}}. Die \texttt{core\_categories} Tabelle bedient sich dieses 'Behavious', was es ermöglicht diesen Kategoriebaum rekursiv zu durchlaufen und dadurch das Kataloggruppensystem des BMECat abzubilden.
+	\end{addmargin}
+	
+	
+	Die Methode \texttt{categoryToNode(\$category,\$sellerId)} durchläuft, ausgehend vom Wurzelelement, alle Kindelemente und schreibt die entsprechenden Daten in das Dokument. Solange dabei die Anzahl der Kindelemente des gerade traversierten Elementes größer 0 ist wird dabei dem Attribut \texttt{type} der Wert \texttt{node} zugewiesen. Gibt es keine Kindelemente mehr, wird der Wert auf \texttt{leaf} gesetzt. 
+	\lstset{language=xml}
+	\begin{lstlisting}
+	<CATALOG_STRUCTURE type="node">
+	 <GROUP_ID>207</GROUP_ID>
+	 <GROUP_NAME>Auto -Motorrad - Flugzeug</GROUP_NAME>
+	 <PARENT_ID>202</PARENT_ID>
+	</CATALOG_STRUCTURE>
+	<CATALOG_STRUCTURE type="leaf">
+	 <GROUP_ID>210</GROUP_ID>
+	 <GROUP_NAME>Oldtimer</GROUP_NAME>
+	 <PARENT_ID>207</PARENT_ID>
+	</CATALOG_STRUCTURE>
+	\end{lstlisting}
+	
+	\subsubsection{Artikelerstellung}
+	
+	Die Methode \texttt{createArticles(\$sellerId)} aggregiert die zu schreibenenden Artikeldaten. Über einen \texttt{INNER JOIN} werden die Tabellen \texttt{mercateo\_products} und \texttt{core\_products} verbunden, so dass über die in \texttt{mercateo\_products} hinterlegte \texttt{core\_product\_id} die entsprechenden Daten aus der \texttt{core\_products} Tabelle nachgeladen werden können. 
+	Ist der Artikelstatus gleich \textit{'new'} oder \textit{'update'} wird die Methode \texttt{writeArticle(\$product, \$articleMode)} aufgerufen, die die entsprechenden XML Elemente schreibt. \\
+		
+		\begin{minipage}{\linewidth}
+			\vspace{1em}
+			\centering
+			\includegraphics[width=0.7 \linewidth]{img/createArticleHierarchie}
+			\captionof{figure}[BasicLogic]{Aufrufhierarchie createArticle}
+			\vspace{1em}
+		\end{minipage}
+	
+	Zusätzlich wird geprüft ob die dem Artikel zugeordneten Bilder der Mercateo Spezifikation entsprechen. Diese gestattet als Bildformate nur '.jpeg' und '.png'. Entsprechen die Bilddateien nicht diesem Format wird eine entsprechende Ausnahmebehandlung durchgeführt. Dabei wird der komplette Pfad der beanstandeten Datei zurückgeliefert, um es dem Anwender zu erleichtern diesen Fehler zu beheben.\\
+	
+	\begin{lstlisting}
+	2017-01-05 16:30:55 Info: Product with CoreProductId: 7147 updated
+	Exception: 'png' ist not allowed as File Extension.
+	Only .gif & .jpg Files are accepted by Mercateo-Marketplace
+	Check Image Path: https://bild-im-rahmen.com/wp-content/uploads/2016/03/s21r.png
+	\end{lstlisting}
+
+	Handelt es sich um einen gelöschten Artikel, wird die Methode \texttt{writeDeletedArticle(\$pro\-duct)} aufgerufen. Diese schreibt die in \texttt{mercateo\_products} hinterlegten, um einen Artikel als gelöscht auszeichnen zu können notwendigen Informationen - Die SKU \& den Titel- in das Dokument.
+	
+	\subsubsection{Kategoriemapping}
+	
+	Mit der Methode \texttt{mapArticleToCatalogGroup(\$sellerId)} werden bei der Transaktion \texttt{T\_NEW\_CATALOG} die Artikel ihren Kategorien zugewiesen. Alle dazu notwendigen Informationen finden sich in der \texttt{mercateo\_products} Tabelle.
+	
+	Wird ein Update Katalog erstellt wird die Funktion \texttt{updateMapArticleToCatalogGroup()} aufgerufen. Sie setzt den bei der Transaktion \texttt{T\_UPDATE\_PRODCUTS} geforderten Attributwert für \texttt{mode} entsprechend der Angaben in der \texttt{mercateo\_products} Tabelle.
+	Mögliche Werte sind \textit{'new'} für neu erstellte und \textit{'delete'} für gelöschte Produkte.
+	
+	
+	\section{prepareCatalogTask}
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 	\section{Test}
 
