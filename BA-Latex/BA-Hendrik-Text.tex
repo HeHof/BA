@@ -458,27 +458,22 @@
 	Eine Übersicht der in \texttt{mercateo\_accounts} gespeicherten Werte bietet folgende Tabelle, wenn nicht anders angegeben entspricht das BMECat Element der Spaltenbezeichnung (\texttt{catalog\_id} == \textless CATALOG\_ID \textgreater )
 
 
-	\begin{tabularx}{\textwidth \small}{p{4cm} X p{3cm} }
+	\begin{tabularx}{\textwidth \small}{p{4cm} X p{2.8cm} }
 		\rowcolor[HTML]{EFEFEF} 
 		Spalte & Erläuterung & BMECat Element \\ \cline{1-3} \addlinespace[7pt]
 		id & Primärschlüssel & \multicolumn{1}{c}{\normalsize$\times$} \\
 		core\_seller\_id & Fremdschlüssel auf \texttt{core\_sellers}  & \multicolumn{1}{c}{\normalsize$\times$}  \\ 
 		core\_marketplace\_id & Fremdschlüssel auf \texttt{core\_marketplaces} & \multicolumn{1}{c}{\normalsize$\times$} \\ 
-		core\_currency\_id & Fremdschlüssel auf \texttt{core\_marketplaces}  & \textless CURRENCY \textgreater \\ 
+		core\_currency\_id & Fremdschlüssel auf \texttt{core\_marketplaces}  &\multicolumn{1}{c}{ \textless CURRENCY \textgreater} \\ 
 		supplier\_name & Name des verkaufenden Unternehmens & \multicolumn{1}{c}{\normalsize \checked}   \\
 		catalog\_id & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked}  \\
-		catalog\_version & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked} \\
-		catalog\_name & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked} \\
-		group\_system\_id & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked}  \\
-		group\_system\_name & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked}  \\
-		group\_system\_description & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked} \\
-		
-		
-		
-		
-		
-		created & Timestamp, wann der Eintrag erzeugt wurde & text \\
-		modified & Timestamp, wann der Eintrag geändert wurde & text \\\addlinespace[7pt] \cline{1-3} 
+		catalog\_version & Version des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked} \\
+		catalog\_name & Beliebiger Name, der den Produktkatalog beschreibt & \multicolumn{1}{c}{\normalsize \checked} \\
+		group\_system\_id & Kennung des Kataloggruppensystems & \multicolumn{1}{c}{\normalsize \checked}  \\
+		group\_system\_name & Name des Kataloggruppensystems & \multicolumn{1}{c}{\normalsize \checked}  \\
+		group\_system\_description & Beschreibung des Kataloggruppensystems & \multicolumn{1}{c}{\normalsize \checked} \\	
+		created & Timestamp, wann der Eintrag erzeugt wurde & \multicolumn{1}{c}{\normalsize$\times$} \\
+		modified & Timestamp, wann der Eintrag geändert wurde & \multicolumn{1}{c}{\normalsize$\times$}\\\addlinespace[7pt] \cline{1-3} 
 		\end{tabularx}%
 	
 	
