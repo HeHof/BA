@@ -476,8 +476,8 @@
 	\subsection{Katalogerstellung NEW}
 	
 	Die Erstellung der BMECat Dokumente wird über eine CakePHP Shell und von dort aus aufrufbare Tasks realisiert. Das hat den Vorteil, dass diese über einen Cronjob automatisiert werden können.
-	Die Logik zur Erstellung eines neuen BMECat Dokumentes wird in die Klasse \texttt{addNewCatalogTask} ausgelagert, die zur Erstellung eines Updatekataloges in die Klasse 
-	\texttt{updateCatalogTask}. Mit der Klasse \texttt{deleteCatalogTask} wird das Löschen von den zu exportierenden Katalogdaten umgesetzt. Das Schreiben eines Katalogdokumentes wird durch die Componentklasse \texttt{BMECatComponent} realisiert, die sich wiederum der Komponentenklasse \texttt{XMLWriterComponent} bedient. Hier kommt das \textit{Single-Responsibility} zur Anwendung; Jede Klasse erfüllt genau eine Aufgabe. \texttt{addNewCatalogTask} und \texttt{updateCatalogTask} sollen von der Shellklasse \texttt{prepareCatalogShell} abgeleitet werden. So wird das Prinzip des \textit{Open-Closed} umgesetzt.
+	Die Logik zur Erstellung eines neuen BMECat Dokumentes wird in die Klasse \texttt{AddNewCatalogTask} ausgelagert, die zur Erstellung eines Updatekataloges in die Klasse 
+	\texttt{UpdateCatalogTask}. Mit der Klasse \texttt{DeleteCatalogTask} wird das Löschen von den zu exportierenden Katalogdaten umgesetzt. Das Schreiben eines Katalogdokumentes wird durch die Componentklasse \texttt{BMECatComponent} realisiert, die sich wiederum der Komponentenklasse \texttt{XMLWriterComponent} bedient. Hier kommt das \textit{Single-Responsibility} zur Anwendung; Jede Klasse erfüllt genau eine Aufgabe. \texttt{AddNewCatalogTask}, \texttt{UpdateCatalogTask} und \texttt{DeleteCatalogTask} erweitern die Basisklasse \texttt{catalogTools} abgeleitet werden. So wird das Prinzip des \textit{Open-Closed} umgesetzt.
 
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
@@ -581,9 +581,9 @@
 	
 	Wird die Shell unter Angabe des entsprechenden Tasks aufgerufen, wird zunächst überprüft ob der Nutzer die \textit{id} des Verkäufers angegeben hat, dessen Produkte exportiert werden sollen. Ist das nicht der Fall bricht das Programm mit einem Hinweis zum korrekten Aufruf ab. Falls die übergebene \textit{id} nicht in der Datenbank gefunden werden kann, so wird eine Liste aller verfügbaren Verkäufer ausgegeben. Anschließend wird, je nach gewähltem Task ein Katalogdokument erzeugt oder geupdated und im Anschluss daran mit dem entsprechenden XML Schema validiert. 
 	
-	\subsubsection{Katalogerstellungslogik in der Klasse \texttt{addNewCatalogTask}}
+	\subsubsection{Katalogerstellungslogik in der Klasse \texttt{AddNewCatalogTask}}
 	
-	Mit dem Aufruf des \texttt{addNewCatalogTask}s wird die Umsetzung der Transaktionsart \texttt{T\_NEW\_CATALOG} realisiert. Zu Beginn wird die \texttt{mercateo\_products} Tabelle mit den entsprechenden Werten aus \texttt{core\_products} initialisiert. Allen Einträgen wird dabei zunächst der Status \texttt{new} zugewiesen. Daraufhin werden Datum \& Uhrzeit der Initialisierung in die Tabelle \texttt{core\_configurations} geschrieben. Anschließend wird eine BMECat Datei mit der Transaktion \texttt{T\_NEW\_CATALOG} erstellt. Die dazu benötigten Informationen werden aus den Tabellen \texttt{mercateo\_products}, \texttt{core\_products}, \texttt{mercateo\_accounts} und \texttt{core\_configurations} geladen. Danach wird der Status aller Einträge in \texttt{mercateo\_products} auf \texttt{active} gesetzt. 
+	Mit dem Aufruf des \texttt{AddNewCatalogTask}s wird die Umsetzung der Transaktionsart \texttt{T\_NEW\_CATALOG} realisiert. Zu Beginn wird die \texttt{mercateo\_products} Tabelle mit den entsprechenden Werten aus \texttt{core\_products} initialisiert. Allen Einträgen wird dabei zunächst der Status \texttt{new} zugewiesen. Daraufhin werden Datum \& Uhrzeit der Initialisierung in die Tabelle \texttt{core\_configurations} geschrieben. Anschließend wird eine BMECat Datei mit der Transaktion \texttt{T\_NEW\_CATALOG} erstellt. Die dazu benötigten Informationen werden aus den Tabellen \texttt{mercateo\_products}, \texttt{core\_products}, \texttt{mercateo\_accounts} und \texttt{core\_configurations} geladen. Danach wird der Status aller Einträge in \texttt{mercateo\_products} auf \texttt{active} gesetzt. 
 	
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
@@ -595,8 +595,8 @@
 	
 	Nachdem das Katalogdokument geschrieben wurde wird es mithilfe des  XSD-Schemas (\texttt{bmecat\_new\_catalog\_1\_2.xsd}) überprüft. 
 		
-	\subsubsection{Katalogerstellungslogik in der Klasse \texttt{updateCatalogTask} }
-    Die	Klasse \texttt{updateCatalogTask} realisiert die Umsetzung der Transaktionsart
+	\subsubsection{Katalogerstellungslogik in der Klasse \texttt{UpdateCatalogTask} }
+    Die	Klasse \texttt{UpdateCatalogTask} realisiert die Umsetzung der Transaktionsart
 	\texttt{T\_UPDATE\_PRODUCTS}.
 	Bei jedem  Aufruf des Tasks wird zunächst überprüft ob Einträge in der \texttt{core\_products} Tabelle gelöscht, neu hinzugefügt oder geändert wurden. Letzteres geschieht mit Hilfe der Tabelle \texttt{core\_product\_updates} in der jede Änderung an einem \texttt{core\_product} mit dem Zeitstempel der Änderung erfasst wird. Ist einer der Fälle eingetreten wird der Status des Eintrages in der \texttt{mercateo\_products} Tabelle entsprechend gesetzt. Dieser Vorgang ist nicht modelliert.
 	
@@ -620,29 +620,46 @@
 	
 	Die Implementierung gliedert sich demnach in 2 Bereiche, die Konsolenanwendung zur Generierung des Katalogdokumentes und die Bestandsdatenabfrage.
 	
-	\subsection{Die BMECat Creator Shell}
+	\subsection{Die PrepareCatalog Shell}
 	
-	Mit der BMECat Creator Shell wird der Entwurf zur Erzeugung eine BMECat Katalogdokumentes umgesetzt. Die eigentliche Shell Klasse \texttt{BmeCatCreatorShell} dient in der Implementierung nur dazu das Subcommando \texttt{prepareCatalogTask} aufzurufen und sicherzustellen, dass die notwendigen Argumente übergeben werden.
+	Mit der PrepareCatalog Shell wird der Entwurf zur Erzeugung eine BMECat Katalogdokumentes umgesetzt. Die eigentliche Shell Klasse \texttt{PrepareCatalogShell} dient in der Implementierung  dazu die Subcommandos \texttt{AddNewCatalogTask},\texttt{UpdateCatalogTask} und \texttt{DeleteCatalogTask} aufzurufen und sicherzustellen, dass die notwendigen Argumente übergeben werden.
 	\lstset{basicstyle=\scriptsize\ttfamily}
 	\begin{lstlisting}
 	Usage:
-	cake mercateo.bme_cat_creator [subcommand] [-h] [-q] [-v] <Core Seller Id> [<Delete flag>]
+	cake mercateo.prepare_catalog [subcommand] [-h] [-q] [-v] <Core Seller Id>
+	
 	Subcommands:
-	prepareCatalog  Creates or updates a BMECat Catalog file.
 	
-	To see help on a subcommand use `cake mercateo.bme_cat_creator [subcommand] --help`
+	addNewCatalog  Creates a new BMECat Catalog file.
+	deleteCatalog  Deletes Sellers Products from mercateo_products table
+	updateCatalog  Creates an Update Catalog file.
 	
-	Options:	
+	To see help on a subcommand use `cake mercateo.prepare_catalog [subcommand] --help`
+	
+	Options:
+	
 	--help, -h     Display this help.
 	--quiet, -q    Enable quiet output.
 	--verbose, -v  Enable verbose output.
 	
-	Arguments:	
+	Arguments:
+	
 	Core Seller Id  The ID of the Seller for whom the BMECat shall be
-	                created
-	Delete flag     If "del" is set as second Argument, the
-	                mercateo_products table will be truncated
-	                (optional)
+	            created
+
+	
+	\end{lstlisting}
+	
+	Kann der übergebene Parameter keinem Verkäufer zugeordnet werden wird eine Übersicht der verfügbaren Verkäufer angezeigt. Dies geschieht in den einzelnen Tasks über die geerbte Methode \texttt{validateArgument(\$coreSellerId)}.
+	
+	\begin{lstlisting}
+	Please choose one of the available Sellers:
+	
+	ID | Name
+	
+	1  | Hendrik
+	2  | Ben
+	3  | Guehring
 	\end{lstlisting}
 	
 	Dabei liegt dem Programm folgende Aufrufhierarchie zugrunde:\\
@@ -697,8 +714,8 @@
 	
 	\subsubsection{Erstellen des BMECat Dokumentes}
 	
-	Die Funktion \texttt{createBMECatXMLDocument(\$sellerName, \$sellerId, \$transactionType, \$prevVersion)} dient der Erzeugung eines BMECat Dokumentes. Sie legt die die XML Datei mit der Namenskonvention \texttt{'Verkäufername\_Erzeugungsdatum\_Erzeugungszeit.xml'} an und schreibt Informationen zum XML Namensraum (xmlns) und zur Dokumenttypdefinition (dtd) in die XML-Deklaration. Von ihr werden die Methoden zur Erzeugung des Headers und der restlichen Abschnitte des BMECat Dokumentes aufgerufen.
-	Anhand des Parameters \texttt{\$transactionType} wird entschieden ob bei dem zu erzeugenden Dokument die Transaktion \texttt{T\_NEW\_CATALOG} oder \texttt{T\_UPDATE\_PRODUCTS} umgesetzt werden soll.
+	Die Funktion \texttt{createBMECatXMLDocument(\$sellerName, \$sellerId, \$transactionType, \$prevVersion)} dient der Erzeugung eines BMECat Dokumentes. Sie legt die XML Datei mit der Namenskonvention \texttt{'Verkäufername\_Erzeugungsdatum\_Erzeugungszeit.xml'} an und schreibt Informationen zum XML Namensraum (xmlns) und zur Dokumenttypdefinition (dtd) in die XML-Deklaration. Von ihr werden die Methoden zur Erzeugung des Headers und der restlichen Abschnitte des BMECat Dokumentes aufgerufen.
+	Anhand des Parameters \texttt{\$transactionType} wird entschieden ob bei dem zu erzeugenden Dokument die Transaktion \texttt{T\_NEW\_CATALOG} oder \texttt{T\_UPDATE\_PRODUCTS} umgesetzt werden soll. Falls die Datei, z.B. wegen fehlender Rechte, nicht angelegt werden kann, wird durch die XMLWriter Komponente eine Exception erzeugt.
 	
 	\subsubsection{Schreiben der Header Sektion}
 
@@ -751,7 +768,7 @@
 			\vspace{1em}
 		\end{minipage}
 	
-	Zusätzlich wird geprüft ob die dem Artikel zugeordneten Bilder der Mercateo Spezifikation entsprechen. Diese gestattet als Bildformate nur '.jpeg' und '.png'. Entsprechen die Bilddateien nicht diesem Format wird eine entsprechende Ausnahmebehandlung durchgeführt. Dabei wird der komplette Pfad der beanstandeten Datei zurückgeliefert, um es dem Anwender zu erleichtern diesen Fehler zu beheben.\\
+	Zusätzlich wird geprüft ob die dem Artikel zugeordneten Bilder der Mercateo Spezifikation entsprechen. Diese gestattet als Bildformate nur '.jpeg' und '.gif'. Entsprechen die Bilddateien nicht diesem Format wird eine entsprechende Ausnahmebehandlung durchgeführt. Dabei wird der komplette Pfad der beanstandeten Datei zurückgeliefert, um es dem Anwender zu erleichtern diesen Fehler zu beheben.\\
 	
 	\begin{lstlisting}
 	2017-01-05 16:30:55 Info: Product with CoreProductId: 7147 updated
@@ -766,28 +783,63 @@
 	
 	Mit der Methode \texttt{mapArticleToCatalogGroup(\$sellerId)} werden bei der Transaktion \texttt{T\_NEW\_CATALOG} die Artikel ihren Kategorien zugewiesen. Alle dazu notwendigen Informationen finden sich in der \texttt{mercateo\_products} Tabelle.
 	
-	Wird ein Update Katalog erstellt wird die Funktion \texttt{updateMapArticleToCatalogGroup()} aufgerufen. Sie setzt den bei der Transaktion \texttt{T\_UPDATE\_PRODCUTS} geforderten Attributwert für \texttt{mode} entsprechend der Angaben in der \texttt{mercateo\_products} Tabelle.
+	Wird ein Update Katalog erstellt wird die Funktion \texttt{updateMapArticleToCatalogGroup(\$sellerId)} aufgerufen. Sie setzt den bei der Transaktion \texttt{T\_UPDATE\_PRODCUTS} geforderten Attributwert für \texttt{mode} entsprechend der Angaben in der \texttt{mercateo\_products} Tabelle.
 	Mögliche Werte sind \textit{'new'} für neu erstellte und \textit{'delete'} für gelöschte Produkte.
 	
+	\subsection{Die Klasse \texttt{CatalogToolsTask}}
 	
-	\subsection{prepareCatalogTask}
+	Die Klasse \texttt{CatalogToolsTask} stellt Methoden zur Verfügung die von den drei sie beerbenden Task Klassen verwandt werden.
 	
-	Die Klasse \texttt{prepareCatalogTask} setzt die in Kapitel 3.1.4 und 3.1.5 modellierten Entwürfe zur Katalogerstellung um. In der \texttt{main()} Methode wird zunächst ein BmeCatComponent Objekt erzeugt und mit der Methode \texttt{validateArgument(\$sellerId)}überprüft ob die beim Programmaufruf übergebene \texttt{sellerId} vorhanden ist. Falls nicht wird eine tabellarische Übersicht der verfügbaren Verkäufer ausgegeben.
-	\begin{lstlisting}
-	Please choose one of the available Sellers:
+	\begin{minipage}{\linewidth}
+		\vspace{0.5em}
+		\centering
+		\includegraphics[width=0.7 \linewidth]{img/CatalogToolsTaskUML}
+		\captionof{figure}[BasicLogic]{UML Modellierung der Klasse \texttt{CatalogToolsTask}}
+		\vspace{0.5em}
+	\end{minipage}
 	
-	ID | Name
+	Die Methode \texttt{initialize()} lädt alle zur Katalogerzeugung benötigten Model-Klassen und initialisiert die Instanzvariable \texttt{BMECatComponent}.
+	Die vom CakePHP-Framework zur Verfügung gestellte Methode \texttt{getOptionParser()} überprüft, ob beim Aufruf des Tasks die benötigte \texttt{\$coreSellerId} übergeben wird.
+	Mit \texttt{validateArgument(\$coreSellerId)} wird geprüft, ob die übergebene \texttt{\$coreSellerId} im System vorhanden ist. Falls ja, wird \texttt{true} zurückgeliefert. Falls nicht, wird eine tabellarische Übersicht der verfügbaren Verkäufer ausgegeben und \texttt{false} zurückgegeben.
+	Durch \texttt{writeDataToMercateoProductsTable(\$sellerId, \$coreProduct, \$statusCode)} werden Einträge in der \texttt{mercateo\_products}-Tabelle erzeugt, dabei wird mit \texttt{checkIfProductIdIsAllreadyInMercateoProductsTable(\$coreProductId)} sichergestellt, dass keine doppelten Einträge erstellt werden, eine bestimmte \texttt{core\_product\_id} also nur einmal in der Tabelle vorkommt. Das setzten eines bestimmten Produktstatus für \textit{einen} Eintrag in der \texttt{mercateo\_products}-Tabelle wird mit der Methode \texttt{setMercateoProductStatus(\$productId, \$status)} realisiert. Das setzten der Produkstatus aller Produkte eines \textit{CoreSellers} geschieht mit \texttt{setMercateoProductsStatus(\$sellerId, \$status)}.
+	Information darüber,ob die \texttt{mercateo\_products}-Tabelle bereits Produkte eines bestimmten Verkäufers enthält, erlangt man mit \texttt{checkIfMercateoProductsTableContainsSellersProducts(\$sellerId)}. Die Methode \texttt{setLastCatalogUpdate(\$sellerId)} schreibt den Timestamp der letzten Katalogerstellung in die \texttt{core\_configurations}-Tabelle.\\
 	
-	1  | Hendrik
-	2  | Ben
-	3  | Guehring
-	\end{lstlisting}
+	\begin{addmargin}[1cm]{1cm}
+	\underline{Exkurs:}\\
+	 In der Tabelle \texttt{core\_configurations} werden Konfigurationsdaten gespeichert. 	 
+	 \begin{table}[!htbp]
+	 \begin{addmargin}[1cm]{1cm}
+	 \centering
+		 		\begin{tabularx}{\linewidth}{p{4cm} X}
+		 		\rowcolor[HTML]{EFEFEF} 
+		 		Spalte & Erläuterung \\ \cline{1-2} \addlinespace[7pt]
+		 		id & Primärschlüssel \\
+		 		core\_seller\_id & Die Id des Verkäufers für den die Konfiguration gilt \\
+		 		configuration\_group & Angabe des Plugins für das die Konfiguration gilt \\
+		 		configuration\_path & Nähere Angabe zum blabla Valeri fragen \\
+		 		configuration\_value & Der Konfigurationswert \\\addlinespace[7pt] \cline{1-2} 
+		 		\end{tabularx}%
+		 		\captionbelow{Die Tabelle \texttt{mercateo\_products}}
+		 	\end{addmargin}
+		 	\end{table}
+	 
+	 Bis dato können Einträge in die Tabelle nur über das GUI des iTool erstellt werden. Die Methode \texttt{setSellerConfiguration(\$coreSellerId, \$configurationPath, \$configurationValue)} erweitert die Klasse \texttt{CoreConfigurationsTable} um die Möglichkeit Einträge über einen Methodenaufruf erzeugen zu können. Ist unter dem übergeben Pfad schon ein Wert hinterlegt so wird dieser aktualisiert. Existiert noch keine Eintrag, wird ein neuer erzeugt.
+		\end{addmargin}
 	
-	Ist der Verkäufer vorhanden wird mit\texttt{checkIfMercateoProductsTableContainsSellersPro\-ducts(\$sellerId)} überprüft ob in der Tabelle \texttt{mercateo\_products} schon dessen Produkte angelegt wurden. Ist dem nicht so, wird mit der \texttt{newCatalog(\$sellerId, \$BmeCatComponent)} die Katalogerzeugung gestartet.
+	Die Methode \texttt{validateXml(\$path, \$schemePath)} lädt eine Instanz der Klasse \texttt{XMLReaderComponent} und öffnet damit die soeben erstellte Datei, welche durch den lesenden Zugriff validiert wird. Der Dateipfad wird der Instanzvariablen \texttt{path} der BMECat-Komponente entnommen.
 	
-	\subsubsection{Erzeugung eines initialen Katalogdokumentes}
+		\begin{addmargin}[1cm]{1cm}
+		\underline{Exkurs:}\\
+		Um die erzeugte XML Datei mit dem dazugehörigen Schema validieren zu können muss die Klasse \texttt{XMLReaderComponent} um diese Funktionalität ergänzt werden. Die dem Component zugrundeliegende \texttt{xmlReader}-Klasse stellt dazu eine Methode \texttt{setSchema(\$schemePath)} zur Verfügung die hier zur Anwendung kommt. Wurde ein Schema gesetzt wird mit dem ersten Aufruf der \texttt{xmlReader->read())} Methode die zu lesende Datei validiert. 
+		\end{addmargin}
 	
-	In der Methode \texttt{newCatalog} sind die zur Erstellung eines initialen Katalogdokumentes benötigten Methoden zusammengefasst.
+		
+		
+
+	
+	\subsubsection{Erzeugung eines initialen Katalogdokumentes mit der Klasse \texttt{AddNewCatalogTask}}
+	
+	Die Klasse \texttt{AddNewCatalogTask} vereint die zur Erzeugung eines initialen Katalogdokumentes benötigten Funktionen. 
 	 
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
@@ -801,70 +853,45 @@
 	
 	Anschließend wird mit \texttt{setLastCatalogUpdate} der Timestamp der Katalogerzeugung in die \texttt{core\_configurations} Tabelle geschrieben.
 	
-	\begin{addmargin}[1cm]{1cm}
-	\underline{Exkurs:}\\
-	 In der Tabelle \texttt{core\_configurations} werden Konfigurationsdaten gespeichert. 
-
-	 
-	 \begin{table}[!htbp]
-	 \begin{addmargin}[1cm]{1cm}
-	 \centering
-	 		\begin{tabularx}{\linewidth}{p{4cm} X}
-	 		\rowcolor[HTML]{EFEFEF} 
-	 		Spalte & Erläuterung \\ \cline{1-2} \addlinespace[7pt]
-	 		id & Primärschlüssel \\
-	 		core\_seller\_id & Die Id des Verkäufers für den die Konfiguration gilt \\
-	 		configuration\_group & Angabe des Plugins für das die Konfiguration gilt \\
-	 		configuration\_path & Nähere Angabe zum blabla Valeri fragen \\
-	 		configuration\_value & Der Konfigurationswert \\\addlinespace[7pt] \cline{1-2} 
-	 		\end{tabularx}%
-	 		\captionbelow{Die Tabelle \texttt{mercateo\_products}}
-	 	\end{addmargin}
-	 	\end{table}
-	 
-	 Bis dato können Einträge in die Tabelle nur über das GUI des iTool erstellt werden. Die Methode setSellerConfiguration(\$coreSellerId, \$configurationPath, \$configurationValue) erweitert die Klasse \texttt{CoreConfigurationsTable} um die Möglichkeit Einträge über einen Methodenaufruf erzeugen zu können. Ist unter dem übergeben Pfad schon ein Wert hinterlegt so wird dieser aktualisiert. Existiert noch keine Eintrag, wird ein neuer erzeugt.
-	\end{addmargin}
+	
 	
 	Durch den Aufruf der \texttt{main(\$sellerId, \$transactionType, \$prevVersion = null)} Methode des \texttt{BmeCatComponent}-Objektes wird die eigentliche Katalogdokumenterstellung angestoßen. Dem Parameter \texttt{transactionType} wird hier der Wert \texttt{T\_NEW\_CATALOG} zugewiesen. Anschließend wird durch die Methode \texttt{setMercateoProductsStatus(\$status)} der \textit{status} aller in \texttt{mercateo\_products} gespeicherten Artikel auf \textit{active} gesetzt.
 
-	\begin{addmargin}[1cm]{1cm}
-	\underline{Exkurs:}\\
-	Um die erzeugte XML Datei mit dem dazugehörigen Schema validieren zu können muss die Klasse \texttt{XMLReaderComponent} um diese Funktionalität ergänzt werden. Die dem Component zugrundeliegende xmlReader Klasse stellt dazu eine Methode \texttt{setSchema(\$schemePath)} zur Verfügung die hier zur Anwendung kommt. Wurde ein Schema gesetzt wird mit dem Aufruf der xmlReader Methode  die zu lesende Datei validiert. 
-	\end{addmargin}
-	
-	Die Methode \texttt{validateXml(\$path, \$schemePath)} lädt eine Instanz der Klasse \texttt{XMLReaderComponent} und öffnet damit die soeben erstellte Datei,welche durch den lesenden Zugriff validiert wird. Der passende Dateipfad ist der Rückgabewert der \texttt{main()}-Methode des BMECatComponent.
-	
-	Im folgenden werden jene 3 Methoden vorgestellt, die erfassen ob Produkte gelöscht, geändert oder neu hinzugefügt wurden. Sie geben jeweils \texttt{true} zurück, falls eine entsprechende Änderung stattgefunden hat. Zugleich wird in der Konsole eine Meldung der Form 	
-	\begin{lstlisting}
-	Info: Product with CoreProductId: 1781 added
-	Info: Product with CoreProductId: 1782 deleted
-	Info: Product with CoreProductId: 1783 updated
-	\end{lstlisting} ausgegeben, die außerdem in der Datei \textit{productChange.log} erfasst wird.
-		
-	Die Methode \texttt{checkIfNewCoreProductsHaveBeenCreated(\$sellerId)} überprüft ob es seit der letzten Katalogerstellung in der Tabelle \texttt{core\_products} neue Einträge gab. Dazu wird die Tabelle \texttt{mercateo\_products} über einen LEFT-JOIN an \texttt{core\_products} gebunden.All jene Produkte aus \texttt{core\_products}, deren \textit{core\_product\_id} nicht in \texttt{mercateo\_products} zu finden ist müssen als neu gelten und werden demnach mit dem Statuscode \texttt{new} in \texttt{mercateo\_products} geschrieben. 
-	
 
-	Mit \texttt{checkIfCoreProductsHaveBeenDeleted(\$sellerId)} wird geprüft ob Daten aus der \texttt{core\_products} Tabelle gelöscht wurden. Auch hier wird \texttt{mercateo\_products} über einen LEFT-JOIN an \texttt{core\_products} gebunde. All jene Produkte deren \textit{core\_product\_id} 
-	noch in der \texttt{mercateo\_products} Tabelle vermerkt ist, nicht aber in \texttt{core\_products}, müssen als gelöscht gelten. Entsprechend wird der Status der betroffenen Produkte in \texttt{mercateo\_products} auf \texttt{delete} gesetzt.
 	
-	Durch die Methode \texttt{checkIfCoreProductsHaveBeenChanged(\$sellerId)} schließlich wird geprüft ob sich Produktdaten seit der letzten Katalogerstellung geändert haben. Dazu wird die Tabelle \texttt{core\_product\_updates} über einen INNER-JOIN an \texttt{mercateo\_products} gebunden.
-	Beim Erstellen des Kataloges wurde der Zeitpunkt der Erzeugung in der \texttt{core\_configurations} Tabelle gespeichert. All jene Einträge aus \texttt{core\_product\_updates}, deren Erzeugungsdatum nach der Katalogerstellung liegt werden in \texttt{mercateo\_products} mit dem Status \texttt{update} versehen.
+	
 	
 	\subsubsection{Erzeugung eines Update-Katalogdokumentes}
 	
-	Hat eine der soeben vorgestellten Methoden \texttt{true} zurückgeliefert, wird die Methode \texttt{updateCatalog(\$sellerId, \$BmeCatComponent)} aufgerufen, die alle an der Erstellung eines Update-Katalogdokumentes beteiligten Methoden zusammenfasst.
+	Im folgenden werden jene 3 Methoden vorgestellt, die erfassen ob Produkte gelöscht, geändert oder neu hinzugefügt wurden. Sie geben jeweils \texttt{true} zurück, falls eine entsprechende Änderung stattgefunden hat. Zugleich wird in der Konsole eine Meldung der Form 	
+		\begin{lstlisting}
+		Info: Product with CoreProductId: 1781 added
+		Info: Product with CoreProductId: 1782 deleted
+		Info: Product with CoreProductId: 1783 updated
+		\end{lstlisting} ausgegeben, die außerdem in der Datei \textit{productChange.log} erfasst wird.
+			
+		Die Methode \texttt{checkIfNewCoreProductsHaveBeenCreated(\$sellerId)} überprüft ob es seit der letzten Katalogerstellung in der Tabelle \texttt{core\_products} neue Einträge gab. Dazu wird die Tabelle \texttt{mercateo\_products} über einen LEFT-JOIN an \texttt{core\_products} gebunden.All jene Produkte aus \texttt{core\_products}, deren \textit{core\_product\_id} nicht in \texttt{mercateo\_products} zu finden ist müssen als neu gelten und werden demnach mit dem Statuscode \texttt{new} in \texttt{mercateo\_products} geschrieben. 
+		
+	
+		Mit \texttt{checkIfCoreProductsHaveBeenDeleted(\$sellerId)} wird geprüft ob Daten aus der \texttt{core\_products} Tabelle gelöscht wurden. Auch hier wird \texttt{mercateo\_products} über einen LEFT-JOIN an \texttt{core\_products} gebunde. All jene Produkte deren \textit{core\_product\_id} 
+		noch in der \texttt{mercateo\_products} Tabelle vermerkt ist, nicht aber in \texttt{core\_products}, müssen als gelöscht gelten. Entsprechend wird der Status der betroffenen Produkte in \texttt{mercateo\_products} auf \texttt{delete} gesetzt.
+		
+		Durch die Methode \texttt{checkIfCoreProductsHaveBeenChanged(\$sellerId)} schließlich wird geprüft ob sich Produktdaten seit der letzten Katalogerstellung geändert haben. Dazu wird die Tabelle \texttt{core\_product\_updates} über einen INNER-JOIN an \texttt{mercateo\_products} gebunden.
+		Beim Erstellen des Kataloges wurde der Zeitpunkt der Erzeugung in der \texttt{core\_configurations} Tabelle gespeichert. All jene Einträge aus \texttt{core\_product\_updates}, deren Erzeugungsdatum nach der Katalogerstellung liegt werden in \texttt{mercateo\_products} mit dem Status \texttt{update} versehen.
+	
+	Hat eine der soeben vorgestellten Methoden \texttt{true} zurückgeliefert, wird die Methode \texttt{UpdateCatalog(\$sellerId, \$BmeCatComponent)} aufgerufen, die alle an der Erstellung eines Update-Katalogdokumentes beteiligten Methoden zusammenfasst.
 	
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.7 \linewidth]{img/updateKatalogAufrufhierarchie}
-		\captionof{figure}[BasicLogic]{Aufrufhierarchie der Methode \texttt{updateCatalog}}
+		\captionof{figure}[BasicLogic]{Aufrufhierarchie der Methode \texttt{UpdateCatalog}}
 		\vspace{1em}
 	\end{minipage}
 	
 	Zu Beginn wird mit \texttt{setLastCatalogUpdate(\$sellerId)} der Zeitpunkt der Erstellung in der \texttt{core\_configurations} Tabelle gespeichert.  
 	
-	Die Methode \texttt{getPreviousCatalogVersion(\$sellerId)} liefert den in \texttt{core\_configurations} gespeicherten Wert des bei der Transaktion \texttt{T\_UPDATE\_PRODUCTS} benötigten Attributes \texttt{prev\_version} zurück. Existiert noch kein Eintrag in der Tabelle wird dieser erstellt und der Wert des Attributes auf '0' gesetzt. Bei der ersten Ausführung von \texttt{T\_UPDATE\_PRODUCTS} wird so stets '0' zurückgeliefert. Dieser Wert wird in der Variablen \texttt{\$prevCatalogVersion} gespeichert um bei Aufruf der \texttt{main()}-Methode des BMECatComponent - diesmal wird der Parameter \texttt{\$transactionType} mit \texttt{T\_UPDATE\_PRODUCTS} initialisiert - übergeben werden zu können.
+	Die Methode \texttt{getPreviousCatalogVersion(\$sellerId)} liefert den in \texttt{core\_configurations} gespeicherten Wert des bei der Transaktion \texttt{T\_UPDATE\_PRODUCTS} benötigten Attributes \texttt{prev\_version} zurück. Existiert noch kein Eintrag in der Tabelle wird dieser erstellt und der Wert des Attributes auf '0' gesetzt. Bei der ersten Ausführung von \texttt{T\_UPDATE\_PRODUCTS} wird so stets '0' zurückgeliefert. Dieser Wert wird in der Variablen \texttt{\$prevCatalogVersion} gespeichert um bei Aufruf der BMECatComponent-Methode \texttt{createBMECatXMLDocument} - diesmal wird der Parameter \texttt{\$transactionType} mit \texttt{T\_UPDATE\_PRODUCTS} initialisiert - übergeben werden zu können.
 	
 	Wurde der Updatekatalog erstellt müssen die Einträge aus der \texttt{mercateo\_products} Tabelle gelöscht werden, deren Status auf \texttt{delete} gesetzt ist. Die Methode \texttt{deleteMercateoProductsWithStatusDeleted(\$sellerId)} setzt dies um.
 	
