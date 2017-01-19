@@ -791,11 +791,11 @@
 	Die Klasse \texttt{CatalogToolsTask} stellt Methoden zur Verfügung die von den drei sie beerbenden Task Klassen verwandt werden.
 	
 	\begin{minipage}{\linewidth}
-		\vspace{0.5em}
+		\vspace{1em}
 		\centering
 		\includegraphics[width=0.7 \linewidth]{img/CatalogToolsTaskUML}
 		\captionof{figure}[BasicLogic]{UML Modellierung der Klasse \texttt{CatalogToolsTask}}
-		\vspace{0.5em}
+		\vspace{1em}
 	\end{minipage}
 	
 	Die Methode \texttt{initialize()} lädt alle zur Katalogerzeugung benötigten Model-Klassen und initialisiert die Instanzvariable \texttt{BMECatComponent}.
@@ -833,13 +833,12 @@
 		Um die erzeugte XML Datei mit dem dazugehörigen Schema validieren zu können muss die Klasse \texttt{XMLReaderComponent} um diese Funktionalität ergänzt werden. Die dem Component zugrundeliegende \texttt{xmlReader}-Klasse stellt dazu eine Methode \texttt{setSchema(\$schemePath)} zur Verfügung die hier zur Anwendung kommt. Wurde ein Schema gesetzt wird mit dem ersten Aufruf der \texttt{xmlReader->read())} Methode die zu lesende Datei validiert. 
 		\end{addmargin}
 	
-		
-		
-
-	
 	\subsubsection{Erzeugung eines initialen Katalogdokumentes mit der Klasse \texttt{AddNewCatalogTask}}
 	
-	Die Klasse \texttt{AddNewCatalogTask} vereint die zur Erzeugung eines initialen Katalogdokumentes benötigten Funktionen. 
+	Die Klasse \texttt{AddNewCatalogTask} dient der Erzeugung eines neuen Katalogdokumentes. Der in Kapitel 3.2.4 vorgestellte Entwurf zur Erzeugung eines neuen Katalogdokumentes wird mit den von der Methode \texttt{newCatalog(\$sellerId, BmeCatComponent \$BmeCatComponent)} aufgerufenen Funktionen umgesetzt.
+	\texttt{initialize()} ruft die gleichnamige Methode der Elternklasse auf. Somit stehen alles dort geladenen Model-Klassen sowie die zur Katalogerzeugung benötigte Instanz der BMECatComponent Klasse zur verfügung.
+	In der \texttt{main()}-Methode wird der Aufrufparamter validiert und mit \texttt{checkIfMercateoProductsTableContainsSellersProducts(\$sellerId))} geprüft ob die \texttt{mercateo\_products} Tabelle bereits Einträge des angegebenen Verkäufers enthält. Ist dies nicht der Fall, wird die Katalogerzeugung durch Aufruf von \texttt{newCatalog} angestoßen.
+	
 	 
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
@@ -848,27 +847,36 @@
 		\captionof{figure}[BasicLogic]{Aufrufhierarchie der Methode \texttt{newCatalog}}
 		\vspace{1em}
 	\end{minipage}
+
 	
-	\texttt{initializeMercateoProductsTable} lädt die Produkte des Verkäufers und speichert die Einträge durch Aufruf von \texttt{writeDataToMercateoProductsTable}. Der Variablen \texttt{statusCode} wird dabei der Wert \textit{new} zugewiesen. 
+	Mit \texttt{initializeMercateoProductsTable(\$sellerId)} wird die \texttt{mercateo\_products} Tabelle initialisiert. Dabei werden die in \texttt{core\_products} gespeicherten Produkte des angegebenen Verkäufers geladen und durch Aufruf von \texttt{writeDataToMercateoProductsTable} in die \texttt{mercateo\_products} Tabelle geschrieben. Der Variablen \texttt{statusCode} wird dabei der Wert \textit{new} zugewiesen. 
 	
 	Anschließend wird mit \texttt{setLastCatalogUpdate} der Timestamp der Katalogerzeugung in die \texttt{core\_configurations} Tabelle geschrieben.
-	
-	
-	
-	Durch den Aufruf der \texttt{main(\$sellerId, \$transactionType, \$prevVersion = null)} Methode des \texttt{BmeCatComponent}-Objektes wird die eigentliche Katalogdokumenterstellung angestoßen. Dem Parameter \texttt{transactionType} wird hier der Wert \texttt{T\_NEW\_CATALOG} zugewiesen. Anschließend wird durch die Methode \texttt{setMercateoProductsStatus(\$status)} der \textit{status} aller in \texttt{mercateo\_products} gespeicherten Artikel auf \textit{active} gesetzt.
+		
+	Durch Aufruf der Methode \texttt{createBMECatXMLDocument(\$sellerId, \$transactionType, \$prevVersion = null)} Methode des \texttt{BmeCatComponent}-Objektes wird die zu erzeugende XML-Datei geschrieben . Dem Parameter \texttt{transactionType} wird hier der Wert \texttt{T\_NEW\_CATALOG} zugewiesen. Anschließend wird mit \texttt{setMercateoProductsStatus(\$status)} der \textit{status} aller in \texttt{mercateo\_products} gespeicherten Artikel auf \textit{active} gesetzt.
 
-
+	Die Validierung des soeben erzeugten Dokumentes erfolgt mit dem Schema \texttt{bmecat\_new\_catalog\_1\_2.xsd} durch Aufruf von \texttt{validateXml(\$path, \$schemePath)}
 	
 	
 	
-	\subsubsection{Erzeugung eines Update-Katalogdokumentes}
+	\subsubsection{Erzeugung eines Update-Katalogdokumentes  mit der Klasse \texttt{UpdateCatalogTask}}
 	
-	Im folgenden werden jene 3 Methoden vorgestellt, die erfassen ob Produkte gelöscht, geändert oder neu hinzugefügt wurden. Sie geben jeweils \texttt{true} zurück, falls eine entsprechende Änderung stattgefunden hat. Zugleich wird in der Konsole eine Meldung der Form 	
+	Die Klasse \texttt{AddNewCatalogTask} dient der Erzeugung eines Update-Katalog-Dokumentes. Die \texttt{initialize()} Methode verhält sich wie im vorherigen Abschnitt beschrieben. Auch die \texttt{main()} verhält sich ähnlich, mit dem Unterschied, dass nun positiv darauf geprüft wird, ob die \texttt{mercateo\_products} Tabelle bereits Einträge des angegebenen Verkäufers enthält. \\
+	\begin{minipage}{\linewidth}
+		\vspace{1em}
+		\centering
+		\includegraphics[width=0.7 \linewidth]{img/UpdateCatalogTaskUML}
+		\captionof{figure}[BasicLogic]{UML-Klassendiagramm der \texttt{UpdateCatalogTask}}
+		\vspace{1em}
+	\end{minipage}
+	
+	Die Funktion \texttt{checkMercateoProductsStatusChanges(\$sellerId)} fasst jene
+ 	jene 3 Methoden zusammen, die prüfen ob Produkte gelöscht, geändert oder neu hinzugefügt wurden. Diese geben jeweils \texttt{true} zurück, falls eine entsprechende Änderung stattgefunden hat. Zugleich wird in der Konsole eine Meldung der Form 	
 		\begin{lstlisting}
 		Info: Product with CoreProductId: 1781 added
 		Info: Product with CoreProductId: 1782 deleted
 		Info: Product with CoreProductId: 1783 updated
-		\end{lstlisting} ausgegeben, die außerdem in der Datei \textit{productChange.log} erfasst wird.
+		\end{lstlisting} ausgegeben, die zudem in der Datei \textit{productChange.log} erfasst wird.
 			
 		Die Methode \texttt{checkIfNewCoreProductsHaveBeenCreated(\$sellerId)} überprüft ob es seit der letzten Katalogerstellung in der Tabelle \texttt{core\_products} neue Einträge gab. Dazu wird die Tabelle \texttt{mercateo\_products} über einen LEFT-JOIN an \texttt{core\_products} gebunden.All jene Produkte aus \texttt{core\_products}, deren \textit{core\_product\_id} nicht in \texttt{mercateo\_products} zu finden ist müssen als neu gelten und werden demnach mit dem Statuscode \texttt{new} in \texttt{mercateo\_products} geschrieben. 
 		
@@ -906,32 +914,18 @@
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
-		\includegraphics[width=0.4 \linewidth]{img/AvailabilityController}
+		\includegraphics[width=0.4 \linewidth]{img/AvailabilityControllerUML}
 		\captionof{figure}[BasicLogic]{Klassendiagramm AvailabilityController}
 		\vspace{1em}
 	\end{minipage}
 	
 	Für das zurückliefern der Bestandsdaten einer angefragten SKU wird keine View benötigt. CakePHP versucht jedoch automatisch zu jeder aufgerufenen Controllermethode eine entsprechende View zu rendern \footnote{vgl. hierzu Kapitel 1.3.1 - Convention over Configuration in CakePHP}.  Da jedoch dennoch auf die \texttt{index(\$sku)} Methode zugegriffen werden soll wird in der Funktion \texttt{initialize} das automatische Rendern einer View abgeschaltet, sowie der direkte Zugriff auf die texttt{index(\$sku)} Methode gestattet.
 	
+	Die Funktion \texttt{checkIfProductExists(\$sku)} prüft zunächst ob sich das angefragte Produkt in der \texttt{mercateo\_products} Tabelle finden lässt.Ist dies der Fall, wird zusätzlich geprüft ob es auch in der \texttt{core\_products} Tabelle gefunden werden kann. Falls beides zutrifft, wird \texttt{true} zurückgeliefert, andernfalls \texttt{false}.
 	
+	Die \texttt{index(\$sku)} Methode verarbeitet die Anfrage. Kann das angefragte Produkt in der Datenbank gefunden werden,wird über Aufruf der Methode \texttt{getProductQuantity(\$sku)}) die Bestandsmenge desselben abgefragt und als Text im Browserfenster ausgegeben. Zusätzlich wird der HTTP-Statuscode \textit{200} zurückgeben um das anfragenden System darüber zu informieren, dass die Anfrage erfolgreich bearbeitet werden konnte.
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	Können keine Produkdaten gefunden werden, wird im Browserfenster eine entsprechende Browsermeldung ausgegeben und der HTTP-Statuscode \textit{204} zurückgeben. Das anfragende System erlangt so Kenntnis darüber, dass die Anfrage verabeitet werden konnte, jedoch kein Inhalt zurückgeliefert werden kann.
 	
 	
 	
@@ -939,7 +933,34 @@
 
 	
 	\section{Test}
-
+	
+	
+	CakePHP unterstützt 'ab Werk' Unit Testing mit PHPUnit, welches in vorliegender Arbeit verwendet wird. -ETWAS ÜEBR DIE KONVENTIONEN SCHREIBEN-  Um jene Methoden testen zu können die lesend und schreibend auf die Datenbank zugreifen, werden für die Betroffenen Tabellen \textit{Fixtures} erstellt. Fixtures sind Duplikate der eigentlichen Tabellen und enthalten Testdatensätze. Der Vorteil von Fixtures ist, dass Datenbankabfragen durchgeführt werden können ohne das die eigentlichen Datensätze davon betroffen wären.
+	
+	Im folgenden werden die einzelnen Testklassen und Testfälle vorgestellt.
+	
+	\subsection{Die Klasse AvailabilityControllerTest}
+	
+	Um die Methoden \texttt{getProductQuantity} und \texttt{checkIfProductExists} testen zu können müssen Fixtures für die Tabellen \texttt{mercateo\_products}, \texttt{core\_products}, \texttt{core\_marketplaces} und \texttt{core\_product\_quantities} erstellt und mit Testdatensätzen befüllt werden.
+	\texttt{testCheckIfProductExists()} enthält je einen Positiv- und einen Negativtest. Es wird erwartet, dass die Methode \texttt{checkIfProductExists} den booleschen Wert \texttt{true} zurückliefert, falls ein Produkt in der Datenbank gefunden werden konnte und \texttt{false}, wenn nicht.
+	Die Methode \texttt{testGetProductQuantity} prüft ob der Rückgabewert dem erwarteten Zahlenwert entspricht und ob er vom Typ \textit{Integer} ist.
+	
+	\subsection{Die Klasse UpdateCatalogTaskTest}
+	
+	In der Klasse \texttt{UpdateCatalogTaskTest} werden folgende Fixtures geladen:
+	\begin{itemize}[nosep]
+		\item \texttt{core\_configurations}
+		\item \texttt{mercateo\_products}
+		\item \texttt{core\_products}
+		\item \texttt{core\_product\_quantities}
+		\item \texttt{core\_product\_types}
+		\item \texttt{core\_product\_updates}
+	\end{itemize}
+	\texttt{testGetPreviousCatalogVersion()} testet positiv und negativ auf einen in der \texttt{core\_configuartions}-Fixture hinterlegten Konfigurationswert. Zudem wird geprüft, ob '0' zurückgeliefert wird, falls für den angegeben Seller noch kein Konfigurationswert in der Datenbank angelegt wurde.
+	
+	Mit \texttt{testCheckMercateoProductsStatusChanges()} werden die als \textit{private} ausgezeichneten Methoden \texttt{checkIfNewCoreProductsHaveBeenCreated}, 
+	\texttt{checkIfCoreProductsHaveBeenDeleted} und
+	\texttt{checkIfCoreProductsHaveBeenUpdated} auf Funktion getestet. Für Testfall 1 - jeweils ein Produkt wurde hinzugefügt, gelöscht bzw. aktualisiert- werden entsprechende Einträge in den Fixturetabellen von \texttt{core\_products}, \texttt{mercateo\_products} und \texttt{core\_product\_updates} angelegt. Als Rückgabewert wird demzufolge \texttt{true} erwartet. Entsprechendes geschieht für den Fall, dass keine Produktstatusveränderungen stattgefunden haben sollen und als Rückgabewert \texttt{false} erwartet werden kann.
 
 	
 

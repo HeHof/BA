@@ -46,6 +46,8 @@
 \BOOKMARK [3][-]{subsubsection.4.3.5}{Kategoriemapping}{subsection.4.3}% 46
 \BOOKMARK [2][-]{subsection.4.4}{Die Klasse CatalogToolsTask}{section.4}% 47
 \BOOKMARK [3][-]{subsubsection.4.4.1}{Erzeugung eines initialen Katalogdokumentes mit der Klasse AddNewCatalogTask}{subsection.4.4}% 48
-\BOOKMARK [3][-]{subsubsection.4.4.2}{Erzeugung eines Update-Katalogdokumentes}{subsection.4.4}% 49
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Erzeugung eines Update-Katalogdokumentes mit der Klasse UpdateCatalogTask}{subsection.4.4}% 49
 \BOOKMARK [2][-]{subsection.4.5}{Bestandsdatenabfrage}{section.4}% 50
 \BOOKMARK [1][-]{section.5}{Test}{}% 51
+\BOOKMARK [2][-]{subsection.5.1}{Die Klasse AvailabilityControllerTest}{section.5}% 52
+\BOOKMARK [2][-]{subsection.5.2}{Die Klasse UpdateCatalogTaskTest}{section.5}% 53
