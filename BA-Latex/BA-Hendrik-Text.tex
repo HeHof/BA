@@ -262,7 +262,7 @@
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
-		\includegraphics[width=0.65\linewidth]{img/newCatalogLogik}
+		\includegraphics[width=0.8\linewidth]{img/newCatalogLogik}
 		\captionof{figure}[New Catalog Logik]{Flowchart T\_NEW\_CATALOG}
 		\label{fig:header}
 		\vspace{1em}
@@ -293,11 +293,11 @@
 	Die Namen von \textbf{Model} Klassen sind 'CamelCased' und im Plural. Der Name der zum Model gehörenden Tabelle ist im Plural verfasst und mit einem Unterstrich verbunden.\\
 	\texttt{article\_categories} ist die dem Model \texttt{ArticleCategories} zugrundeliegende Tabelle. Um einen Fremdschlüssel auf eine Tabelle zu vergeben genügt es das Suffix \texttt{\_id} an den kleingeschriebenen Namen dieser Tabelle anzuhängen. Wenn Users eine hasMany Beziehung zu Articles hat, kann mit dem Fremdschlüssel \texttt{user\_id} in der \texttt{articles}-Tabelle auf den entsprechenden Eintrag in der \texttt{users}-Tabelle verwiesen werden. \newline
 	
-	Die Template Datei einer \textbf{View} ist nach der entsprechenden Methode im Controller benannt die sie darstellen soll. Die \texttt{view()} Methode der \texttt{ArticlesController} Klasse würde demnach unter \texttt{src/Template/Articles/view.ctp} nach einem View-Template suchen\footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/intro/conventions.html}}.
+	Die Template Datei einer \textbf{View} ist nach der entsprechenden Methode im Controller benannt, die sie darstellen soll. Die \texttt{view()} Methode der \texttt{ArticlesController} Klasse würde demnach unter \texttt{src/Template/Articles/view.ctp} nach einem View-Template suchen\footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/intro/conventions.html}}.
 	
 	\subsubsection{Model}
 	
-	Das Backend einer CakePHP Anwendung wird von einer SQL Datenbank gebildet. Das Model repräsentiert die Daten einer Anwendung und enthält die Geschäftslogik zur Datenmanipulation. Nach der CakePHP Konvention wird die Datenbankverbindung einmal in der \texttt{config/app.php} konfiguriert. Die Model-Klasse stellt dabei Methoden zur Verfügung, über die es möglich ist, den Zustand der Daten abzufragen, die Daten zu filtern und zu verändern. Die CRUD-Funktionalität (CREATE-READ-UPDATE-DELETE) ist so direkt im Model integriert.\footnote{vgl. hierzu: Webentwicklung mit CakePHP, 2. Auflage, O'Reilly, Seite 7}. 
+	Das Backend einer CakePHP Anwendung wird von einer SQL Datenbank gebildet. Das Model repräsentiert die Daten einer Anwendung und enthält die Geschäftslogik zur Datenmanipulation. Nach der CakePHP Konvention wird die Datenbankverbindung einmal in der Daeti \texttt{config/app.php} konfiguriert. Die Model-Klasse stellt dabei Methoden zur Verfügung, über die es möglich ist, den Zustand der Daten abzufragen, die Daten zu filtern und zu verändern. Die CRUD-Funktionalität (CREATE-READ-UPDATE-DELETE) ist so direkt im Model integriert.\footnote{vgl. hierzu: Webentwicklung mit CakePHP, 2. Auflage, O'Reilly, Seite 7}. 
 	Die Beziehungen einzelner Models zueinander werden über \textit{Associations} hergestellt. Die vier Assoziationstypen in CakePHP sind:\\
 
 	\begin{table}[!htbp]
@@ -358,7 +358,7 @@
 	Er ist dafür zuständig, dass das richtige Model aufgerufen und die entsprechende Antwort oder View erzeugt wird. Er dient dabei als eine Art Vermittler zwischen dem Model und der View. Normalerweise ist in CakePHP ein Controller für ein Model verantwortlich, es ist dennoch möglich, oft auch nötig, dass ein Controller mit mehreren Models arbeitet.
 	
 	Der Controller enthält eine Reihe von  Methoden die HTTP Anfragen verarbeiten. Diese Methoden werden in CakePHP \textit{actions} genannt. Per Definition ist jede öffenliche Methode in einem Controller eine \textit{action} und über eine URL der Form \url{http://samplesite.com/article-categorie/view} erreichbar.
-	Eine \textit{action} ist für die Verarbeitung der Anfrage und das zurückliefern einer Antwort zuständig. Im normalfall wird dabei eine View erzeugt, es können aber auch (wie im Abschnitt Model erläutert) auch XML oder JSON Daten zurückgeliefert werden.\footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/controllers.html}}
+	Eine \textit{action} ist für die Verarbeitung der Anfrage und das Zurückliefern einer Antwort zuständig. Im Normalfall wird dabei eine View erzeugt, es können aber auch (wie im Abschnitt Model erläutert) XML oder JSON Daten zurückgeliefert werden.\footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/controllers.html}}
 	
 	\subsubsection{Component}
 	Komponenten (Components) sind in sich geschlossene Bereiche innerhalb einer Applikation, die eine bestimmte Funktionalität kapseln und über die Grenzen eines Controllers hinaus verfügbar machen. Sollen bestimmte logische Prozesse in verschiedenen Teilen einer Anwendung zur Verfügung stehen - insbesondere in unterschiedlichen Controllern- so ist es sinnvoll diese in eine Komponente auszulagern.\footnote{vgl hierzu: CakeBuch Webentwcik, Seite 223}
@@ -470,32 +470,24 @@
 	
 	\begin{itemize}
 	\item \textbf{Das Single-Responsibility-Prinzip}\\besagt, dass eine Klasse nur eine fest definierte Aufgabe hat und nur Methoden enthält, die zur Erfüllung dieser Aufgabe notwendig sind.
-	\item \textbf{Das Open-Closed-Prinzip}\\ besagt, dass Klassen sowohl offen für Erweiterungen, als auch geschlossen für Modifikationen seien sollen. Das Prinzip der Vererbung setzt dies um.
+	\item \textbf{Das Open-Closed-Prinzip}\\ besagt, dass Klassen sowohl offen für Erweiterungen, als auch geschlossen für Modifikationen seien sollen. Das Prinzip der Vererbung (Polymorphie) setzt dies um.
 	\end{itemize}
 	
-	\subsection{Katalogerstellung NEW}
+	\subsection{Katalogerstellung}
 	
-	Die Erstellung der BMECat Dokumente wird über eine CakePHP Shell und von dort aus aufrufbare Tasks realisiert. Das hat den Vorteil, dass diese über einen Cronjob automatisiert werden können.
+	Die Erstellung der BMECat Dokumente wird über eine CakePHP Shell und von dort aus aufrufbare Tasks realisiert. Das hat den Vorteil, dass diese, im Bedarfsfall, über einen Cronjob automatisiert werden können.
 	Die Logik zur Erstellung eines neuen BMECat Dokumentes wird in die Klasse \texttt{AddNewCatalogTask} ausgelagert, die zur Erstellung eines Updatekataloges in die Klasse 
-	\texttt{UpdateCatalogTask}. Mit der Klasse \texttt{DeleteCatalogTask} wird das Löschen von den zu exportierenden Katalogdaten umgesetzt. Das Schreiben eines Katalogdokumentes wird durch die Componentklasse \texttt{BMECatComponent} realisiert, die sich wiederum der Komponentenklasse \texttt{XMLWriterComponent} bedient. Hier kommt das \textit{Single-Responsibility} zur Anwendung; Jede Klasse erfüllt genau eine Aufgabe. \texttt{AddNewCatalogTask}, \texttt{UpdateCatalogTask} und \texttt{DeleteCatalogTask} erweitern die Basisklasse \texttt{catalogTools} abgeleitet werden. So wird das Prinzip des \textit{Open-Closed} umgesetzt.
+	\texttt{UpdateCatalogTask}. Mit der Klasse \texttt{DeleteCatalogTask} wird das Löschen von den zu exportierenden Katalogdaten umgesetzt. Das Schreiben eines Katalogdokumentes wird durch die Componentklasse \texttt{BMECatComponent} realisiert, die sich wiederum der Komponentenklasse \texttt{XMLWriterComponent} bedient. Hier kommt das \textit{Single-Responsibility} Prinzip zur Anwendung; Jede Klasse erfüllt genau eine Aufgabe. \texttt{AddNewCatalogTask}, \texttt{UpdateCatalogTask} und \texttt{DeleteCatalogTask} werden von der Basisklasse \texttt{CatalogToolsTask} abgeleitet. So wird das Prinzip des \textit{Open-Closed} umgesetzt.
 
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.7 \linewidth]{img/VererbungShellSimple}
-		\captionof{figure}[BasicLogic]{An der Katalogerzeugung beteiligte Klassen}
+		\captionof{figure}[BasicLogic]{Vererbungshierarchie der Task-Klassen}
 		\vspace{1em}
 	\end{minipage}	
 	
-	
-	
-		
-	
-	
-	
-	\subsection{Katalogerstellung OLD}
-	
-	Die Erstellung der BMECat Dokumente wird über eine CakePHP Shell realisiert. Das hat den Vorteil, dass diese über einen Cronjob automatisiert werden kann werden kann. Um die Shell im Bedarfsfall leicht erweitern zu können und nicht zu überladen wird die Programmlogik in einen Shell-Task \texttt{prepareCatalog} ausgelagert.Es soll möglich sein beim Aufruf des Tasks die \textit{id} des \texttt{core\_sellers} zu übergeben, dessen Produkte exportiert werden sollen. Die Spezifikation des BMECat verlangt, dass im Katalogdokument bestimmte Informationen zur Katalogversion, dem Katalognamen, der Währung \textit{etc.} aufgeführt werden. Diese Daten werden in der Tabelle \texttt{mercateo\_accounts} gespeichert und können über die GUI des iTool eingesehen, erstellt, gelöscht und geändert werden. Der Zeitpunkt der Katalogerstellung sowie dessen fortlaufende Versionsnummer (das Attribut \texttt{prev\_version}) werden in die bereits im iTool vorhandene Tabelle \texttt{core\_configurations} geschrieben. Zur Zwischenspeicherung der zu exportierenden Daten kommt die Tabelle \texttt{mercateo\_products} zum Einsatz. Die eigentlichen Produktdaten werde aus der Tabelle \texttt{core\_products} geladen, die Produktkategorien aus der mit dieser verknüpften Tabelle \texttt{core\_categories}. Mit Hilfe der Tabelle \texttt{core\_product\_updates} kann überprüft werden ob ein Artikel aktualisiert wurde. Wurde ein Produkt aktualisiert, wird dort ein neuer Eintrag erstellt, der die \texttt{core\_product\_id} und den Zeitpunkt der Erzeugung enthält.
+	Es soll möglich sein beim Aufruf des Tasks die \textit{id} des \texttt{core\_sellers} zu übergeben, dessen Produkte exportiert werden sollen. Die Spezifikation des BMECat verlangt, dass im Katalogdokument bestimmte Informationen zur Katalogversion, dem Katalognamen, der der Preisauszeichnung zu Grunde liegenden Währung \textit{etc.} aufgeführt werden. Diese Daten werden in der Tabelle \texttt{mercateo\_accounts} gespeichert und können über die GUI des iTool eingesehen, erstellt, gelöscht und geändert werden. Der Zeitpunkt der Katalogerstellung sowie dessen fortlaufende Versionsnummer (das Attribut \texttt{prev\_version}) werden in die bereits im iTool vorhandene Tabelle \texttt{core\_configurations} geschrieben. Zur Zwischenspeicherung der zu exportierenden Daten kommt die Tabelle \texttt{mercateo\_products} zum Einsatz. Die eigentlichen Produktdaten werde aus der Tabelle \texttt{core\_products} geladen, die Produktkategorien aus der mit dieser verknüpften Tabelle \texttt{core\_categories}. Mit Hilfe der Tabelle \texttt{core\_product\_updates} kann überprüft werden ob Artikeldaten aktualisiert wurde. Ist dem so, wird dort ein neuer Eintrag erstellt, der die \texttt{core\_product\_id} und den Zeitpunkt der Erzeugung enthält.
 	
 
 	
@@ -506,15 +498,15 @@
 			Tabelle & Inhalt/Zweck  \\ \cline{1-2} \addlinespace[7pt]
 			mercateo\_accounts & Speicherung statischer Daten wie Katalog- oder Herstellername. \\
 			mercateo\_products & Zwischenspeicherung der zu exportierenden Daten.  \\
-			core\_products & Sämtliche Produkdaten. \\
-			core\_categories & Produktkategoriedaten. \\
-			core\_configurations & Konfigurationsgruppen, Pfade und Werte. \\ 
+			core\_products & Hält sämtliche Produkdaten. \\
+			core\_categories & Enthält Produktkategoriedaten. \\
+			core\_configurations & Speichert Konfigurationsgruppen, Pfade und Werte. \\ 
 			core\_product\_updates & Speichert den Timestamp der letzten Änderung eines \texttt{core\_products}. \\ \addlinespace[7pt] \cline{1-2} 	
 	
 		\end{tabularx}%
 		\captionbelow{Übersicht der bei der Katalogerstellung verwendeten Tabellen}
 	\end{table}
-		\pagebreak
+		
 	\subsubsection{Die Tabelle \texttt{mercateo\_accounts}}
 	
 	Eine Übersicht der in \texttt{mercateo\_accounts} gespeicherten Werte bietet Tabelle 3. Wenn nicht anders angegeben entspricht das BMECat Element der Spaltenbezeichnung (\texttt{catalog\_id} $\approx$ \textless CATALOG\_ID\textgreater )
@@ -523,19 +515,19 @@
 		\begin{tabularx}{\textwidth \small}{p{4cm} X p{2.8cm} }
 			\rowcolor[HTML]{EFEFEF} 
 			Spalte & Erläuterung & BMECat Element \\ \cline{1-3} \addlinespace[7pt]
-			id & Primärschlüssel & \multicolumn{1}{c}{\normalsize$\times$} \\
-			core\_seller\_id & Fremdschlüssel auf \texttt{core\_sellers}  & \multicolumn{1}{c}{\normalsize$\times$}  \\ 
-			core\_marketplace\_id & Fremdschlüssel auf \texttt{core\_marketplaces} & \multicolumn{1}{c}{\normalsize$\times$} \\ 
-			core\_currency\_id & Fremdschlüssel auf \texttt{core\_currencies}  &\multicolumn{1}{c}{ \textless CURRENCY\textgreater} \\ 
-			supplier\_name & Name des verkaufenden Unternehmens & \multicolumn{1}{c}{\normalsize \checked}   \\
-			catalog\_id & Eindeutiger Bezeichner des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked}  \\
-			catalog\_version & Version des Produktkataloges & \multicolumn{1}{c}{\normalsize \checked} \\
-			catalog\_name & Beliebiger Name, der den Produktkatalog beschreibt & \multicolumn{1}{c}{\normalsize \checked} \\
-			group\_system\_id & Kennung des Kataloggruppensystems & \multicolumn{1}{c}{\normalsize \checked}  \\
-			group\_system\_name & Name des Kataloggruppensystems & \multicolumn{1}{c}{\normalsize \checked}  \\
-			group\_system\_description & Beschreibung des Kataloggruppensystems & \multicolumn{1}{c}{\normalsize \checked} \\	
-			created & Timestamp, wann der Eintrag erzeugt wurde & \multicolumn{1}{c}{\normalsize$\times$} \\
-			modified & Timestamp, wann der Eintrag geändert wurde & \multicolumn{1}{c}{\normalsize$\times$}\\\addlinespace[7pt] \cline{1-3} 
+			id & Primärschlüssel. & \multicolumn{1}{c}{\normalsize$\times$} \\
+			core\_seller\_id & Fremdschlüssel auf \texttt{core\_sellers}.  & \multicolumn{1}{c}{\normalsize$\times$}  \\ 
+			core\_marketplace\_id & Fremdschlüssel auf \texttt{core\_marketplaces}. & \multicolumn{1}{c}{\normalsize$\times$} \\ 
+			core\_currency\_id & Fremdschlüssel auf \texttt{core\_currencies}.  &\multicolumn{1}{c}{ \textless CURRENCY\textgreater} \\ 
+			supplier\_name & Name des verkaufenden Unternehmens. & \multicolumn{1}{c}{\normalsize \checked}   \\
+			catalog\_id & Eindeutiger Bezeichner des Produktkataloges. & \multicolumn{1}{c}{\normalsize \checked}  \\
+			catalog\_version & Version des Produktkataloges. & \multicolumn{1}{c}{\normalsize \checked} \\
+			catalog\_name & Beliebiger Name, der den Produktkatalog beschreibt. & \multicolumn{1}{c}{\normalsize \checked} \\
+			group\_system\_id & Kennung des Kataloggruppensystems. & \multicolumn{1}{c}{\normalsize \checked}  \\
+			group\_system\_name & Name des Kataloggruppensystems. & \multicolumn{1}{c}{\normalsize \checked}  \\
+			group\_system\_description & Beschreibung des Kataloggruppensystems. & \multicolumn{1}{c}{\normalsize \checked} \\	
+			created & Timestamp, wann der Eintrag erzeugt wurde. & \multicolumn{1}{c}{\normalsize$\times$} \\
+			modified & Timestamp, wann der Eintrag geändert wurde. & \multicolumn{1}{c}{\normalsize$\times$}\\\addlinespace[7pt] \cline{1-3} 
 		\end{tabularx}%
 		\captionbelow{Die Tabelle \texttt{mercateo\_accounts}}
 	\end{table}
@@ -666,8 +658,8 @@
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
-		\includegraphics[width=1 \linewidth]{img/shellFlow}
-		\captionof{figure}[BasicLogic]{Aufrufhierarchie BMECatCreatorShell}
+		\includegraphics[width=0.7 \linewidth]{img/Aufrufhierarchie}
+		\captionof{figure}[BasicLogic]{Aufrufhierarchie PrepareCatalogShell}
 		\vspace{1em}
 	\end{minipage}\\
 	
@@ -802,7 +794,7 @@
 	Die vom CakePHP-Framework zur Verfügung gestellte Methode \texttt{getOptionParser()} überprüft, ob beim Aufruf des Tasks die benötigte \texttt{\$coreSellerId} übergeben wird.
 	Mit \texttt{validateArgument(\$coreSellerId)} wird geprüft, ob die übergebene \texttt{\$coreSellerId} im System vorhanden ist. Falls ja, wird \texttt{true} zurückgeliefert. Falls nicht, wird eine tabellarische Übersicht der verfügbaren Verkäufer ausgegeben und \texttt{false} zurückgegeben.
 	Durch \texttt{writeDataToMercateoProductsTable(\$sellerId, \$coreProduct, \$statusCode)} werden Einträge in der \texttt{mercateo\_products}-Tabelle erzeugt, dabei wird mit \texttt{checkIfProductIdIsAllreadyInMercateoProductsTable(\$coreProductId)} sichergestellt, dass keine doppelten Einträge erstellt werden, eine bestimmte \texttt{core\_product\_id} also nur einmal in der Tabelle vorkommt. Das setzten eines bestimmten Produktstatus für \textit{einen} Eintrag in der \texttt{mercateo\_products}-Tabelle wird mit der Methode \texttt{setMercateoProductStatus(\$productId, \$status)} realisiert. Das setzten der Produkstatus aller Produkte eines \textit{CoreSellers} geschieht mit \texttt{setMercateoProductsStatus(\$sellerId, \$status)}.
-	Information darüber,ob die \texttt{mercateo\_products}-Tabelle bereits Produkte eines bestimmten Verkäufers enthält, erlangt man mit \texttt{checkIfMercateoProductsTableContainsSellersProducts(\$sellerId)}. Die Methode \texttt{setLastCatalogUpdate(\$sellerId)} schreibt den Timestamp der letzten Katalogerstellung in die \texttt{core\_configurations}-Tabelle.\\
+	Information darüber, ob die \texttt{mercateo\_products}-Tabelle bereits Produkte eines bestimmten Verkäufers enthält, erlangt man mit \texttt{checkIfMercateoProductsTableContainsSellersProducts\-(\$sellerId)}. Die Methode \texttt{setLastCatalogUpdate(\$sellerId)} schreibt den Timestamp der letzten Katalogerstellung in die \texttt{core\_configurations}-Tabelle.\\
 	
 	\begin{addmargin}[1cm]{1cm}
 	\underline{Exkurs:}\\
@@ -815,8 +807,8 @@
 		 		Spalte & Erläuterung \\ \cline{1-2} \addlinespace[7pt]
 		 		id & Primärschlüssel \\
 		 		core\_seller\_id & Die Id des Verkäufers für den die Konfiguration gilt \\
-		 		configuration\_group & Angabe des Plugins für das die Konfiguration gilt \\
-		 		configuration\_path & Nähere Angabe zum blabla Valeri fragen \\
+		 		configuration\_group & Der Scope in dem die Konfiguration gilt \\
+		 		configuration\_path & Nähere Angaben zum Konfigurationswert \\
 		 		configuration\_value & Der Konfigurationswert \\\addlinespace[7pt] \cline{1-2} 
 		 		\end{tabularx}%
 		 		\captionbelow{Die Tabelle \texttt{mercateo\_products}}
@@ -961,6 +953,25 @@
 	Mit \texttt{testCheckMercateoProductsStatusChanges()} werden die als \textit{private} ausgezeichneten Methoden \texttt{checkIfNewCoreProductsHaveBeenCreated}, 
 	\texttt{checkIfCoreProductsHaveBeenDeleted} und
 	\texttt{checkIfCoreProductsHaveBeenUpdated} auf Funktion getestet. Für Testfall 1 - jeweils ein Produkt wurde hinzugefügt, gelöscht bzw. aktualisiert- werden entsprechende Einträge in den Fixturetabellen von \texttt{core\_products}, \texttt{mercateo\_products} und \texttt{core\_product\_updates} angelegt. Als Rückgabewert wird demzufolge \texttt{true} erwartet. Entsprechendes geschieht für den Fall, dass keine Produktstatusveränderungen stattgefunden haben sollen und als Rückgabewert \texttt{false} erwartet werden kann.
+	
+	\subsection{Die Klasse MercateoAccountsTableTest}
+	
+	Die Funktion \texttt{validateCatalogVersionFormat(\$value)} erweitert die CakePHP Standardvalidatormethoden. Mittels regulärem Ausdruck wird geprüft ob die übergeben Zeichenkette einem bestimmten Format entspricht. \texttt{testValidateCatalogVersionFormat()} führt einen Positiv- und einen Negativtest der Funktionalität durch. 
+	
+	\subsection{Die Klasse BMECatComponentTest}
+	
+	Um die Methoden \texttt{getSellerName(\$sellerId)} und \texttt{getParentCoreCategoryIds(\$sellerId)} testen zu können werden die Fixtures für \texttt{core\_sellers} und \texttt{core\_categories} geladen.
+	\texttt{testGetSellerName()} prüft mit einem Positiv- und einem Negativtest ob die zurückgelieferte Zeichenkette der Erwartung entspricht.
+	
+	Die Methode \texttt{testGetParentCoreCategoryIds()} prüft ob ein Array zurückgeliefert wird und ob die darin gespeicherten Werte vom Typ \textit{Integer} sind.
+	
+	\texttt{testArticleDataValidator()} führt einen Positiv- und einen Negativtest durch, indem jeweils eine 'gültige' bzw. 'ungültige' Instanz von \textit{CoreProducts} an \texttt{articleDataValidator(\$product)} übergeben wird.
+	
+	Mit \texttt{testCheckImageFormat()} wird geprüft, ob \texttt{checkImageFormat(\$image)} jeweils \texttt{true} zurückliefert wenn der übergebene \textit{URI} auf 'jpeg', 'jpg' oder 'gif' endet. Es wird \texttt{false} erwartet, wenn die Datei eine andere Endung hat.
+	
+	
+	
+	
 
 	
 

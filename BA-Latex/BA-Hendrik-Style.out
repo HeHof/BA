@@ -27,27 +27,28 @@
 \BOOKMARK [2][-]{subsection.2.5}{Informelle Aufgabenbeschreibung}{section.2}% 27
 \BOOKMARK [2][-]{subsection.2.6}{Zielstellung}{section.2}% 28
 \BOOKMARK [1][-]{section.3}{Entwurf}{}% 29
-\BOOKMARK [2][-]{subsection.3.1}{Katalogerstellung NEW}{section.3}% 30
-\BOOKMARK [2][-]{subsection.3.2}{Katalogerstellung OLD}{section.3}% 31
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Die Tabelle mercateo\137accounts}{subsection.3.2}% 32
-\BOOKMARK [3][-]{subsubsection.3.2.2}{Die Tabelle mercateo\137products}{subsection.3.2}% 33
-\BOOKMARK [3][-]{subsubsection.3.2.3}{Allgemeiner Programmablauf}{subsection.3.2}% 34
-\BOOKMARK [3][-]{subsubsection.3.2.4}{Katalogerstellungslogik in der Klasse AddNewCatalogTask}{subsection.3.2}% 35
-\BOOKMARK [3][-]{subsubsection.3.2.5}{Katalogerstellungslogik in der Klasse UpdateCatalogTask }{subsection.3.2}% 36
-\BOOKMARK [2][-]{subsection.3.3}{Bestandsdatenabfrage}{section.3}% 37
-\BOOKMARK [1][-]{section.4}{Implementierung}{}% 38
-\BOOKMARK [2][-]{subsection.4.1}{Die PrepareCatalog Shell}{section.4}% 39
-\BOOKMARK [2][-]{subsection.4.2}{XMLWriterComponent}{section.4}% 40
-\BOOKMARK [2][-]{subsection.4.3}{BMECatComponent}{section.4}% 41
-\BOOKMARK [3][-]{subsubsection.4.3.1}{Erstellen des BMECat Dokumentes}{subsection.4.3}% 42
-\BOOKMARK [3][-]{subsubsection.4.3.2}{Schreiben der Header Sektion}{subsection.4.3}% 43
-\BOOKMARK [3][-]{subsubsection.4.3.3}{Schreiben des Kataloggruppensystems}{subsection.4.3}% 44
-\BOOKMARK [3][-]{subsubsection.4.3.4}{Artikelerstellung}{subsection.4.3}% 45
-\BOOKMARK [3][-]{subsubsection.4.3.5}{Kategoriemapping}{subsection.4.3}% 46
-\BOOKMARK [2][-]{subsection.4.4}{Die Klasse CatalogToolsTask}{section.4}% 47
-\BOOKMARK [3][-]{subsubsection.4.4.1}{Erzeugung eines initialen Katalogdokumentes mit der Klasse AddNewCatalogTask}{subsection.4.4}% 48
-\BOOKMARK [3][-]{subsubsection.4.4.2}{Erzeugung eines Update-Katalogdokumentes mit der Klasse UpdateCatalogTask}{subsection.4.4}% 49
-\BOOKMARK [2][-]{subsection.4.5}{Bestandsdatenabfrage}{section.4}% 50
-\BOOKMARK [1][-]{section.5}{Test}{}% 51
-\BOOKMARK [2][-]{subsection.5.1}{Die Klasse AvailabilityControllerTest}{section.5}% 52
-\BOOKMARK [2][-]{subsection.5.2}{Die Klasse UpdateCatalogTaskTest}{section.5}% 53
+\BOOKMARK [2][-]{subsection.3.1}{Katalogerstellung}{section.3}% 30
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Die Tabelle mercateo\137accounts}{subsection.3.1}% 31
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Die Tabelle mercateo\137products}{subsection.3.1}% 32
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Allgemeiner Programmablauf}{subsection.3.1}% 33
+\BOOKMARK [3][-]{subsubsection.3.1.4}{Katalogerstellungslogik in der Klasse AddNewCatalogTask}{subsection.3.1}% 34
+\BOOKMARK [3][-]{subsubsection.3.1.5}{Katalogerstellungslogik in der Klasse UpdateCatalogTask }{subsection.3.1}% 35
+\BOOKMARK [2][-]{subsection.3.2}{Bestandsdatenabfrage}{section.3}% 36
+\BOOKMARK [1][-]{section.4}{Implementierung}{}% 37
+\BOOKMARK [2][-]{subsection.4.1}{Die PrepareCatalog Shell}{section.4}% 38
+\BOOKMARK [2][-]{subsection.4.2}{XMLWriterComponent}{section.4}% 39
+\BOOKMARK [2][-]{subsection.4.3}{BMECatComponent}{section.4}% 40
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Erstellen des BMECat Dokumentes}{subsection.4.3}% 41
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Schreiben der Header Sektion}{subsection.4.3}% 42
+\BOOKMARK [3][-]{subsubsection.4.3.3}{Schreiben des Kataloggruppensystems}{subsection.4.3}% 43
+\BOOKMARK [3][-]{subsubsection.4.3.4}{Artikelerstellung}{subsection.4.3}% 44
+\BOOKMARK [3][-]{subsubsection.4.3.5}{Kategoriemapping}{subsection.4.3}% 45
+\BOOKMARK [2][-]{subsection.4.4}{Die Klasse CatalogToolsTask}{section.4}% 46
+\BOOKMARK [3][-]{subsubsection.4.4.1}{Erzeugung eines initialen Katalogdokumentes mit der Klasse AddNewCatalogTask}{subsection.4.4}% 47
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Erzeugung eines Update-Katalogdokumentes mit der Klasse UpdateCatalogTask}{subsection.4.4}% 48
+\BOOKMARK [2][-]{subsection.4.5}{Bestandsdatenabfrage}{section.4}% 49
+\BOOKMARK [1][-]{section.5}{Test}{}% 50
+\BOOKMARK [2][-]{subsection.5.1}{Die Klasse AvailabilityControllerTest}{section.5}% 51
+\BOOKMARK [2][-]{subsection.5.2}{Die Klasse UpdateCatalogTaskTest}{section.5}% 52
+\BOOKMARK [2][-]{subsection.5.3}{Die Klasse MercateoAccountsTableTest}{section.5}% 53
+\BOOKMARK [2][-]{subsection.5.4}{Die Klasse BMECatComponentTest}{section.5}% 54
