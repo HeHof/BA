@@ -9,7 +9,7 @@
 Vorliegende Arbeit entstand im Rahmen meiner Werkstudententätigkeit bei der Firma i-Ways Sales Solutions GmbH und meinem Mitwirken
 an der von i-Ways entwickelten, auf einem PHP-Webframework basierenden Multichannel-Marketing Software iTool3, die es -- unter Anderem -- gestattet über eine Weboberfläche Produkte verschiedener
 Verkäufer auf Onlinemarktplätzen wie Amazon oder eBay anzubieten.
-Ziel dieser Arbeit ist es die Anwendung, im Kundenauftrag, um die Möglichkeit der Anbindung an den Mercateo Marktplatz, einer Online B2B Beschaffungsplattform, zu erweitern.
+Die Anwendung soll, im Kundenauftrag, um die Möglichkeit der Anbindung an den Mercateo Marktplatz, einer Online B2B Beschaffungsplattform, zu erweitern.
 Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfängt, soll im folgenden untersucht werden, wie die Anbindung der Software iTool3 an den Mercateo Marktplatz realisiert werden kann. Ziel der Arbeit ist es einen funktionsfähigen Prototypen zu entwickeln, der einen fehlerfreien Transfer der mit iTool verwalteten Produkte an Mercateo ermöglicht.
 \end{minipage}
 \end{center}
@@ -20,11 +20,102 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 
 \section{Grundlagen}
 
+\subsection{Das Cake-PHP Framework}
+	
+	Cake PHP ist ein Webframework, das dem MVC (Model-View-Controller) Schema folgt und dabei die Softwaredesignparadigmen \enquote{DRY} (Don't repeat yourself) und \enquote{Convention over configuration} umsetzt. 
+	
+	\subsubsection{Convention over Configuration in CakePHP}
+	
+	%Hier noch eine Erklärung zu COC von den Big Five einfügen
+	In CakePHP wird das Softwaredesign-Paradigma der \enquote{Convention over Configuration} konsequent umgesetzt.\newline % Entweder duetsch oder englisch bzw erläuternd übersetzen
+	
+	 Die Klassennamen von \textbf{Controllern} sind im Plural verfasst, \enquote{CamelCased} und enden auf \textit{Controller}. \texttt{UsersController} und \texttt{ArticleCategoriesController} sind Beispiele dafür. Eine öffentliche Methode eines solchen Controllers kann über einen Webbrowser aufgerufen werden. Per Konvention werden Controllernamen in URLs klein geschrieben und mit Bindestrich verbunden.
+	\url{http://samplesite.com/article-categorie/view} ruft demnach die öffentliche \texttt{view()} Methode des \texttt{ArticleCategoriesController}s auf.\\
+	\newline
+	Die Namen von \textbf{Model} Klassen sind \enquote{CamelCased} und im Plural. Der Name der zum Model gehörenden Tabelle ist im Plural verfasst und mit einem Unterstrich verbunden.\\
+	\texttt{article\_categories} ist die dem Model \texttt{ArticleCategories} zugrunde liegende Tabelle. Um einen Fremdschlüssel auf eine Tabelle zu vergeben genügt es das Suffix \enquote{\texttt{\_id}} an den klein geschriebenen Namen dieser Tabelle anzuhängen. Wenn z.B. \textit{Users} eine \textit{hasMany}-Beziehung zu \textit{Articles} hat, kann mit dem Fremdschlüssel \texttt{user\_id} in der \texttt{articles}-Tabelle auf den entsprechenden Eintrag in der \texttt{users}-Tabelle verwiesen werden. \newline
+	
+	Die Template Datei einer \textbf{View} ist nach der entsprechenden Methode im Controller benannt, die sie darstellen soll. Die \texttt{view()} Methode der \texttt{ArticlesController} Klasse würde demnach unter \texttt{src/Template/Articles/view.ctp} nach einem View-Template suchen\footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/intro/conventions.html}.(Abgerufen am 27.01.2017).}. 
+	
+	\subsubsection{Model}
+	
+	Das Backend einer CakePHP Anwendung wird von einer SQL Datenbank gebildet. Das Model repräsentiert die Daten einer Anwendung und enthält die Geschäftslogik zur Datenmanipulation. Nach der CakePHP Konvention wird die Datenbankverbindung einmal in der Datei \texttt{config/app.php} konfiguriert. Die Model-Klasse stellt dabei Methoden zur Verfügung die es ermöglichen den Zustand der Daten abzufragen, die Daten zu filtern und zu verändern. Die CRUD-Funktionalität ist so direkt im Model integriert\footnote{vgl. hierzu: Webentwicklung mit CakePHP, 2. Auflage, O'Reilly, Seite 7}. 
+	Die Beziehungen einzelner Models zueinander werden über \textit{Associations} hergestellt. Die vier Assoziationstypen in CakePHP sind:\\
+
+	\begin{table}[!htbp]
+		\begin{tabularx}{\textwidth}{p{1cm} X X p{8cm}}
+			\cline{2-4}
+			\rowcolor[HTML]{EFEFEF} 
+			 Nr. & Beziehung & in CakePHP & Beispiel \\ \cline{1-4} \addlinespace
+			1 & one to one & hasOne & Ein Museum hat eine Adresse. \\
+			2 & one to many & hasMany & In einem Museum hängen mehrere Kunstwerke. \\
+			3 & many to one & belongsTo & Mehrere Bilder gehören zu einem Museum. \\  
+			4 & many to many & belongsToMany & Ein Student hat mehrere Professoren. Ein Professor hat mehrere Hörer. \\ \addlinespace \cline{1-4}     
+		\end{tabularx}
+		\captionbelow{Übersicht der Assoziationstypen in CakePHP}
+	\end{table}
+		
+	
+	
+	
+	Es ist möglich ein \textit{Model} um ein oder mehrere \textit{Behavior} zu erweitern. Dabei handelt es sich um Klassen, in denen, ähnlich einem Trait, Funktionen zur Erweiterung des Models gekapselt sind. Ein Beispiel hierfür ist das Tree-Behavior, das es ermöglicht hierarchische Datenstrukturen in der Datenbank zu pflegen. Anwendung hierfür kann z.B. die Abbildung einer Kategoriestruktur sein \footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/orm/behaviors/tree.html}. (Abgerufen am 27.01.2017).}. 
+	
+	Mit Hilfe von im Model definierten Validatoren können zu speichernde Daten auf Vollständigkeit und Konsistenz geprüft werden. 
+
+	\lstset{language=PHP}
+	\begin{lstlisting}[caption={Validator in CakePHP}] 
+
+	$validator
+     	->requirePresence('catalog_name', 'create')
+     	->notEmpty('catalog_name')
+     	->add('catalog_name', [
+	         'maxLength' => [
+	             'rule' => ['maxLength', 100],
+	             'message' => 'maxLength = 100.'
+	         ]
+     ]);
+	
+	\end{lstlisting}
+	
+	\subsubsection{View}
+	
+	Die View ist für die Darstellung der Daten in der Anwendung zuständig. Eine View ist in CakePHP immer auf einen bestimmten Controller bezogen und wird nicht für die Darstellung anderer Daten verwendet\footnote{vgl. hierzu: Webentwicklung mit CakePHP, 2. Auflage, O'Reilly, Seite 7}. CakePHP-View-Template-Dateien enden auf \enquote{.ctp} und verwenden die alternative PHP-Syntax für Kontrollstrukturen und Ausgabe. 
+	In einer View kann direkt auf Variablen zugegriffen werden, die in der entsprechenden Controller Methode gesetzt wurden:\\ 
+   \lstset{language=PHP} 
+	\begin{lstlisting}[caption={Freigabe einer Controllervariablen für die View}] 
+	$this->set('articleCategories',  $articleCategories);
+	\end{lstlisting}
+	  Die Codebeispiele zeigen, wie die Variable \texttt{\$articleCategories} im Controller für die View freigegeben wird und dort z.B. mit einer foreach-Schleife durchlaufen werden kann um ihren Inhalt auszugeben. 
+		\lstset{language=PHP}
+		\begin{lstlisting}[caption={Alternative PHP Syntax}] 	
+		<ul>
+	   	<?php foreach ($todo as $item): ?>
+		  <li><?= $item ?></li>
+		<?php endforeach; ?>
+		</ul>
+		\end{lstlisting}
+	 Eine View ist dabei nicht auf das Anzeigen von HTML Inhalten beschränkt, sondern kann auch dazu verwandt werden XML- oder JSON- Repräsentationen der angefragten Daten zurückzuliefern.
+	\subsubsection{Controller}
+	Der Controller regelt den Ablauf der Benutzerinteraktion.
+	Er ist dafür zuständig, dass das richtige Model aufgerufen und die entsprechende Antwort oder View erzeugt wird. Er dient dabei als eine Art Vermittler zwischen dem Model und der View. Normalerweise ist in CakePHP ein Controller für ein Model verantwortlich, es ist dennoch möglich, oft auch nötig, dass ein Controller mit mehreren Models arbeitet.
+	
+	Der Controller enthält eine Reihe von  Methoden die HTTP Anfragen verarbeiten. Diese Methoden werden in CakePHP \textit{actions} genannt. Per Definition ist jede öffenliche Methode in einem Controller eine \textit{action} und über eine URL der Form \url{http://samplesite.com/article-categorie/view} erreichbar.
+	Eine \textit{action} ist für die Verarbeitung der Anfrage und das Zurückliefern einer Antwort zuständig. Im Normalfall wird dabei eine View erzeugt, es können aber auch (wie im Abschnitt Model erläutert) XML oder JSON Daten zurückgeliefert werden\footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/controllers.html}.(Abgerufen am 27.01.2017).}.
+	 
+	\subsubsection{Component}
+	Komponenten (Components) sind in sich geschlossene Bereiche innerhalb einer Applikation, die eine bestimmte Funktionalität kapseln und über die Grenzen eines Controllers hinaus verfügbar machen. Sollen bestimmte logische Prozesse in verschiedenen Teilen einer Anwendung zur Verfügung stehen - insbesondere in unterschiedlichen Controllern- so ist es sinnvoll diese in eine Komponente auszulagern\footnote{vgl. hierzu: Webentwicklung mit CakePHP, 2. Auflage, O'Reilly, Seite 223}.
+	Die Möglichkeit mit Komponenten zu arbeiten setzt das DRY Paradigma konsequent um.
+	
+	\subsubsection{Shell}	%Übergang zwischen Shell und Baking flüssiger gestalten
+	CakePHP bietet die Möglichkeit Konsolenanwendungen zu schreiben. Dies ist nützlich für Anwendungen die per Cronjob ausgeführt werden sollen oder für solche die nicht aus einem Browser erreicht werden müssen bzw. sollen\footnote{vgl. hierzu \url{http://book.cakephp.org/3.0/en/console-and-shells.html}.(Abgerufen am 27.01.2017).}. 
+	Eine nützliche Funktionalität der Cake Shell ist das \enquote{Backen} (Baking). Gemeint ist damit die automatische Generierung von Code. Der Befehl \texttt{bin/cake bake} erstellt, je nach gewählter Option, ganze MVC Grundgerüste, Controller- oder Model- Klassen, Plugin Verzeichnisstrukturen oder Shell-Klassen. Einzelne Funktionalitäten einer Shell Klasse können in Tasks ausgelagert werden.  
+	
+
 %erst Cake, dann itool
 	
 	\subsection{iTool3}
 	
-	iTool3 ist eine auf dem CakePHP 3.3 - Framework basierende eCommerce Software Lösung zur Steuerung von Produktsortimenten auf verschiedenen Marktplätzen mit dem Ziel, den
+	iTool3 ist eine auf dem CakePHP 3.3 - Framework basierende eCommerce-Software  zur Steuerung von Produktsortimenten auf verschiedenen Marktplätzen mit dem Ziel, den
 	Vertriebsprozess zu automatisieren. Es ermöglicht dem Nutzer, über eine einzelne Benutzeroberfläche, Produkte auf Marktplätzen wie eBay, Amazon oder auch einem Magento-Store
 	zu verwalten. Produkte können dabei händisch erstellt oder aus bestehenden Datenquellen in die Software	eingepflegt werden. Im Anschluss ist es möglich diese Produkte auf einem oder mehreren Marktplätzen anzubieten. Die Verwaltung und Abwicklung der eingehenden Bestellungen läuft dabei komplett über das iTool.
 	Da für jeden Marktplatz unterschiedliche Daten benötigt werden um auf ihm erfolgreich zu verkaufen, können für jedes Produkt unterschiedliche Attribute mit wiederum unterschiedlichen Werten angelegt werden. Die Produktverwaltung der Software folgt daher dem Entity-Attribute-Value Modell.
@@ -37,7 +128,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.6\linewidth]{img/ERD_Seller_User_complete}
-		\captionof{figure}[ERD]{ER-Diagramm: Verkäufer - Benutzer}
+		\captionof{figure}[ER-Diagramm: Verkäufer - Benutzer]{ER-Diagramm: Verkäufer - Benutzer}
 		\label{fig:header}
 		\vspace{1em}
 	\end{minipage}
@@ -48,21 +139,21 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\subsubsection{Produktverwaltung}
 	
-	Die Produktverwaltung ist aufgeteilt in Produkte und Kategorien. \textbf{Produkte} besitzen Attribute wie Titel, Preis, Beschreibung etc. die für jeden Marktplatz auf denen diese angeboten werden sollen unterschiedlich ausfallen können. Es kann gewählt werden, ob ein Produkt auf einem bestimmten Marktplatz angeboten werden soll oder nicht. Ein Produkt kann dabei mehreren \textbf{Kategorien} zugeordnet sein.\\
+	Die Produktverwaltung ist aufgeteilt in Produkte und Kategorien. \textbf{Produkte} besitzen Attribute wie Titel, Preis, Beschreibung etc., die für jeden Marktplatz auf denen diese angeboten werden sollen unterschiedlich ausfallen können. Es kann gewählt werden, ob ein Produkt auf einem bestimmten Marktplatz angeboten werden soll oder nicht. Ein Produkt kann dabei mehreren \textbf{Kategorien} zugeordnet sein.\\
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.6\linewidth]{img/ERD_Category_Product}
-		\captionof{figure}[ERD]{ER-Diagramm: Kategorie - Produkt}
+		\captionof{figure}[ER-Diagramm: Kategorie - Produkt]{ER-Diagramm: Kategorie - Produkt}
 		\label{fig:header}
 		\vspace{1em}
 	\end{minipage}
-	Eine Kind-Kategorie hat jeweils genau eine Eltern-Kategorie. Eine Eltern-Kategorie kann jedoch mehrere Kind\_Kategorien haben.Die  einzelnen Produkte sind genau einem Verkäufer zugeordnet. \\
+	Eine Kind-Kategorie hat jeweils genau eine Eltern-Kategorie. Eine Eltern-Kategorie kann jedoch mehrere Kind-Kategorien haben. Die einzelnen Produkte sind genau einem Verkäufer zugeordnet. \\
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.6\linewidth]{img/ERD_Seller_Product}
-		\captionof{figure}[ERD]{ER-Diagramm: Verkäufer - Benutzer}
+		\captionof{figure}[ER-Diagramm: Verkäufer - Benutzer]{ER-Diagramm: Verkäufer - Benutzer}
 		\label{fig:header}
 		\vspace{1em}
 	\end{minipage}
@@ -77,14 +168,14 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	\subsection{Der BMECat} %Das XML Katalogformat BMECat
 	
 	Der BMECat ist ein vom \enquote{Bundesverband Materialwirtschaft, Einkauf und Logistik e.V} in Zusammenarbeit mit dem \enquote{eBusiness Standardization Committee} entwickelter XML
-	Standard mit dem Ziel den Austausch von Produktkatalogen zwischen Lieferanten und beschaffenden Organisationen zu standardisieren und somit zu vereinfachen\footnote{BMECat V1.2 Spezifikation, Seite 5}. 
+	Standard mit dem Ziel den Austausch von Produktkatalogen zwischen Lieferanten und beschaffenden Organisationen zu standardisieren und somit zu vereinfachen\footnote{vgl. hierzu: BMECat V1.2 Spezifikation, Seite 5}. 
 	
 	\subsubsection{Terminologie}
 	Ein \textbf{Produktkatalog} ist die Menge aller benötigten Daten, welche vom katalogerzeugenden Unternehmen an das katalogempfangende Unternehmen übermittelt werden sollen.\\
 	Ein \textbf{Katalogdokument} ist eine XML-Datei, in der der Produktkatalog im BMECat-Format gespeichert und zum Katalogemfänger übermittelt wird.\\
 	Eine \textbf{Kataloggruppe} ist ein Datenbereich, der eine Gruppe definiert, welcher gleichartige Artikel zugeordnet werden können. Diese wird im BMEcat-Format durch das Element \texttt{\textbf{CATALOG\_STRUCTURE}} abgebildet.\\
 	Ein \textbf{Kataloggruppensystem} ist ein hierarchischer Baum von verknüpften Kataloggruppen. Es wird
-	im BMEcat-Format durch das Element \texttt{\textbf{CATALOG\_GROUP\_SYSTEM}} abgebildet.\footnote{vgl. hierzu:BMECat V1.2 Spezifikation, Seite 7}
+	im BMEcat-Format durch das Element \texttt{\textbf{CATALOG\_GROUP\_SYSTEM}} abgebildet\footnote{vgl. hierzu:BMECat V1.2 Spezifikation, Seite 7}.
 	
 	\subsubsection{Transaktionen}
 	Im BMECat wird zwischen 3 verschiedenen Transaktionsarten unterschieden:
@@ -93,7 +184,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	\item \texttt{\textbf{T\_UPDATE\_PRODUCTS}} - Aktualisierung von Produktdaten
 	\item \texttt{\textbf{T\_UPDATE\_PRICES}} - Aktualisierung von Preisinformationen
 	\end{itemize} 
-	Die Unterscheidung geschieht um die Größe eines Katalogdokumentes zu reduzieren. Es muss so z.B. nicht ein kompletter Produktkatalog übertragen werden, falls sich bei einem \(oder mehreren\) Artikel\(n\) der Preis ändert. %crap
+	Die Unterscheidung geschieht um die Größe eines Katalogdokumentes zu reduzieren. Es muss so z.B. nicht ein kompletter Produktkatalog übertragen werden, falls sich bei einem (oder mehreren) Artikel(-n) der Preis ändert. %crap
 	
 	\subsubsection{Aufbau}
 	
@@ -103,7 +194,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		
 			\item 
 			XML Deklaration:
-			\begin{lstlisting}
+			\begin{lstlisting}[caption={XML Deklaration in einem BMECat-Dokument}] 
 			<?xml version="1.0" encoding="UTF-8"?>
 			<!DOCTYPE BMECAT SYSTEM "bmecat_new_catalog.dtd">
 			<BMECAT version="1.2" xml:lang="de" xmlns="http://www.bmecat.org/bmecat/1.2/bmecat_new_catalog">
@@ -111,7 +202,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 			
 			\item
 			Header-Bereich (mit Informationen über Kataloganbieter und Empfänger, Bezeichnung und Erstellungsdatum des Kataloges etc.  )
-			\begin{lstlisting} %vernünftige Daten
+			\begin{lstlisting}[caption={Header-Sektion in einem BMECat-Dokument}]  %vernünftige Daten
 			<HEADER> 
 			  <GENERATOR_INFO> Kann </GENERATOR_INFO>
 			  <CATALOG> Muss </CATALOG>
@@ -121,7 +212,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 			\end{lstlisting}
 			\pagebreak
 			\item Produktgruppensystem (Baumstruktur der Produktgruppen mit den Attributwerten \enquote{root}, \texttt{Node} und \textit{Leaf})
-			\begin{lstlisting}
+			\begin{lstlisting}[caption={Produktgruppensystem in einem BMECat-Dokument }] 
 			<CATALOG_STRUCTURE type="root">
 			   <GROUP_ID>1</GROUP_ID>
 			   <GROUP_NAME>Katalog</GROUP_NAME>
@@ -144,7 +235,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 			
 			\item Artikel (mit Attributen und Werten)
 			
-			\begin{lstlisting}
+			\begin{lstlisting}[caption={Ein Artikel in einem BMECat-Dokument }] 
 			<ARTICLE mode="new">
 			  <SUPPLIER_AID>9057320097280</SUPPLIER_AID>
 			    <ARTICLE_DETAILS>
@@ -159,7 +250,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 			
 	
 			\item Zuordnung der Artikel zu den Produktgruppen.
-			\begin{lstlisting}
+			\begin{lstlisting}[caption={Zuordnung der Artikel zu den Produktgruppen in einem BMECat-Dokument }] 
 			<ARTICLE_TO_CATALOGGROUP_MAP>
 			  <ART_ID>9057320097280</ART_ID>
 			  <CATALOG_GROUP_ID>7</CATALOG_GROUP_ID>
@@ -167,18 +258,16 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 			\end{lstlisting}
 		
 		\end{enumerate}
-		
-	--- Übersicht der im BMECat verwendeten Datentypen --- noch einfügen ---
 	
-	Im Folgenden wird jeder Teilbereich mit seinen Unterelementen graphisch dargestellt und erläutert. Farblich rot markiert sind jeweils die \enquote{Muss}-Felder, welche zwingend in einem gültigen BMECat Dokument vorkommen müssen, grün die \enquote{Kann}-Felder. Ein Plus \(+\) Zeichen hinter dem Elementnamen indiziert, dass dieses Element mehrfach an dieser Stelle vorkommen muss, jedoch mindestens einmal. Ein Asterisk \(*\) zeigt an, dass dieses Element einmal, mehrfach oder gar nicht vorkommen kann.  
+	Im Folgenden wird jeder Teilbereich mit seinen Unterelementen graphisch dargestellt und erläutert. Farblich rot markiert sind jeweils die \enquote{Muss}-Felder, welche zwingend in einem gültigen BMECat Dokument vorkommen müssen, grün die \enquote{Kann}-Felder. Ein Plus \(+\) Zeichen hinter dem Elementnamen indiziert, dass dieses Element mehrfach an dieser Stelle vorkommen kann, jedoch mindestens einmal. Ein Asterisk \(*\) zeigt an, dass dieses Element einmal, mehrfach oder gar nicht vorkommen kann.  
 	
 	\textbf{\underline{Header}}\\
 	Im Header werden allgemeine Informationen über das Katalogdokument hinterlegt und
 	 Default Werte gesetzt. Das Element \texttt{\textbf{CATALOG}} enthält dabei %??
 	
 	Informationen zur Identifikation und Beschreibung des Produktkataloges, wie z.B. die
-	 Katalog\-ID, die Katalogversion oder die für das Katalogdokument geltende Sprache sowie
-	  Elemente zum Setzten von Standard-Werten wie z.B. die für das Katalogdokument geltende Währungsangabe \footnote{BMECat V 1.2 Spezifikation, Seite 27,29}.
+	 Katalog-Id, die Katalogversion oder die für das Katalogdokument geltende Sprache sowie
+	  Elemente zum Setzten von Standard-Werten wie z.B. die für das Katalogdokument geltende Währungsangabe \footnote{vgl. hierzu: BMECat V 1.2 Spezifikation, Seite 27 \& 29}.
 	
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
@@ -201,12 +290,12 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.65\linewidth]{img/newCatalog}
-		\captionof{figure}[T\_NEW\_CATALOG]{T\_NEW\_CATALOG}
+		\captionof{figure}[Transaktion T\_NEW\_CATALOG]{Transaktion T\_NEW\_CATALOG}
 		\label{fig:header}
 		\vspace{1em}
 	\end{minipage}
 	
-	\textbf{\underline{Die Transaktion T\_UPDATE\_PRODUCTS}}\\
+	\textbf{\underline{Die Transaktion T\_UPDATE\_PRODUCTS}}
 	
 	Bei dieser Transaktion werden Artikeldaten übertragen und gegebenenfalls einer Kataloggruppe zugeordnet. Je nach Kennung des Artikels werden die übertragenen
 	Artikel im Zielsystem entweder hinzugefügt, gelöscht oder die Artikeldaten werden komplett ersetzt.
@@ -217,14 +306,14 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.65\linewidth]{img/updateProducts}
-		\captionof{figure}[T\_UPDATE\_PRODUCTS]{T\_UPDATE\_PRODUCTS}
+		\captionof{figure}[Transaktion T\_UPDATE\_PRODUCTS]{Transaktion T\_UPDATE\_PRODUCTS}
 		\label{fig:header}
 		\vspace{1em}
 	\end{minipage}
 	
 	Das Element \texttt{T\_UPDATE\_PRODUCTS} verfügt über das Attribut \texttt{prev\_version}, welches die Anzahl der vorausgegangenen Updates enthält. Der Wert dieses Attributes wird nach jedem Update um 1 erhöht.
 	
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={Das Attribut \texttt{prev\_version} bei der Transaktion T\_UPDATE\_PRODUCTS}] 
 	<T_UPDATE_PRODUCTS prev_version="91">...</T_UPDATE_PRODUCTS>
 	\end{lstlisting}
 	
@@ -257,7 +346,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	Das Element \texttt{ARTICLE} verfügt über das Attribut \texttt{mode}, welches Informationen darüber enthält, ob es sich um die Anlage eines neuen Artikel, ein Update der Artikelinformationen oder die Löschung eines Artikels handelt.
 	
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={Die verschiedenen Artikelmodi}] 
 	<ARTICLE mode="new">...</ARTICLE>
 	<ARTICLE mode="update">...</ARTICLE>
 	<ARTICLE mode="delete">...</ARTICLE>
@@ -273,14 +362,14 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.7\linewidth]{img/articleGroupMap}
-		\captionof{figure}[ArticleGroupMap]{ARTICLE\_TO\_CATALOG\_GROUP\_MAP}
+		\captionof{figure}[ARTICLE\_TO\_CATALOG\_GROUP\_MAP]{ARTICLE\_TO\_CATALOG\_GROUP\_MAP}
 		\label{fig:header}
 		\vspace{1em}
 	\end{minipage}
 	
 	Im Kontext der Transaktion \texttt{T\_UPDATE\_PRODUCTS} verfügt das Element zusätzlich über das Attribut \texttt{mode}, mit welchem angegeben wird, ob es sich um eine Neuzuweisung zu einer Kategorie handelt oder der Artikel aus einer Kategorie entfernt werden soll.
 	
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={Modi des Elementes ARTICLE\_TO\_CATALOGGROUP\_MAP }] 
 	<ARTICLE_TO_CATALOGGROUP_MAP mode="new">...</<ARTICLE_TO_CATALOGGROUP_MAP>
 	<ARTICLE_TO_CATALOGGROUP_MAP mode="delete">...</<ARTICLE_TO_CATALOGGROUP_MAP>
 	\end{lstlisting}
@@ -294,7 +383,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.8\linewidth]{img/newCatalogLogik}
-		\captionof{figure}[New Catalog Logik]{Logik des empfangenden Systems bei der Transaktion  \texttt{T\_NEW\_CATALOG}}
+		\captionof{figure}[Logik des empfangenden Systems bei der Transaktion  \texttt{T\_NEW\_CATALOG}]{Logik des empfangenden Systems bei der Transaktion  \texttt{T\_NEW\_CATALOG}}
 		\label{fig:header}
 		\vspace{1em}
 	\end{minipage}
@@ -305,101 +394,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\item Das Attribut \texttt{prev\_version} muss bei der ersten anderen Transaktionsart nach\\ \texttt{T\_NEW\_CATALOG}, (\texttt{T\_UPDATE\_PRODUCTS},\texttt{T\_UPDATE\_PRICES}) auf \enquote{0} gesetzt werden.
 		\item Danach wird es bei jeder solchen Transaktion um \enquote{1} erhöht.
 	\end{itemize}
-	
-	
-	---- Übersicht, tabellarisch oder nicht über die wichtigsten Felder und ihre Einschränkungen, vor allem die von Mercateo ----
-	
-	\subsection{Das Cake-PHP Framework}
-	
-	Cake PHP ist ein Webframework, das dem MVC (Model-View-Controller) Schema folgt und dabei die Softwaredesignparadigmen DRY (Don't repeat yourself) und \enquote{Convention over configuration} umsetzt. 
-	
-	\subsubsection{Convention over Configuration in CakePHP}
-	
-	%Hier noch eine Erklärung zu COC von den Big Five einfügen
-	In CakePHP wird das Softwaredesign-Paradigma der \enquote{Konvention vor Konfiguration} konsequent umgesetzt.\newline % Entweder duetsch oder englisch bzw erläuternd übersetzen
-	
-	 Die Klassennamen von \textbf{Controllern} sind im Plural verfasst, \enquote{CamelCased} und enden auf \textit{Controller}. \texttt{UsersController} und \texttt{ArticleCategoriesController} sind Beispiele dafür. Eine öffentliche Methode eines solchen Controllers kann über einen Webbrowser aufgerufen werden. Per Konvention werden Controllernamen in URLs klein geschrieben und mit Bindestrich verbunden.
-	\url{http://samplesite.com/article-categorie/view} ruft demnach die öffentliche \texttt{view()} Methode des ArticleCategoriesControllers auf.\\
-	\newline
-	Die Namen von \textbf{Model} Klassen sind \enquote{CamelCased} und im Plural. Der Name der zum Model gehörenden Tabelle ist im Plural verfasst und mit einem Unterstrich verbunden.\\
-	\texttt{article\_categories} ist die dem Model \texttt{ArticleCategories} zugrundeliegende Tabelle. Um einen Fremdschlüssel auf eine Tabelle zu vergeben genügt es das Suffix \texttt{\_id} an den kleingeschriebenen Namen dieser Tabelle anzuhängen. Wenn Users eine hasMany Beziehung zu Articles hat, kann mit dem Fremdschlüssel \texttt{user\_id} in der \texttt{articles}-Tabelle auf den entsprechenden Eintrag in der \texttt{users}-Tabelle verwiesen werden. \newline
-	
-	Die Template Datei einer \textbf{View} ist nach der entsprechenden Methode im Controller benannt, die sie darstellen soll. Die \texttt{view()} Methode der \texttt{ArticlesController} Klasse würde demnach unter \texttt{src/Template/Articles/view.ctp} nach einem View-Template suchen\footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/intro/conventions.html}}.
-	
-	\subsubsection{Model}
-	
-	Das Backend einer CakePHP Anwendung wird von einer SQL Datenbank gebildet. Das Model repräsentiert die Daten einer Anwendung und enthält die Geschäftslogik zur Datenmanipulation. Nach der CakePHP Konvention wird die Datenbankverbindung einmal in der Daeti \texttt{config/app.php} konfiguriert. Die Model-Klasse stellt dabei Methoden zur Verfügung, über die es möglich ist, den Zustand der Daten abzufragen, die Daten zu filtern und zu verändern. Die CRUD-Funktionalität (CREATE-READ-UPDATE-DELETE) ist so direkt im Model integriert.\footnote{vgl. hierzu: Webentwicklung mit CakePHP, 2. Auflage, O'Reilly, Seite 7}. 
-	Die Beziehungen einzelner Models zueinander werden über \textit{Associations} hergestellt. Die vier Assoziationstypen in CakePHP sind:\\
-
-	\begin{table}[!htbp]
-		\begin{tabularx}{\textwidth}{p{1cm} X X p{8cm}}
-			\cline{2-4}
-			\rowcolor[HTML]{EFEFEF} 
-			 Nr. & Beziehung & Typ & Beispiel \\ \cline{1-4} \addlinespace
-			1 & one to one & hasOne & Ein Museum hat eine Adresse. \\
-			2 & one to many & hasMany & In einem Museum hängen mehrere Kunstwerke. \\
-			3 & many to one & belongsTo & Mehrere Bilder gehören zu einem Museum. \\  
-			4 & many to many & belongsToMany & Ein Student hat mehrere Professoren. Ein Professor hat mehrere Hörer. \\ \addlinespace \cline{1-4}     
-		\end{tabularx}
-		\captionbelow{Übersicht der Assoziationstypen in CakePHP}
-	\end{table}
 		
-	
-	
-	
-	Es ist möglich ein \textit{Model} um ein oder mehrere \textit{Behavior} zu erweitern. Dabei handelt es sich um Klassen, in denen, ähnlich einem Trait, Funktionen zur Erweiterung des Models gekapselt sind. Ein Beispiel hierfür ist das Tree-Behavior, das es ermöglicht hierarchische Datenstrukturen in der Datenbank zu pflegen. Anwendung hierfür kann z.B. die Abbildung einer Kategoriestruktur sein \footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/orm/behaviors/tree.html}}.
-	
-	Mit Hilfe von im Model definierten Validatoren können zu speichernde Daten auf Vollständigkeit und Konsistenz geprüft werden. 
-
-	\lstset{language=PHP}
-	\begin{lstlisting}
-
-	$validator
-     	->requirePresence('catalog_name', 'create')
-     	->notEmpty('catalog_name')
-     	->add('catalog_name', [
-	         'maxLength' => [
-	             'rule' => ['maxLength', 100],
-	             'message' => 'maxLength = 100.'
-	         ]
-     ]);
-	
-	\end{lstlisting}
-	
-	\subsubsection{View}
-	
-	Die View ist für die Darstellung der Daten in der Anwendung zuständig. Eine View ist in CakePHP immer auf einen bestimmten Controller bezogen und wird nicht für die Darstellung anderer Daten verwendet\footnote{vgl. hierzu: Webentwicklung mit CakePHP, 2. Auflage, O'Reilly, Seite 7}. CakePHP View Template Dateien Enden auf \enquote{.ctp} und bedienen sich der alternativen PHP Syntax für Kontrollstrukturen und Ausgabe. 
-	In einer View kann direkt auf Variablen zugegriffen werden die in der entsprechenden Controller Methode gesetzt wurden:\\ 
-   \lstset{language=PHP} 
-	\begin{lstlisting}
-	$this->set('articleCategories',  $articleCategories);
-	\end{lstlisting}
-	  Die Codebeispiele zeigen, wie die Variable \texttt{\$articleCategories} im Controller für die View freigegeben wird und dort z.B. mit einer foreach-Schleife durchlaufen werden kann um ihren Inhalt auszugeben. 
-		\lstset{language=PHP}
-		\begin{lstlisting}[caption={Alternative PHP Syntax}] 	
-		<ul>
-	   	<?php foreach ($todo as $item): ?>
-		  <li><?= $item ?></li>
-		<?php endforeach; ?>
-		</ul>
-		\end{lstlisting}
-	 Eine View ist dabei nicht auf das Anzeigen von HTML Inhalten beschränkt, sondern kann auch dazu verwandt werden XML- oder JSON- Repräsentationen der angefragten Daten zurückzuliefern.
-	\subsubsection{Controller}
-	Der Controller regelt den Ablauf der Benutzerinteraktion.
-	Er ist dafür zuständig, dass das richtige Model aufgerufen und die entsprechende Antwort oder View erzeugt wird. Er dient dabei als eine Art Vermittler zwischen dem Model und der View. Normalerweise ist in CakePHP ein Controller für ein Model verantwortlich, es ist dennoch möglich, oft auch nötig, dass ein Controller mit mehreren Models arbeitet.
-	
-	Der Controller enthält eine Reihe von  Methoden die HTTP Anfragen verarbeiten. Diese Methoden werden in CakePHP \textit{actions} genannt. Per Definition ist jede öffenliche Methode in einem Controller eine \textit{action} und über eine URL der Form \url{http://samplesite.com/article-categorie/view} erreichbar.
-	Eine \textit{action} ist für die Verarbeitung der Anfrage und das Zurückliefern einer Antwort zuständig. Im Normalfall wird dabei eine View erzeugt, es können aber auch (wie im Abschnitt Model erläutert) XML oder JSON Daten zurückgeliefert werden.\footnote{vgl. hierzu: \url{http://book.cakephp.org/3.0/en/controllers.html}}
-	
-	\subsubsection{Component}
-	Komponenten (Components) sind in sich geschlossene Bereiche innerhalb einer Applikation, die eine bestimmte Funktionalität kapseln und über die Grenzen eines Controllers hinaus verfügbar machen. Sollen bestimmte logische Prozesse in verschiedenen Teilen einer Anwendung zur Verfügung stehen - insbesondere in unterschiedlichen Controllern- so ist es sinnvoll diese in eine Komponente auszulagern\footnote{vgl. hierzu: Webentwicklung mit CakePHP, 2. Auflage, O'Reilly, Seite 223}.
-	Die Möglichkeit mit Komponenten zu arbeiten setzt das DRY Paradigma konsequent um.
-	
-	\subsubsection{Shell}	%Übergang zwischen Shell und Baking flüssiger gestalten
-	CakePHP bietet die Möglichkeit Konsolenanwendungen zu schreiben. Dies ist nützlich für Anwendungen die per Cronjob ausgeführt werden sollen oder für solche die nicht aus einem Browser erreicht werden müssen bzw. sollen\footnote{vgl. hierzu \url{http://book.cakephp.org/3.0/en/console-and-shells.html}}. 
-	Eine der wichtigsten Funktionalität der Cake Shell ist das \enquote{Backen} (Baking). Gemeint ist damit die automatische Generierung von Code. Der Befehl \texttt{bin/cake bake} erstellt, je nach gewählter Option, ganze MVC Grundgerüste, Controller- oder Model- Klassen, Plugin Verzeichnisstrukturen oder Shell-Klassen. Einzelne Funktionalitäten einer Shell Klasse können in Tasks ausgelagert werden.  
-	
-	
 	\section{Analyse der Aufgabe und der Anforderungen}
 	
 	\subsection{Funktionale und nichtfunktionale Anforderungen}	
@@ -471,7 +466,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\subsubsection{BMECat Format}
 	
-	Allgemeine Vorteile die sich aus dem XML-Format ergeben sind die gleichzeitige Mensch- und Maschinenlesbarkeit sowie die Möglichkeit das Dokument gegen ein XML-Schema testen zu können. So kann schon direkt nach der Erzeugung des BMECat Dokumentes überprüft werden, ob die geschriebenen Elemente vom richtigen Datentyp sind und das Dokument der in der XSD Datei festgelegten Struktur folgt. Weitere Vorteile speziell des BMECat Standards sind\footnote{vgl. hierzu: \url{http://wiki.prozeus.de/index.php/BMEcat}}:
+	Allgemeine Vorteile die sich aus dem XML-Format ergeben sind die gleichzeitige Mensch- und Maschinenlesbarkeit sowie die Möglichkeit das Dokument gegen ein XML-Schema testen zu können. So kann schon direkt nach der Erzeugung des BMECat Dokumentes überprüft werden, ob die geschriebenen Elemente vom richtigen Datentyp sind und das Dokument der in der XSD Datei festgelegten Struktur folgt. Weitere Vorteile speziell des BMECat Standards sind\footnote{vgl. hierzu: \url{http://wiki.prozeus.de/index.php/BMEcat}.(Abgerufen am 27.01.2017).}:
 	
 	\begin{itemize}[noitemsep]
 	\item konfigurierbare Produkte sind abbildbar.
@@ -498,7 +493,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
    	\item Die vollständige Datenübertragung kann nicht garantiert werden (fehlende Prüfsummen o.ä.)
    	\end{itemize}
    	\textbf{Fazit:}\\
-	Nicht optimal, vor allem aus Sicherheitsgründen. Zudem Fehleranfällig, wenn die Ordnerstruktur- und Dateinamenskonventionen von Mercateo nicht eingehalten werden \footnote{vgl. hierzu: \url{http://www.mercateo.com/support/verkaufen/katalog-allgemeine-informationen/datenuebertragung-per-ftp/}}.
+	Nicht optimal, vor allem aus Sicherheitsgründen. Zudem Fehleranfällig, wenn die Ordnerstruktur- und Dateinamenskonventionen von Mercateo nicht eingehalten werden \footnote{vgl. hierzu: \url{http://www.mercateo.com/support/verkaufen/katalog-allgemeine-informationen/datenuebertragung-per-ftp/}.(Abgerufen am 27.01.2017).}.
 
 	\pagebreak	
 	\section{Entwurf}
@@ -520,7 +515,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.7 \linewidth]{img/VererbungShellSimple}
-		\captionof{figure}[BasicLogic]{Vererbungshierarchie der Task-Klassen}
+		\captionof{figure}[Vererbungshierarchie der Task-Klassen]{Vererbungshierarchie der Task-Klassen}
 		\vspace{1em}
 	\end{minipage}	
 	
@@ -530,7 +525,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=1 \linewidth]{img/iToolSeller}
-		\captionof{figure}[BasicLogic]{Abbildung der \texttt{mercateo\_accounts} Daten im iTool}
+		\captionof{figure}[Abbildung der \texttt{mercateo\_accounts} Daten im iTool]{Abbildung der \texttt{mercateo\_accounts} Daten im iTool}
 		\vspace{1em}
 	\end{minipage}
 	
@@ -603,7 +598,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	Die Spalten \enquote{sku},\enquote{core\_category\_id} \& \enquote{title} sind notwendig um einen Artikel in einem BMECat Dokument als \textit{gelöscht} auszeichnen zu können. Die Spalte \enquote{status} akzeptiert vier  \textit{Zustände}: 
 	
-
+\begin{table}[!htbp]
 	\begin{tabularx}{\textwidth}{p{3cm} X}
 	\rowcolor[HTML]{EFEFEF} 
 	Zustand & Erläuterung \\ \cline{1-2} \addlinespace[7pt]
@@ -613,7 +608,8 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	\texttt{active} & Produktdaten wurden in das aktuelle BMECat Dokument übernommen. \\
 	   \addlinespace[7pt] \cline{1-2} 
 	\end{tabularx}%
-		
+	\captionbelow{Mögliche Werte der Spalte \enquote{status}}
+		\end{table}	
 	Diese Zustände sind die Werte die das Attribut \texttt{mode} des BMECat Elements \texttt{ARTICLE} annehmen kann. Gleichzeitig geben sie an dieser Stelle Auskunft darüber, ob ein in \texttt{core\_products} gespeicherter Datensatz neu ist bzw. gelöscht oder verändert wurde. Jene Datensätze die in das aktuelle BMECat Dokument geschrieben wurden, werden mit \enquote{active} markiert. Die in \texttt{mercateo\_products} gehaltenen Einträge können über das GUI manipuliert werden.
 	
 	\subsubsection{Allgemeiner Programmablauf bei der Katalogerzeugung}
@@ -628,7 +624,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=1 \linewidth]{img/newCatalogComplete}
-		\captionof{figure}[BasicLogic]{Programmlogik  bei der Transaktion \texttt{T\_NEW\_CATALOG}}
+		\captionof{figure}[Programmlogik  bei der Transaktion \texttt{T\_NEW\_CATALOG}]{Programmlogik  bei der Transaktion \texttt{T\_NEW\_CATALOG}}
 		\vspace{1em}
 	\end{minipage}\\
 	
@@ -642,7 +638,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=1 \linewidth]{img/productChangeCheck}
-		\captionof{figure}[BasicLogic]{Überprüfung auf Produktbestandsänderungen}
+		\captionof{figure}[Überprüfung auf Produktbestandsänderungen]{Überprüfung auf Produktbestandsänderungen}
 		\vspace{1em}
 	\end{minipage}\\
 	
@@ -655,7 +651,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=1 \linewidth]{img/updateCatalogComplete}
-		\captionof{figure}[BasicLogic]{Programmlogik  bei der Transaktion \texttt{T\_UPDATE\_PRODUCTS}}
+		\captionof{figure}[Programmlogik  bei der Transaktion \texttt{T\_UPDATE\_PRODUCTS}]{Programmlogik  bei der Transaktion \texttt{T\_UPDATE\_PRODUCTS}}
 		\vspace{1em}
 	\end{minipage}\\
 	
@@ -675,7 +671,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	Mit der PrepareCatalog Shell wird der Entwurf zur Erzeugung eine BMECat Katalogdokumentes umgesetzt. Die eigentliche Shell Klasse \texttt{PrepareCatalogShell} dient in der Implementierung  dazu die Subcommandos \texttt{AddNewCatalogTask}, \texttt{UpdateCatalogTask} und \texttt{DeleteCatalogTask} aufzurufen und sicherzustellen, dass die notwendigen Argumente übergeben werden.
 	\lstset{basicstyle=\scriptsize\ttfamily}
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={Konsolenausgabe bei Aufruf der PrepareCatalogShell}]
 	Usage:
 	cake mercateo.prepare_catalog [subcommand] [-h] [-q] [-v] <Core Seller Id>
 	
@@ -703,7 +699,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	Kann der übergebene Parameter keinem Verkäufer zugeordnet werden wird eine Übersicht der verfügbaren Verkäufer angezeigt. Dies geschieht in den einzelnen Tasks über die geerbte Methode \texttt{validateArgument(\$coreSellerId)}.
 	
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={Auflistung der verfügbaren Verkäufer}]
 	Please choose one of the available Sellers:
 	
 	ID | Name
@@ -718,7 +714,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.7 \linewidth]{img/Aufrufhierarchie}
-		\captionof{figure}[BasicLogic]{Aufrufhierarchie PrepareCatalogShell}
+		\captionof{figure}[Aufrufhierarchie PrepareCatalogShell]{Aufrufhierarchie PrepareCatalogShell}
 		\vspace{1em}
 	\end{minipage}\\
 	
@@ -727,9 +723,9 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	Im Folgenden werden die einzelnen Klassen vorgestellt.
 	
-	\subsection{XMLWriterComponent}
+	\subsection{Die XMLWriter Komponente}
 	
-	Die XMLWriterComponent Klasse ist insofern wichtiger Bestandteil der Implementierung, als das ohne sie nur auf umständlicherem Wege XML geschrieben werden kann. Hier seien nun in Kürze jene Methoden vorgestellt, die von der Klasse BMECatComponent genutzt werden:
+	Die XMLWriterComponent-Klasse ist insofern wichtiger Bestandteil der Implementierung, als das ohne sie nur auf umständlicherem Wege XML geschrieben werden kann. Hier seien nun in Kürze jene Methoden vorgestellt, die von der Klasse BMECatComponent genutzt werden:
 	
 	\begin{enumerate}[noitemsep]
 	\item \texttt{public function openXmlWriter(\$filePath, \$rootElement, \$attributes = null, \$doctype = null)} \\
@@ -744,16 +740,14 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		  Schließt das zuvor geöffnete Element ab. (Schreibt den End-Tag)
 	\end{enumerate}
 	
-	VORTEILE? 
-	
-	\subsection{BMECatComponent}
+	\subsection{Die BMECat Komponente}
 	
 	Die Klasse BMECatComponent dient dazu ein wohlgeformtes und gültiges XML Dokument entsprechend den BMECat- und Mercateo Vorgaben zu erstellen. \\
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.8 \linewidth]{img/BMECatComponentUML}
-		\captionof{figure}[BasicLogic]{UML Diagramm der Klasse BMECatComponent}
+		\captionof{figure}[UML Diagramm der Klasse BMECatComponent]{UML Diagramm der Klasse BMECatComponent}
 		\vspace{1em}
 	\end{minipage}
 	Wie im Kapitel Grundlagen bereits beschrieben gliedert sich ein BMECat Dokument in 4 Bereiche und zwar den Header, das Kataloggruppensystem, die Auflistung der einzelnen Artikel und die Zuordnung der Artikel zu ihren Kategorien. Der BMECat Komponent stellt für jeden dieser Teilbereiche Funktionen bereit die in Folge erläutert werden sollen.
@@ -763,7 +757,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.8 \linewidth]{img/createBMECatHierarchie}
-		\captionof{figure}[BasicLogic]{Aufrufhierarchie createBMECatXMLDocument}
+		\captionof{figure}[Aufrufhierarchie der Methode createBMECatXMLDocument]{Aufrufhierarchie der Methode createBMECatXMLDocument}
 		\vspace{1em}
 	\end{minipage}
 	
@@ -773,7 +767,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\subsubsection{Erstellen des BMECat Dokumentes}
 	
-	Die Funktion \texttt{createBMECatXMLDocument(\$sellerName, \$sellerId, \$transactionType, \$prevVersion)} dient der Erzeugung eines BMECat Dokumentes. Sie legt die XML Datei mit der Namenskonvention \texttt{\enquote{Verkäufername\_Erzeugungsdatum\_Erzeugungszeit.xml}} an und schreibt Informationen zum XML Namensraum \textit{(xmlns)} und zur Dokumenttypdefinition \textit{(dtd)} in die XML-Deklaration. Von ihr werden die Methoden zur Erzeugung des Headers und der restlichen Abschnitte des BMECat Dokumentes aufgerufen.
+	Die Funktion \texttt{createBMECatXMLDocument(\$sellerName, \$sellerId, \$transactionType, \$prevVersion)} dient der Erzeugung eines BMECat Dokumentes. Sie legt die XML Datei mit der Namenskonvention \enquote{\texttt{Verkäufername\_Erzeugungsdatum\_Erzeugungszeit.xml}} an und  schreibt Informationen zum XML Namensraum \textit{(xmlns)} und zur Dokumenttypdefinition \textit{(dtd)} in die XML-Deklaration. Von ihr werden die Methoden zur Erzeugung des Headers und der restlichen Abschnitte des BMECat Dokumentes aufgerufen.
 	Anhand des Parameters \texttt{\$transactionType} wird entschieden ob bei dem zu erzeugenden Dokument die Transaktion \texttt{T\_NEW\_CATALOG} oder \texttt{T\_UPDATE\_PRODUCTS} umgesetzt werden soll. Falls die Datei, z.B. wegen fehlender Rechte, nicht angelegt werden kann, wird durch die XMLWriter Komponente eine Exception erzeugt.
 	
 	\subsubsection{Schreiben der Header Sektion}
@@ -787,7 +781,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.7 \linewidth]{img/CreateCatalogGroupSystemHierarchie}
-		\captionof{figure}[BasicLogic]{Aufrufhierarchie createCatalogGroupSystem}
+		\captionof{figure}[Aufrufhierarchie der Methode createCatalogGroupSystem]{Aufrufhierarchie der Methode createCatalogGroupSystem}
 		\vspace{1em}
 	\end{minipage}
 	
@@ -795,13 +789,13 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	 
 	\begin{addmargin}[1cm]{1cm}
 	\underline{Dazu ein kleiner Exkurs:}\\
-		 CakePHP bietet die Möglichkeit einem Model ein sogenanntes Tree-Behaviour hinzuzufügen. Dieses basiert auf dem Nested-Set-Konzept, das es ermöglicht hierarchische Strukturen in relationalen Datenbanken abzubilden\footnote{vgl. hierzu: \url{https://www.sitepoint.com/hierarchical-data-database-2/}}. Die \texttt{core\_categories} Tabelle bedient sich dieses \enquote{Behavious}, was es ermöglicht diesen Kategoriebaum rekursiv zu durchlaufen und dadurch das Kataloggruppensystem des BMECat abzubilden.
+		 CakePHP bietet die Möglichkeit einem Model ein sogenanntes Tree-Behaviour hinzuzufügen. Dieses basiert auf dem Nested-Set-Konzept, das es ermöglicht hierarchische Strukturen in relationalen Datenbanken abzubilden\footnote{vgl. hierzu: \url{https://www.sitepoint.com/hierarchical-data-database-2/}.(Abgerufen am 27.01.2017).}. Die \texttt{core\_categories} Tabelle bedient sich dieses \enquote{Behavious}, was es ermöglicht diesen Kategoriebaum rekursiv zu durchlaufen und dadurch das Kataloggruppensystem des BMECat abzubilden.
 	\end{addmargin}
 	
 	
 	Die Methode \texttt{categoryToNode(\$category,\$sellerId)} durchläuft, ausgehend vom Wurzelelement, alle Kindelemente und schreibt die entsprechenden Daten in das Dokument. Solange dabei die Anzahl der Kindelemente des gerade traversierten Elementes größer 0 ist wird dabei dem Attribut \texttt{type} der Wert \texttt{node} zugewiesen. Gibt es keine Kindelemente mehr, wird der Wert auf \texttt{leaf} gesetzt. 
 	\lstset{language=xml}
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={Abbildung der Kataloggruppensystems}]
 	<CATALOG_STRUCTURE type="node">
 	 <GROUP_ID>207</GROUP_ID>
 	 <GROUP_NAME>Auto -Motorrad - Flugzeug</GROUP_NAME>
@@ -823,13 +817,13 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 			\vspace{1em}
 			\centering
 			\includegraphics[width=0.7 \linewidth]{img/createArticleHierarchie}
-			\captionof{figure}[BasicLogic]{Aufrufhierarchie createArticle}
+			\captionof{figure}[Aufrufhierarchie der Methode createArticle]{Aufrufhierarchie der Methode createArticle}
 			\vspace{1em}
 		\end{minipage}
 	
 	Zusätzlich wird geprüft ob die dem Artikel zugeordneten Bilder der Mercateo Spezifikation entsprechen. Diese gestattet als Bildformate nur \enquote{.jpeg} und \enquote{.gif}. Entsprechen die Bilddateien nicht diesem Format wird eine entsprechende Ausnahmebehandlung durchgeführt. Dabei wird der komplette Pfad der beanstandeten Datei zurückgeliefert, um es dem Anwender zu erleichtern diesen Fehler zu beheben.\\
 	
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={Konsolenausgabe bei falschem Bildformat}]
 	2017-01-05 16:30:55 Info: Product with CoreProductId: 7147 updated
 	Exception: 'png' ist not allowed as File Extension.
 	Only .gif & .jpg Files are accepted by Mercateo-Marketplace
@@ -847,21 +841,19 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\subsection{Die Klasse \texttt{CatalogToolsTask}}
 	
-	Die Klasse \texttt{CatalogToolsTask} stellt Methoden zur Verfügung die von den drei sie beerbenden Task Klassen verwendet werden.
+	Die Klasse \texttt{CatalogToolsTask} stellt Methoden zur Verfügung die von den drei sie beerbenden Task-Klassen verwendet werden.
 	
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
-		\includegraphics[width=0.7 \linewidth]{img/CatalogToolsTaskUML}
-		\captionof{figure}[BasicLogic]{UML Diagramm der Klasse CatalogToolsTask}
+		\includegraphics[width=0.5 \linewidth]{img/CatalogToolsTaskUML}
+		\captionof{figure}[UML Diagramm der Klasse CatalogToolsTask]{UML Diagramm der Klasse CatalogToolsTask}
 		\vspace{1em}
 	\end{minipage}
 	
 	Die Methode \texttt{initialize()} lädt alle zur Katalogerzeugung benötigten Model-Klassen und initialisiert die Instanzvariable \texttt{BMECatComponent}.
 	Die vom CakePHP-Framework zur Verfügung gestellte Methode \texttt{getOptionParser()} überprüft, ob beim Aufruf des Tasks die benötigte \texttt{\$coreSellerId} übergeben wird.
-	Mit \texttt{validateArgument(\$coreSellerId)} wird geprüft, ob die übergebene \texttt{\$coreSellerId} im System vorhanden ist. Falls ja, wird \texttt{true} zurückgeliefert. Falls nicht, wird eine tabellarische Übersicht der verfügbaren Verkäufer ausgegeben und \texttt{false} zurückgegeben.
-	Durch \texttt{writeDataToMercateoProductsTable(\$sellerId, \$coreProduct, \$statusCode)} werden Einträge in der \texttt{mercateo\_products}-Tabelle erzeugt, dabei wird mit Aufruf der \texttt{MercateoProducts}-Model-Methode \texttt{allreadyInDatabase(\$coreProductId)} sichergestellt, dass keine doppelten Einträge erstellt werden, eine bestimmte \texttt{core\_product\_id} also nur einmal in der Tabelle vorkommt. Das setzten eines bestimmten Produktstatus für \textit{einen} Eintrag in der \texttt{mercateo\_products}-Tabelle wird mit der Methode \texttt{setMercateoProductStatus(\$productId, \$status)} realisiert. Das setzten der Produkstatus aller Produkte eines \textit{CoreSellers} geschieht mit \texttt{setMercateoProductsStatus(\$sellerId, \$status)}.
-	 Die Methode \texttt{setLastCatalogUpdate(\$sellerId)} schreibt den Timestamp der letzten Katalogerstellung in die \texttt{core\_configurations}-Tabelle.\\
+	Mit \texttt{validateArgument(\$coreSellerId)} wird geprüft, ob die übergebene \texttt{\$coreSellerId} im System vorhanden ist. Falls ja, wird \texttt{true} zurückgeliefert. Falls nicht, wird eine tabellarische Übersicht der verfügbaren Verkäufer ausgegeben und \texttt{false} zurückgegeben. Die Methode \texttt{setLastCatalogUpdate(\$sellerId)} schreibt den Timestamp der letzten Katalogerstellung in die \texttt{core\_configurations}-Tabelle.\\
 	
 	\begin{addmargin}[1cm]{1cm}
 	\underline{Exkurs:}\\
@@ -873,10 +865,10 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		 		\rowcolor[HTML]{EFEFEF} 
 		 		Spalte & Erläuterung \\ \cline{1-2} \addlinespace[7pt]
 		 		id & Primärschlüssel \\
-		 		core\_seller\_id & Die Id des Verkäufers für den die Konfiguration gilt \\
-		 		configuration\_group & Der Scope in dem die Konfiguration gilt \\
-		 		configuration\_path & Nähere Angaben zum Konfigurationswert \\
-		 		configuration\_value & Der Konfigurationswert \\\addlinespace[7pt] \cline{1-2} 
+		 		core\_seller\_id & Die Id des Verkäufers, für den die Konfiguration gilt. \\
+		 		configuration\_group & Der Scope in dem die Konfiguration gilt. \\
+		 		configuration\_path & Nähere Angaben zum Konfigurationswert. \\
+		 		configuration\_value & Der Konfigurationswert. \\\addlinespace[7pt] \cline{1-2} 
 		 		\end{tabularx}%
 		 		\captionbelow{Die Tabelle \texttt{core\_configurations}}
 		 	\end{addmargin}
@@ -891,28 +883,60 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\underline{Exkurs:}\\
 		Um die erzeugte XML Datei mit dem dazugehörigen Schema validieren zu können muss die Klasse \texttt{XMLReaderComponent} um diese Funktionalität ergänzt werden. Die dem Component zugrundeliegende \texttt{xmlReader}-Klasse stellt dazu eine Methode \texttt{setSchema(\$schemePath)} zur Verfügung die hier zur Anwendung kommt. Wurde ein Schema gesetzt wird mit dem ersten Aufruf der \texttt{xmlReader->read())} Methode die zu lesende Datei validiert. 
 		\end{addmargin}
+		
+	\subsubsection{Die Model-Klasse \texttt{MercateoProductsTable}}
+	
+	Die Klasse \texttt{MercateoProductsTable} enthält öffentliche Methoden zur Manipulation der Datensätze der von ihr verwalteten Tabelle \texttt{mercateo\_products} und setzt damit das Paradigma des DRY um, da die erwähnten Methoden nur einmal im Model implementiert werden und so von allen dieses Model nutzenden Controller- und Modelklassen verwendet werden können. \\
+	\begin{minipage}{\linewidth}
+		\vspace{1em}
+		\centering
+		\includegraphics[width=0.6 \linewidth]{img/MercateoProductsTableUML}
+		\captionof{figure}[UML Diagramm der Klasse MercateoProductsTable]{UML Diagramm der Klasse MercateoProductsTable}
+		\vspace{1em}
+	\end{minipage}
+	Die im UML-Diagramm aufgeführten Funktionen werden, mit Ausnahme von \texttt{validationDefault}, bei der Beschreibung der einzelnen Tasks näher erläutert. \texttt{validationDefault} prüft, ob die zu speichernden Datensätze den von ihr festgelegten Regeln entsprechen. So wird verlangt, dass alle Felder Werte enthalten müssen. Das Feld \texttt{status} akzeptiert zusätzlich nur die 4 Einträge \texttt{new}, \texttt{update}, \texttt{delete} oder \texttt{active}.
+	
+	\begin{lstlisting}[caption={Auszug aus der Validator Methode der Klasse MercateoProductsTable}] 
+	$validator
+     	->requirePresence('status')
+     	->notEmpty('status')
+     	->add('status', 'inList', [
+        	 'rule' => ['inList', ['new', 'delete', 'update', 'active']],
+         	'message' => 'Status must be of type new, delete,update, active'
+     	]);
+	\end{lstlisting}
+	
+	
 	
 	\subsubsection{Erzeugung eines initialen Katalogdokumentes mit der Klasse \texttt{AddNewCatalogTask}}
 	
-	Die Klasse \texttt{AddNewCatalogTask} dient der Erzeugung eines neuen Katalogdokumentes. Der in Kapitel 3.2.4 vorgestellte Entwurf zur Erzeugung eines neuen Katalogdokumentes wird mit den von der Methode \texttt{newCatalog(\$sellerId, BmeCatComponent \$BmeCatComponent)} aufgerufenen Funktionen umgesetzt.
-	\texttt{initialize()} ruft die gleichnamige Methode der Elternklasse auf. Somit stehen alles dort geladenen Model-Klassen sowie die zur Katalogerzeugung benötigte Instanz der BMECatComponent Klasse zur verfügung.
-	In der \texttt{main()}-Methode wird der Aufrufparamter validiert und mit \texttt{checkIfMercateoProductsTableContainsSellersProducts(\$sellerId))} geprüft ob die \texttt{mercateo\_products} Tabelle bereits Einträge des angegebenen Verkäufers enthält. Ist dies nicht der Fall, wird die Katalogerzeugung durch Aufruf von \texttt{newCatalog} angestoßen.
+	Die Klasse \texttt{AddNewCatalogTask} dient der Erzeugung eines neuen Katalogdokumentes. \\
+	\begin{minipage}{\linewidth}
+			\vspace{1em}
+			\centering
+			\includegraphics[width=0.5 \linewidth]{img/AddNewCatalogTaskUML}
+			\captionof{figure}[UML Diagramm der Klasse AddNewCatalogTask]{UML Diagramm der Klasse AddNewCatalogTask}
+			\vspace{1em}
+	\end{minipage}
+	Der in Kapitel 4.1.4 vorgestellte Entwurf zur Erzeugung eines neuen Katalogdokumentes wird mit den von der Methode \texttt{newCatalog(\$sellerId, BmeCatComponent \$BmeCatComponent)} aufgerufenen Funktionen umgesetzt.
+	\texttt{initialize()} ruft die gleichnamige Methode der Elternklasse auf. Somit stehen alle dort geladenen Model-Klassen sowie die zur Katalogerzeugung benötigte Instanz der BMECatComponent Klasse zur verfügung.
+	In der \texttt{main()}-Methode wird der Aufrufparamter validiert und mit \texttt{MercateoProducts->containsSellersProducts(\$sellerId)} geprüft ob die \texttt{mercateo\_products} Tabelle bereits Einträge des angegebenen Verkäufers enthält. Ist dies nicht der Fall, wird die Katalogerzeugung durch Aufruf von \texttt{newCatalog} angestoßen.
 	
 	 
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
 		\includegraphics[width=1 \linewidth]{img/newCatalogAufrufhierarchie}
-		\captionof{figure}[BasicLogic]{Aufrufhierarchie der Methode \texttt{newCatalog}}
+		\captionof{figure}[Aufrufhierarchie der Methode \texttt{newCatalog}]{Aufrufhierarchie der Methode \texttt{newCatalog}}
 		\vspace{1em}
 	\end{minipage}
 
 	
-	Mit \texttt{initializeMercateoProductsTable(\$sellerId)} wird die \texttt{mercateo\_products} Tabelle initialisiert. Dabei werden die in \texttt{core\_products} gespeicherten Produkte des angegebenen Verkäufers geladen und durch Aufruf von \texttt{writeDataToMercateoProductsTable} in die \texttt{mercateo\_products} Tabelle geschrieben. Der Variablen \texttt{statusCode} wird dabei der Wert \textit{new} zugewiesen. 
+	Mit \texttt{MercateoProducts->initializeTable(\$sellerId)} wird die \texttt{mercateo\_products} Tabelle initialisiert. Dabei werden die in \texttt{core\_products} gespeicherten Produkte des angegebenen Verkäufers geladen und durch Aufruf der \texttt{MercateoProductsTable}-Klassenmethode  \texttt{saveProduct(\$sellerId, \$product, \$statusCode)} in die \texttt{mercateo\_products} Tabelle geschrieben. Der Variablen \texttt{statusCode} wird dabei der Wert \enquote{\texttt{new}} zugewiesen. 
 	
-	Anschließend wird mit \texttt{setLastCatalogUpdate} der Timestamp der Katalogerzeugung in die \texttt{core\_configurations} Tabelle geschrieben.
+	Anschließend wird mit der von \texttt{CatalogToolsTask} geerbten Funktion \texttt{setLastCatalogUpdate(\$sellerId)} der Timestamp der Katalogerzeugung in die \texttt{core\_configurations} Tabelle geschrieben.
 		
-	Durch Aufruf der Methode \texttt{createBMECatXMLDocument(\$sellerId, \$transactionType, \$prevVersion = null)} des \texttt{BmeCatComponent}-Objektes wird die zu erzeugende XML-Datei geschrieben . Dem Parameter \texttt{transactionType} wird hier der Wert \texttt{T\_NEW\_CATALOG} zugewiesen. Anschließend wird mit \texttt{setMercateoProductsStatus(\$status)} der \textit{status} aller in \texttt{mercateo\_products} gespeicherten Artikel auf \textit{active} gesetzt.
+	Durch Aufruf der Methode \texttt{createBMECatXMLDocument(\$sellerId, \$transactionType, \$prevVersion = null)} des \texttt{BmeCatComponent}-Objektes wird die zu erzeugende XML-Datei geschrieben . Dem Parameter \texttt{transactionType} wird hier der Wert \texttt{T\_NEW\_CATALOG} zugewiesen. Anschließend wird mit \texttt{MercateoProducts->setProductsStatus(\$status)}  der \textit{status} aller in \texttt{mercateo\_products} gespeicherten Artikel auf \textit{active} gesetzt.
 
 	Die Validierung des soeben erzeugten Dokumentes erfolgt mit dem Schema \texttt{bmecat\_new\_catalog\_1\_2.xsd} durch Aufruf von \texttt{validateXml(\$path, \$schemePath)}.
 	
@@ -920,49 +944,48 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\subsubsection{Erzeugung eines Update-Katalogdokumentes  mit der Klasse \texttt{UpdateCatalogTask}}
 	
-	Die Klasse \texttt{UpdateCatalogTask} dient der Erzeugung eines Update-Katalog-Dokumentes. Die \texttt{initialize()} Methode verhält sich wie im vorherigen Abschnitt beschrieben. Auch die \texttt{main()} verhält sich ähnlich, mit dem Unterschied, dass nun positiv darauf geprüft wird, ob die \texttt{mercateo\_products} Tabelle bereits Einträge des angegebenen Verkäufers enthält. \\
+	Die Klasse \texttt{UpdateCatalogTask} dient der Erzeugung eines Update-Katalog-Dokumentes. Die \texttt{initialize()}-Methode verhält sich wie im vorherigen Abschnitt beschrieben. Auch die \texttt{main()} verhält sich ähnlich, mit dem Unterschied, dass nun positiv darauf geprüft wird, ob die \texttt{mercateo\_products} Tabelle bereits Einträge des angegebenen Verkäufers enthält. \\
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
-		\includegraphics[width=0.7 \linewidth]{img/UpdateCatalogTaskUML}
-		\captionof{figure}[BasicLogic]{UML-Klassendiagramm der Klasse \texttt{UpdateCatalogTask}}
+		\includegraphics[width=0.6 \linewidth]{img/UpdateCatalogTaskUML}
+		\captionof{figure}[UML-Klassendiagramm der Klasse \texttt{UpdateCatalogTask}]{UML-Klassendiagramm der Klasse \texttt{UpdateCatalogTask}}
 		\vspace{1em}
 	\end{minipage}
 	
-	Die Funktion \texttt{checkMercateoProductsStatusChanges(\$sellerId)} fasst
- 	jene 3 Methoden zusammen, die prüfen ob Produkte gelöscht, geändert oder neu hinzugefügt wurden. Diese geben jeweils \texttt{true} zurück, falls eine entsprechende Änderung stattgefunden hat. Zugleich wird in der Konsole eine Meldung der Form 	
-		\begin{lstlisting}
+	Die Methode \texttt{prepareEntries(\$sellerId)} fasst, wie in Kapitel 4.1.5 beschrieben\footnote{vgl. hierzu auch Abbildung 14}, jene 3 Methoden der Klasse \texttt{MercateoProductsTable} zusammen, die Produktbestandsänderungen der \texttt{core\_products}-Tabelle in die \texttt{mercateo\_products}-Tabelle übertragen. 
+	Diese geben jeweils \texttt{true} zurück, falls eine entsprechende Änderung stattgefunden hat. Zugleich wird in der Konsole eine Meldung der Form 	
+		\begin{lstlisting}[caption={Konsolenausgabe bei der Transaktion T\_UPDATE\_PRODUCTS}]
 		Info: Product with CoreProductId: 1781 added
 		Info: Product with CoreProductId: 1782 deleted
 		Info: Product with CoreProductId: 1783 updated
-		\end{lstlisting} ausgegeben, die zudem in der Datei \textit{productChange.log} erfasst wird.
-			
-		Die Methode \texttt{checkIfNewCoreProductsHaveBeenCreated(\$sellerId)} überprüft ob es seit der letzten Katalogerstellung in der Tabelle \texttt{core\_products} neue Einträge gab. Dazu wird die Tabelle \texttt{mercateo\_products} über einen LEFT-JOIN an \texttt{core\_products} gebunden. All jene Produkte aus \texttt{core\_products}, deren \textit{core\_product\_id} nicht in \texttt{mercateo\_products} zu finden ist müssen als neu gelten und werden demnach mit dem Statuscode \texttt{new} in \texttt{mercateo\_products} geschrieben. 
-		
+		\end{lstlisting} ausgegeben, die auch in der Datei \textit{productChange.log} erfasst wird.
 	
-		Mit \texttt{checkIfCoreProductsHaveBeenDeleted(\$sellerId)} wird geprüft ob Daten aus der \texttt{core\_products} Tabelle gelöscht wurden. Auch hier wird \texttt{mercateo\_products} über einen LEFT-JOIN an \texttt{core\_products} gebunde. All jene Produkte deren \textit{core\_product\_id} 
-		noch in der \texttt{mercateo\_products} Tabelle vermerkt ist, nicht aber in \texttt{core\_products}, müssen als gelöscht gelten. Entsprechend wird der Status der betroffenen Produkte in \texttt{mercateo\_products} auf \texttt{delete} gesetzt.
-		
-		Durch die Methode \texttt{checkIfCoreProductsHaveBeenChanged(\$sellerId)} schließlich wird geprüft ob sich Produktdaten seit der letzten Katalogerstellung geändert haben. Dazu wird die Tabelle \texttt{core\_product\_updates} über einen INNER-JOIN an \texttt{mercateo\_products} gebunden.
-		Beim Erstellen des Kataloges wurde der Zeitpunkt der Erzeugung in der \texttt{core\_configurations} Tabelle gespeichert. All jene Einträge aus \texttt{core\_product\_updates}, deren Erzeugungsdatum nach der letzten Katalogerstellung liegt werden in \texttt{mercateo\_products} mit dem Status \texttt{update} versehen.
+	Die Methode \texttt{MercateoProducts->createNewProducts(\$sellerId)} überprüft ob es seit der letzten Katalogerstellung in der Tabelle \texttt{core\_products} neue Einträge gab. Dazu wird die Tabelle \texttt{core\_products} über einen LEFT-JOIN an \texttt{mercateo\_products}  gebunden. All jene Produkte aus \texttt{core\_products}, deren \textit{core\_product\_id} nicht in \texttt{mercateo\_products} zu finden ist müssen als neu gelten und werden demnach mit dem Statuscode \texttt{new} in \texttt{mercateo\_products} geschrieben. 
 	
-	Hat eine der soeben vorgestellten Methoden \texttt{true} zurückgeliefert, wird die Methode \texttt{UpdateCatalog(\$sellerId, \$BmeCatComponent)} aufgerufen, die alle an der Erstellung eines Update-Katalogdokumentes beteiligten Methoden zusammenfasst.
+	Mit \texttt{MercateoProducts->markProductsAsDeleted(\$sellerId)} wird geprüft ob Daten aus der \texttt{core\_products} Tabelle gelöscht wurden. Auch hier wird \texttt{core\_products} über einen LEFT-JOIN an \texttt{mercateo\_products} gebunden. All jene Produkte deren \textit{core\_product\_id} 
+	noch in der \texttt{mercateo\_products} Tabelle vermerkt ist, nicht jedoch in \texttt{core\_products}, müssen als gelöscht gelten. Entsprechend wird der Status der betroffenen Produkte in \texttt{mercateo\_products} auf \texttt{delete} gesetzt.
+	
+	\texttt{MercateoProducts->writeUpdatedProducts(\$sellerId)} schließlich prüft, ob sich Produktdaten seit der letzten Katalogerstellung geändert haben. Dazu wird die Tabelle \texttt{core\_product\_updates} über einen INNER-JOIN an \texttt{mercateo\_products} gebunden.
+	Beim Erstellen des Kataloges wurde der Zeitpunkt der Erzeugung in der \texttt{core\_configurations} Tabelle gespeichert. All jene Einträge aus \texttt{core\_product\_updates}, deren Erzeugungsdatum nach der letzten Katalogerstellung liegt werden in \texttt{mercateo\_products} mit dem Status \texttt{update} versehen.
+	
+	Hat eine der soeben vorgestellten Methoden \texttt{true} zurückgeliefert, wird in der \texttt{main()} die Methode \texttt{updateCatalog(\$sellerId, \$BmeCatComponent)} aufgerufen, die alle an der Erstellung eines Update-Katalogdokumentes beteiligten Methoden zusammenfasst.
 	
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.7 \linewidth]{img/updateKatalogAufrufhierarchie}
-		\captionof{figure}[BasicLogic]{Aufrufhierarchie der Methode \texttt{UpdateCatalog}}
+		\captionof{figure}[Aufrufhierarchie der Methode \texttt{UpdateCatalog}]{Aufrufhierarchie der Methode \texttt{UpdateCatalog}}
 		\vspace{1em}
 	\end{minipage}
 	
-	Zu Beginn wird mit \texttt{setLastCatalogUpdate(\$sellerId)} der Zeitpunkt der Katalogerstellung in der \texttt{core\_configurations} Tabelle gespeichert.  
+	Zunächst wird mit \texttt{setLastCatalogUpdate(\$sellerId)} der Zeitpunkt der Katalogerstellung in der \texttt{core\_configurations} Tabelle gespeichert.  
 	
 	Die Methode \texttt{getPreviousCatalogVersion(\$sellerId)} liefert den in \texttt{core\_configurations} gespeicherten Wert des bei der Transaktion \texttt{T\_UPDATE\_PRODUCTS} benötigten Attributes \texttt{prev\_version} zurück. Existiert noch kein Eintrag in der Tabelle wird dieser erstellt und der Wert des Attributes auf \enquote{0} gesetzt. Bei der ersten Ausführung von \texttt{T\_UPDATE\_PRODUCTS} wird so stets \enquote{0} zurückgeliefert. Dieser Wert wird in der Variablen \texttt{\$prevCatalogVersion} gespeichert um bei Aufruf der BMECatComponent-Methode \texttt{createBMECatXMLDocument} - diesmal wird der Parameter \texttt{\$transactionType} mit \texttt{T\_UPDATE\_PRODUCTS} initialisiert - übergeben werden zu können.
 	
-	Wurde der Updatekatalog erstellt müssen die Einträge aus der \texttt{mercateo\_products} Tabelle gelöscht werden, deren Status auf \texttt{delete} gesetzt ist. Die Methode \texttt{deleteMercateoProductsWithStatusDeleted(\$sellerId)} setzt dies um.
+	Wurde der Updatekatalog erstellt müssen die Einträge aus der \texttt{mercateo\_products} Tabelle gelöscht werden, deren Status auf \texttt{delete} gesetzt ist. Die Methode \texttt{MercateoProducts->deleteEntries\-WithStatusDeleted(\$sellerId)} setzt dies um.
 	
-	Anschließend bekommen die verbliebenen Einträge den Status \texttt{active} zugewiesen.Mit \texttt{setPreviousCatalogVersion(\$sellerId)} wird der entsprechende Wert in \texttt{core\_configurations} um 1 erhöht.
+	Anschließend wird durch Aufruf von \texttt{MercateoProducts->setProductsStatus(\$sellerId)}den verbliebenen Einträge der Status \texttt{active} zugewiesen. Mit \texttt{setPreviousCatalogVersion(\$seller\-Id)} wird der entsprechende Wert in \texttt{core\_configurations} um 1 erhöht.
 	
 	Die Validierung des Katalogdokumentes erfolgt diesmal mit dem Schema \texttt{bmecat\_update\_products\_1\_2.xsd}.
 	
@@ -974,11 +997,11 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.4 \linewidth]{img/DeleteCatalogTask}
-		\captionof{figure}[BasicLogic]{Klassendiagramm DeleteCatalogTask}
+		\captionof{figure}[Klassendiagramm DeleteCatalogTask]{Klassendiagramm DeleteCatalogTask}
 		\vspace{1em}
 	\end{minipage}	
 	
-	In der \texttt{main()}-Methode wird die Validierung des übergebenen Arguments durchgeführt und der Nutzer gefragt, ob er sich seines Handelns sicher ist. Falls ja, werden mit deleteSellersArticlesFromMercateoProductsTable(\$sellerId) die Produkte des entsprechenden Verkäufers aus der \texttt{mercateo\_products}-Tabelle gelöscht.
+	In der \texttt{main()}-Methode wird die Validierung des übergebenen Arguments durchgeführt und der Nutzer gefragt, ob er sich seines Handelns sicher ist. Falls ja, werden mit Aufruf von \texttt{MercateoProducts->deleteSellersArticles(\$sellerId)} die Produkte des entsprechenden Verkäufers aus der \texttt{mercateo\_products}-Tabelle gelöscht.
 
 	\subsubsection{Ressourcenmanagement}
 	
@@ -986,7 +1009,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		
 	Lese- und Schreibzugriffe auf die Datenbank erfolgen stets sequentiell, wie folgendes Codebeispiel illustriert:
 	\lstset{language=php}
-	\begin{lstlisting}[]
+	\begin{lstlisting}[caption={Sequentielles Schreiben}]
 	$limit = 100;
 	$page = 1;
 	
@@ -1007,13 +1030,13 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\subsection{Bestandsdatenabfrage}
 	
-	Die Bestandsdatenabfrage ist in der Controllerklasse \texttt{AvailabilityController} implementiert.
+	Die Bestandsdatenabfrage ist in der Controllerklasse \texttt{AvailabilityController}, implementiert.
 	
 	\begin{minipage}{\linewidth}
 		\vspace{1em}
 		\centering
 		\includegraphics[width=0.4 \linewidth]{img/AvailabilityControllerUML}
-		\captionof{figure}[BasicLogic]{Klassendiagramm AvailabilityController}
+		\captionof{figure}[Klassendiagramm AvailabilityController]{Klassendiagramm AvailabilityController}
 		\vspace{1em}
 	\end{minipage}
 	
@@ -1021,16 +1044,22 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	Die Funktion \texttt{checkIfProductExists(\$sku)} prüft zunächst ob sich das angefragte Produkt in der \texttt{mercateo\_products} Tabelle finden lässt.Ist dies der Fall, wird zusätzlich geprüft ob es auch in der \texttt{core\_products} Tabelle gefunden werden kann. Falls beides zutrifft, wird \texttt{true} zurückgeliefert, andernfalls \texttt{false}.
 	
-	Die \texttt{index(\$sku)} Methode verarbeitet die Anfrage. Kann das angefragte Produkt in der Datenbank gefunden werden,wird über Aufruf der Methode \texttt{getProductQuantity(\$sku)}) die Bestandsmenge desselben abgefragt und als Text im Browserfenster ausgegeben. Zusätzlich wird der HTTP-Statuscode \textit{200} zurückgeben um das anfragenden System darüber zu informieren, dass die Anfrage erfolgreich bearbeitet werden konnte.
+	Die \texttt{index(\$sku)} Methode verarbeitet die Anfrage. Kann das angefragte Produkt in der Datenbank gefunden werden, wird über Aufruf der Methode \texttt{getProductQuantity(\$sku)}) die Bestandsmenge desselben abgefragt und als Text im Browserfenster ausgegeben. Zusätzlich wird der HTTP-Statuscode \textit{200} zurückgeben um das anfragenden System darüber zu informieren, dass die Anfrage erfolgreich bearbeitet werden konnte.
 	
-	Können keine Produkdaten gefunden werden, wird im Browserfenster eine entsprechende Browsermeldung ausgegeben und der HTTP-Statuscode \textit{204} zurückgeben. Das anfragende System erlangt so Kenntnis darüber, dass die Anfrage verabeitet werden konnte, jedoch kein Inhalt zurückgeliefert werden kann.
+	Können keine Produkdaten gefunden werden, wird im Browserfenster eine entsprechende Meldung ausgegeben und der HTTP-Statuscode \textit{204} zurückgeliefert. Das anfragende System erlangt so Kenntnis darüber, dass die Anfrage verabeitet werden konnte, jedoch kein Inhalt zurückgeliefert werden kann.
 	
 	\section{Test}
 	
 	
-	CakePHP unterstützt \enquote{ab Werk} Unit Testing mit PHPUnit, welches in vorliegender Arbeit verwendet wird. -ETWAS ÜEBR DIE KONVENTIONEN SCHREIBEN-  Um jene Methoden testen zu können die lesend und schreibend auf die Datenbank zugreifen, werden für die betroffenen Tabellen \textit{Fixtures} erstellt. Fixtures sind Duplikate der eigentlichen Tabellen und enthalten Testdatensätze. Der Vorteil von Fixtures ist, dass Datenbankabfragen durchgeführt werden können ohne, dass die eigentlichen Datensätze davon betroffen wären.
+	CakePHP unterstützt \enquote{ab Werk} Unit-Testing mit PHPUnit, welches in vorliegender Arbeit in der Version 5.7 verwandt wird. Nach der CakePHP-Konvention trägt eine Testklasse den um das Suffix \textit{Test} erweiterten Namen der Klasse deren Methoden getestet werden sollen (Bsp.: \texttt{AvailabilityControllerTest} und \texttt{AvailabilityController}).  Eine Testmethode trägt den um das Präfix \textit{test} ergänzten Namen der Methode die getestet werden soll (Bsp. \texttt{testGetProductQuantity()} und \texttt{getProductQuantity(\$sku)}). Um jene Methoden testen zu können die lesend und schreibend auf die Datenbank zugreifen, werden für die betroffenen Tabellen \textit{Fixtures} erstellt. Fixtures sind Duplikate der eigentlichen Tabellen und enthalten Testdatensätze. Der Vorteil von Fixtures ist, dass Datenbankabfragen durchgeführt werden können, ohne dass die eigentlichen Datensätze davon betroffen wären.
 	
 	Im folgenden werden die einzelnen Testklassen und Testfälle vorgestellt.
+	
+	\subsection{Die Klasse MercateoProductsTableTest}
+	
+	
+	
+	
 	
 	\subsection{Die Klasse AvailabilityControllerTest}
 	
@@ -1043,17 +1072,14 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	In der Klasse \texttt{UpdateCatalogTaskTest} werden folgende Fixtures geladen:
 	\begin{itemize}[nosep]
 		\item \texttt{core\_configurations}
-		\item \texttt{mercateo\_products}
-		\item \texttt{core\_products}
-		\item \texttt{core\_product\_quantities}
-		\item \texttt{core\_product\_types}
-		\item \texttt{core\_product\_updates}
+		\item \texttt{core\_sellers}
+
+		
 	\end{itemize}
+	
 	\texttt{testGetPreviousCatalogVersion()} testet positiv und negativ auf einen in der \texttt{core\_configuartions}-Fixture hinterlegten Konfigurationswert. Zudem wird geprüft, ob \enquote{0} zurückgeliefert wird, falls für den angegeben Seller noch kein Konfigurationswert in der Datenbank angelegt wurde.
 	
-	Mit \texttt{testCheckMercateoProductsStatusChanges()} werden die als \textit{private} ausgezeichneten Methoden \texttt{checkIfNewCoreProductsHaveBeenCreated}, 
-	\texttt{checkIfCoreProductsHaveBeenDeleted} und
-	\texttt{checkIfCoreProductsHaveBeenUpdated} auf Funktion getestet. Für Testfall 1 - jeweils ein Produkt wurde hinzugefügt, gelöscht bzw. aktualisiert- werden entsprechende Einträge in den Fixturetabellen von \texttt{core\_products}, \texttt{mercateo\_products} und \texttt{core\_product\_updates} angelegt. Als Rückgabewert wird demzufolge \texttt{true} erwartet. Entsprechendes geschieht für den Fall, dass keine Produktstatusveränderungen stattgefunden haben sollen und als Rückgabewert \texttt{false} erwartet werden kann.
+
 	
 	\subsection{Die Klasse MercateoAccountsTableTest}
 	
@@ -1061,7 +1087,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\subsection{Die Klasse BMECatComponentTest}
 	
-	Um die Methoden \texttt{getSellerName(\$sellerId)} und \texttt{getParentCoreCategoryIds(\$sellerId)} testen zu können werden die Fixtures für \texttt{core\_sellers} und \texttt{core\_categories} geladen.
+	Um die Methoden \texttt{getSellerName(\$sellerId)} und \texttt{getParentCoreCategoryIds(\$sellerId)} testen zu können werden die Fixtures für \texttt{core\_sellers} und \texttt{core\_categories} und \texttt{core\_products} geladen.
 	\texttt{testGetSellerName()} prüft mit einem Positiv- und einem Negativtest ob die zurückgelieferte Zeichenkette der Erwartung entspricht.
 	
 	Die Methode \texttt{testGetParentCoreCategoryIds()} prüft ob ein Array zurückgeliefert wird und ob die darin gespeicherten Werte vom Typ \textit{Integer} sind.
@@ -1069,6 +1095,43 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	\texttt{testArticleDataValidator()} führt einen Positiv- und einen Negativtest durch, indem jeweils eine \enquote{gültige} bzw. \enquote{ungültige} Instanz von \textit{CoreProducts} an \texttt{articleDataValidator(\$product)} übergeben wird.
 	
 	Mit \texttt{testCheckImageFormat()} wird geprüft, ob \texttt{checkImageFormat(\$image)} jeweils \texttt{true} zurückliefert, wenn der übergebene \textit{URI} auf \enquote{.jpeg}, \enquote{.jpg} oder \enquote{gif} endet. Es wird \texttt{false} erwartet, wenn die Datei eine andere Endung hat.
+	
+	Die Methode \texttt{testReturnImageFormat()} prüft ob \texttt{returnImageFormat(\$image)} jeweils den erwarteten String zurückgibt.
+	
+	\section{Fazit}
+	
+	Es ist gelungen die Produktdaten und Kategegoriestruktur aus iTool, entsprechend den Anforderungen der BMECat- sowie der Mercateo Spezifikation, in das BMECat-XML-Format zu überführen. 
+	
+	Es können sowohl die Transaktion T\_NEW\_CATALOG, also das Anlegen eines initialen Katalogdokumentes, als auch die Transaktion T\_UPDATE\_PRODUCTS - das anlegen eines Updatekatalogdokumenets - umgesetzt werden. 
+	Alle Änderungen des Produktbestandes sowie der Produktinformationen werden erfasst und entsprechend in das Updatekatalogdokument übernommen.
+	Die Umsetzung der Katalogerzeugung erfolgt in einer CakePHP-Shell und drei darüber aufrufbare Shell-Tasks. \texttt{addNewCatalogTask} dient der Erzeugung eines initialen Katalogdokumentes. Mit
+	\texttt{updateCatalogTask} wird ein Updatekatalog erstellt und \texttt{deleteCatalogTask} entfernt die Produktdaten eines Verkäufers aus der Datenbank.
+	Die Erzeugung des Dokumentes geschieht arbeitsspeicherschonend.
+	Die Produktdaten werden vor dem Export validiert. Es werden nur jene Produkte exportiert, die den genannten Spezifikationen entsprechen. Informationen darüber, welche Produktdaten unvollständig oder fehlerhaft sind, werden beim Erzeugen der XML-Datei in eine Logdatei geschrieben und zugleich auf der Konsole ausgegeben. Es können 'Simple-Products' eines bei Programmaufruf spezifizierten Verkäufers exportiert werden. Die XML-Datei wird nach ihrer Erzeugung mit dem enstprechenden XML-Schema geprüft. 
+	Zudem wird es Mercateo ermöglicht die Lagerstandsdaten zu einem bestimmten Artikel über ein Webinterface abrufen. 
+	Es ist, trotz entsprechender Datensätze in den jeweiligen Fixtures und intensiver Auseinandersetzung mit der Thematik, noch nicht gelungen die Methoden \texttt{createNewProducts(\$sellerId)}, \texttt{markProductsAsDeleted(\$sellerId)} und \texttt{writeUpdatedProducts(\$sellerId)} ausreichend testen zu können. Dies soll, nach Möglichkeit, in Zukunft behoben werden.
+	
+	
+	\section{Ausblick}
+	
+	
+	
+	
+	\pagebreak
+	\pagenumbering{Roman}
+	\setcounter{page}{1}
+	\lhead{Anhang \thesection}
+	\begin{appendix}
+	\pagebreak
+		\listoffigures
+		\pagebreak
+		\listoftables
+		\pagebreak
+		\lstlistoflistings
+		\phantomsection
+		\addcontentsline{toc}{section}{Anhang}
+		\addtocontents{toc}{\vspace{-0.5em}}
+	\end{appendix}
 	
 	
 	

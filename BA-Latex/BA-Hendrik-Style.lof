@@ -1,0 +1,29 @@
+\select@language {ngerman}
+\contentsline {figure}{\numberline {1}{\ignorespaces ER-Diagramm: Verk\IeC {\"a}ufer - Benutzer}}{5}{figure.1}
+\contentsline {figure}{\numberline {2}{\ignorespaces ER-Diagramm: Kategorie - Produkt}}{6}{figure.2}
+\contentsline {figure}{\numberline {3}{\ignorespaces ER-Diagramm: Verk\IeC {\"a}ufer - Benutzer}}{6}{figure.3}
+\contentsline {figure}{\numberline {4}{\ignorespaces Headerstruktur}}{10}{figure.4}
+\contentsline {figure}{\numberline {5}{\ignorespaces Transaktion T\_NEW\_CATALOG}}{10}{figure.5}
+\contentsline {figure}{\numberline {6}{\ignorespaces Transaktion T\_UPDATE\_PRODUCTS}}{11}{figure.6}
+\contentsline {figure}{\numberline {7}{\ignorespaces CATALOG\_GROUP\_SYSTEM und CATALOG\_STRUCTURE}}{11}{figure.7}
+\contentsline {figure}{\numberline {8}{\ignorespaces Article}}{12}{figure.8}
+\contentsline {figure}{\numberline {9}{\ignorespaces ARTICLE\_TO\_CATALOG\_GROUP\_MAP}}{14}{figure.9}
+\contentsline {figure}{\numberline {10}{\ignorespaces Logik des empfangenden Systems bei der Transaktion \texttt {T\_NEW\_CATALOG}}}{15}{figure.10}
+\contentsline {figure}{\numberline {11}{\ignorespaces Vererbungshierarchie der Task-Klassen}}{19}{figure.11}
+\contentsline {figure}{\numberline {12}{\ignorespaces Abbildung der \texttt {mercateo\_accounts} Daten im iTool}}{20}{figure.12}
+\contentsline {figure}{\numberline {13}{\ignorespaces Programmlogik bei der Transaktion \texttt {T\_NEW\_CATALOG}}}{23}{figure.13}
+\contentsline {figure}{\numberline {14}{\ignorespaces \IeC {\"U}berpr\IeC {\"u}fung auf Produktbestands\IeC {\"a}nderungen}}{24}{figure.14}
+\contentsline {figure}{\numberline {15}{\ignorespaces Programmlogik bei der Transaktion \texttt {T\_UPDATE\_PRODUCTS}}}{25}{figure.15}
+\contentsline {figure}{\numberline {16}{\ignorespaces Aufrufhierarchie PrepareCatalogShell}}{27}{figure.16}
+\contentsline {figure}{\numberline {17}{\ignorespaces UML Diagramm der Klasse BMECatComponent}}{28}{figure.17}
+\contentsline {figure}{\numberline {18}{\ignorespaces Aufrufhierarchie der Methode createBMECatXMLDocument}}{29}{figure.18}
+\contentsline {figure}{\numberline {19}{\ignorespaces Aufrufhierarchie der Methode createCatalogGroupSystem}}{30}{figure.19}
+\contentsline {figure}{\numberline {20}{\ignorespaces Aufrufhierarchie der Methode createArticle}}{31}{figure.20}
+\contentsline {figure}{\numberline {21}{\ignorespaces UML Diagramm der Klasse CatalogToolsTask}}{32}{figure.21}
+\contentsline {figure}{\numberline {22}{\ignorespaces UML Diagramm der Klasse MercateoProductsTable}}{34}{figure.22}
+\contentsline {figure}{\numberline {23}{\ignorespaces UML Diagramm der Klasse AddNewCatalogTask}}{35}{figure.23}
+\contentsline {figure}{\numberline {24}{\ignorespaces Aufrufhierarchie der Methode \texttt {newCatalog}}}{35}{figure.24}
+\contentsline {figure}{\numberline {25}{\ignorespaces UML-Klassendiagramm der Klasse \texttt {UpdateCatalogTask}}}{36}{figure.25}
+\contentsline {figure}{\numberline {26}{\ignorespaces Aufrufhierarchie der Methode \texttt {UpdateCatalog}}}{37}{figure.26}
+\contentsline {figure}{\numberline {27}{\ignorespaces Klassendiagramm DeleteCatalogTask}}{38}{figure.27}
+\contentsline {figure}{\numberline {28}{\ignorespaces Klassendiagramm AvailabilityController}}{39}{figure.28}

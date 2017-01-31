@@ -1,54 +1,63 @@
 \select@language {ngerman}
 \contentsline {section}{\numberline {1}Einleitung}{1}{section.1}
 \contentsline {section}{\numberline {2}Grundlagen}{2}{section.2}
-\contentsline {subsection}{\numberline {2.1}iTool3}{2}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {2.1.1}Verk\IeC {\"a}ufer und Benutzer}{2}{subsubsection.2.1.1}
-\contentsline {subsubsection}{\numberline {2.1.2}Produktverwaltung}{2}{subsubsection.2.1.2}
-\contentsline {subsubsection}{\numberline {2.1.3}Dashboard}{3}{subsubsection.2.1.3}
-\contentsline {subsection}{\numberline {2.2}Der BMECat}{3}{subsection.2.2}
-\contentsline {subsubsection}{\numberline {2.2.1}Terminologie}{4}{subsubsection.2.2.1}
-\contentsline {subsubsection}{\numberline {2.2.2}Transaktionen}{4}{subsubsection.2.2.2}
-\contentsline {subsubsection}{\numberline {2.2.3}Aufbau}{4}{subsubsection.2.2.3}
-\contentsline {subsection}{\numberline {2.3}Das Cake-PHP Framework}{11}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}Convention over Configuration in CakePHP}{11}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.2}Model}{12}{subsubsection.2.3.2}
-\contentsline {subsubsection}{\numberline {2.3.3}View}{13}{subsubsection.2.3.3}
-\contentsline {subsubsection}{\numberline {2.3.4}Controller}{13}{subsubsection.2.3.4}
-\contentsline {subsubsection}{\numberline {2.3.5}Component}{14}{subsubsection.2.3.5}
-\contentsline {subsubsection}{\numberline {2.3.6}Shell}{14}{subsubsection.2.3.6}
-\contentsline {section}{\numberline {3}Analyse der Aufgabe und der Anforderungen}{14}{section.3}
-\contentsline {subsection}{\numberline {3.1}Funktionale und nichtfunktionale Anforderungen}{14}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Funktionale Anforderungen}{14}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}Nichtfunktionale Anforderungen}{15}{subsubsection.3.1.2}
-\contentsline {subsection}{\numberline {3.2}Zielstellung}{15}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Einsch\IeC {\"a}tzung der verwendeten Technologien}{16}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}BMECat Format}{16}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Daten\IeC {\"u}bertragung zu Mercateo}{16}{subsubsection.3.3.2}
-\contentsline {section}{\numberline {4}Entwurf}{18}{section.4}
-\contentsline {subsection}{\numberline {4.1}Katalogerstellung}{18}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}Die Tabelle \texttt {mercateo\_accounts}}{19}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Die Tabelle \texttt {mercateo\_products}}{19}{subsubsection.4.1.2}
-\contentsline {subsubsection}{\numberline {4.1.3}Allgemeiner Programmablauf bei der Katalogerzeugung}{21}{subsubsection.4.1.3}
-\contentsline {subsubsection}{\numberline {4.1.4}Katalogerstellungslogik in der Klasse \texttt {AddNewCatalogTask}}{21}{subsubsection.4.1.4}
-\contentsline {subsubsection}{\numberline {4.1.5}Katalogerstellungslogik in der Klasse \texttt {UpdateCatalogTask} }{22}{subsubsection.4.1.5}
-\contentsline {subsection}{\numberline {4.2}Bestandsdatenabfrage}{24}{subsection.4.2}
-\contentsline {section}{\numberline {5}Implementierung}{24}{section.5}
-\contentsline {subsection}{\numberline {5.1}Die PrepareCatalog Shell}{24}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}XMLWriterComponent}{26}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}BMECatComponent}{27}{subsection.5.3}
-\contentsline {subsubsection}{\numberline {5.3.1}Erstellen des BMECat Dokumentes}{28}{subsubsection.5.3.1}
-\contentsline {subsubsection}{\numberline {5.3.2}Schreiben der Header Sektion}{28}{subsubsection.5.3.2}
-\contentsline {subsubsection}{\numberline {5.3.3}Schreiben des Kataloggruppensystems}{28}{subsubsection.5.3.3}
-\contentsline {subsubsection}{\numberline {5.3.4}Artikelerstellung}{29}{subsubsection.5.3.4}
-\contentsline {subsubsection}{\numberline {5.3.5}Kategoriemapping}{30}{subsubsection.5.3.5}
-\contentsline {subsection}{\numberline {5.4}Die Klasse \texttt {CatalogToolsTask}}{31}{subsection.5.4}
-\contentsline {subsubsection}{\numberline {5.4.1}Erzeugung eines initialen Katalogdokumentes mit der Klasse \texttt {AddNewCatalogTask}}{32}{subsubsection.5.4.1}
-\contentsline {subsubsection}{\numberline {5.4.2}Erzeugung eines Update-Katalogdokumentes mit der Klasse \texttt {UpdateCatalogTask}}{33}{subsubsection.5.4.2}
-\contentsline {subsubsection}{\numberline {5.4.3}Die Klasse DeleteCatalogTask}{36}{subsubsection.5.4.3}
-\contentsline {subsubsection}{\numberline {5.4.4}Ressourcenmanagement}{36}{subsubsection.5.4.4}
-\contentsline {subsection}{\numberline {5.5}Bestandsdatenabfrage}{37}{subsection.5.5}
-\contentsline {section}{\numberline {6}Test}{38}{section.6}
-\contentsline {subsection}{\numberline {6.1}Die Klasse AvailabilityControllerTest}{38}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Die Klasse UpdateCatalogTaskTest}{38}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}Die Klasse MercateoAccountsTableTest}{39}{subsection.6.3}
-\contentsline {subsection}{\numberline {6.4}Die Klasse BMECatComponentTest}{39}{subsection.6.4}
+\contentsline {subsection}{\numberline {2.1}Das Cake-PHP Framework}{2}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Convention over Configuration in CakePHP}{2}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}Model}{2}{subsubsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.3}View}{3}{subsubsection.2.1.3}
+\contentsline {subsubsection}{\numberline {2.1.4}Controller}{4}{subsubsection.2.1.4}
+\contentsline {subsubsection}{\numberline {2.1.5}Component}{4}{subsubsection.2.1.5}
+\contentsline {subsubsection}{\numberline {2.1.6}Shell}{5}{subsubsection.2.1.6}
+\contentsline {subsection}{\numberline {2.2}iTool3}{5}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Verk\IeC {\"a}ufer und Benutzer}{5}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Produktverwaltung}{6}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Dashboard}{6}{subsubsection.2.2.3}
+\contentsline {subsection}{\numberline {2.3}Der BMECat}{7}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Terminologie}{7}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Transaktionen}{7}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.3}Aufbau}{7}{subsubsection.2.3.3}
+\contentsline {section}{\numberline {3}Analyse der Aufgabe und der Anforderungen}{15}{section.3}
+\contentsline {subsection}{\numberline {3.1}Funktionale und nichtfunktionale Anforderungen}{15}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Funktionale Anforderungen}{15}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Nichtfunktionale Anforderungen}{16}{subsubsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2}Zielstellung}{17}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Einsch\IeC {\"a}tzung der verwendeten Technologien}{17}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}BMECat Format}{17}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Daten\IeC {\"u}bertragung zu Mercateo}{17}{subsubsection.3.3.2}
+\contentsline {section}{\numberline {4}Entwurf}{19}{section.4}
+\contentsline {subsection}{\numberline {4.1}Katalogerstellung}{19}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Die Tabelle \texttt {mercateo\_accounts}}{20}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Die Tabelle \texttt {mercateo\_products}}{20}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.3}Allgemeiner Programmablauf bei der Katalogerzeugung}{22}{subsubsection.4.1.3}
+\contentsline {subsubsection}{\numberline {4.1.4}Katalogerstellungslogik in der Klasse \texttt {AddNewCatalogTask}}{22}{subsubsection.4.1.4}
+\contentsline {subsubsection}{\numberline {4.1.5}Katalogerstellungslogik in der Klasse \texttt {UpdateCatalogTask} }{23}{subsubsection.4.1.5}
+\contentsline {subsection}{\numberline {4.2}Bestandsdatenabfrage}{25}{subsection.4.2}
+\contentsline {section}{\numberline {5}Implementierung}{25}{section.5}
+\contentsline {subsection}{\numberline {5.1}Die PrepareCatalog Shell}{25}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Die XMLWriter Komponente}{27}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Die BMECat Komponente}{28}{subsection.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}Erstellen des BMECat Dokumentes}{29}{subsubsection.5.3.1}
+\contentsline {subsubsection}{\numberline {5.3.2}Schreiben der Header Sektion}{29}{subsubsection.5.3.2}
+\contentsline {subsubsection}{\numberline {5.3.3}Schreiben des Kataloggruppensystems}{29}{subsubsection.5.3.3}
+\contentsline {subsubsection}{\numberline {5.3.4}Artikelerstellung}{31}{subsubsection.5.3.4}
+\contentsline {subsubsection}{\numberline {5.3.5}Kategoriemapping}{31}{subsubsection.5.3.5}
+\contentsline {subsection}{\numberline {5.4}Die Klasse \texttt {CatalogToolsTask}}{32}{subsection.5.4}
+\contentsline {subsubsection}{\numberline {5.4.1}Die Model-Klasse \texttt {MercateoProductsTable}}{33}{subsubsection.5.4.1}
+\contentsline {subsubsection}{\numberline {5.4.2}Erzeugung eines initialen Katalogdokumentes mit der Klasse \texttt {AddNewCatalogTask}}{35}{subsubsection.5.4.2}
+\contentsline {subsubsection}{\numberline {5.4.3}Erzeugung eines Update-Katalogdokumentes mit der Klasse \texttt {UpdateCatalogTask}}{36}{subsubsection.5.4.3}
+\contentsline {subsubsection}{\numberline {5.4.4}Die Klasse DeleteCatalogTask}{38}{subsubsection.5.4.4}
+\contentsline {subsubsection}{\numberline {5.4.5}Ressourcenmanagement}{38}{subsubsection.5.4.5}
+\contentsline {subsection}{\numberline {5.5}Bestandsdatenabfrage}{39}{subsection.5.5}
+\contentsline {section}{\numberline {6}Test}{40}{section.6}
+\contentsline {subsection}{\numberline {6.1}Die Klasse MercateoProductsTableTest}{40}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Die Klasse AvailabilityControllerTest}{40}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Die Klasse UpdateCatalogTaskTest}{41}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Die Klasse MercateoAccountsTableTest}{41}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}Die Klasse BMECatComponentTest}{41}{subsection.6.5}
+\contentsline {section}{\numberline {7}Fazit}{42}{section.7}
+\contentsline {section}{\numberline {8}Ausblick}{42}{section.8}
+\contentsline {section}{\numberline {A}Abbildungsverzeichnis}{I}{appendix.A}
+\contentsline {section}{\numberline {B}Tabellenverzeichnis}{II}{appendix.B}
+\contentsline {section}{\numberline {C}Listings}{III}{appendix.C}
+\contentsline {section}{Anhang}{III}{section*.8}
+\vspace {-0.5em}

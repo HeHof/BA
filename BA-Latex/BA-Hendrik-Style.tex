@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
 \usepackage{amsmath}
-
+\usepackage{appendix}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
@@ -23,6 +23,7 @@
 \usepackage{parskip}
 \usepackage{url}
 \usepackage{capt-of}
+
 %\usepackage{picins}
 \usepackage[subfigure,titles]{tocloft}
 \usepackage[pdfpagelabels=true]{hyperref}
@@ -88,6 +89,11 @@
 	pdfkeywords={Abschlussarbeit},
 	pdfnewwindow=true,
 	colorlinks=true,linkcolor=black,citecolor=black,filecolor=magenta,urlcolor=black}
+
+   
+\makeatletter
+\def\l@lstlisting#1#2{\@dottedtocline{1}{1.5em}{3em}{#1}{#2}}
+
 
 
 \begin{document}
@@ -223,7 +229,8 @@
 
 % Bilder anzeigen
 
-%\listfigurename
+
+
 
 
 
