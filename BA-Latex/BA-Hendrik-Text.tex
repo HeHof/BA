@@ -481,7 +481,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 
 		
 
-	
+	\clearpage
 	\subsection{Einschätzung der verwendeten Technologien}
 
 	
@@ -690,7 +690,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\subsection{Die PrepareCatalog Shell}
 	
-	Mit der PrepareCatalog Shell wird der Entwurf zur Erzeugung eine BMECat Katalogdokumentes umgesetzt. Die Shell-Klasse \texttt{PrepareCatalogShell} dient in der Implementierung  dazu die Subcommandos \texttt{AddNewCatalogTask}, \texttt{UpdateCatalogTask} und \texttt{DeleteCatalogTask} aufzurufen und sicherzustellen, dass die notwendigen Argumente übergeben werden.
+	Mit der PrepareCatalog Shell wird der Entwurf zur Erzeugung eine BMECat Katalogdokumentes umgesetzt. Die Shell-Klasse \texttt{PrepareCatalogShell} dient in der Implementierung  dazu die Subcommandos \texttt{AddNewCatalogTask}, \texttt{UpdateCatalogTask} und \texttt{DeleteCatalogTask} aufzurufen und sicherzustellen, dass die notwendigen Argumente übergeben werden.\\
 	\lstset{basicstyle=\scriptsize\ttfamily,language=xml}
 	\begin{lstlisting}[caption={Konsolenausgabe bei Aufruf der PrepareCatalogShell}]
 	Usage:
@@ -718,7 +718,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\end{lstlisting}
 	
-	Kann der übergebene Parameter keinem Verkäufer zugeordnet werden wird eine Übersicht der verfügbaren Verkäufer angezeigt. Dies geschieht in den einzelnen Tasks über die geerbte Methode \texttt{validateArgument(\$coreSellerId)}.
+	Kann der übergebene Parameter keinem Verkäufer zugeordnet werden wird eine Übersicht der verfügbaren Verkäufer angezeigt. Dies geschieht in den einzelnen Tasks über die von der Klasse \texttt{CatalogToolsTask} geerbte Methode \texttt{validateArgument(\$coreSellerId)}.\\
 	
 	\begin{lstlisting}[caption={Auflistung der verfügbaren Verkäufer}]
 	Please choose one of the available Sellers:
@@ -727,7 +727,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	1  | Hendrik
 	2  | Ben
-	3  | Guehring
+	3  | Rueckert
 	\end{lstlisting}
 	
 	Dabei liegt dem Programm folgende Aufrufhierarchie zugrunde:\\
@@ -788,12 +788,12 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\subsubsection{Erstellen des BMECat Dokumentes}
 	
-	Die Funktion \texttt{createBMECatXMLDocument(\$sellerName, \$sellerId, \$transactionType, \$prevVersion)} dient der Erzeugung eines BMECat Dokumentes. Sie legt die XML Datei mit der Namenskonvention {\texttt{Verkäufername\_Erzeugungsdatum\_Erzeugungszeit.xml} an und  schreibt Informationen zum XML-Namensraum \textit{(xmlns)} und zur Dokumententypdefinition \textit{(dtd)} in die XML-Deklaration. Von ihr werden die Methoden zur Erzeugung des Headers und der restlichen Abschnitte des BMECat Dokumentes aufgerufen.
+	Die Erzeugung eines BMECat Dokumentes geschieht mit Hilfe der Funktion \texttt{createBMECatXMLDocument\-(\$sellerName, \$sellerId, \$transactionType,\$prevVersion)}. Sie legt die XML Datei mit der Namenskonvention {\texttt{Verkäufername\_Erzeugungsdatum\_Erzeugungszeit.xml} an und  schreibt Informationen zum XML-Namensraum \textit{(xmlns)} und zur Dokumententypdefinition \textit{(dtd)} in die XML-Deklaration. Von ihr werden die Methoden zur Erzeugung des Headers und der restlichen Abschnitte des BMECat Dokumentes aufgerufen.
 	Anhand des Parameters \texttt{\$transactionType} wird entschieden ob bei dem zu erzeugenden Dokument die Transaktion \texttt{T\_NEW\_CATALOG} oder \texttt{T\_UPDATE\_PRODUCTS} umgesetzt werden soll. Falls die Datei, z.B. wegen fehlender Rechte, nicht angelegt werden kann, wird durch die XMLWriter Komponente eine Exception erzeugt.
 	
 	\subsubsection{Schreiben der Header Sektion}
 
-	Die Methode \texttt{createHeader(\$sellerId)} schreibt die BMECat-Header-Sektion des Dokumentes. Alle benötigten Informationen, wie z.B. Herstellername oder Katalogversion werden dabei anhand der \texttt{sellerId} aus der \texttt{mercate\_accounts} Tabelle geladen.
+	Die Methode \texttt{createHeader(\$sellerId)} schreibt die BMECat-Header-Sektion des Dokumentes. Alle benö\-tigten Informationen, wie z.B. Herstellername oder Katalogversion werden dabei anhand der \texttt{sellerId} aus der \texttt{mercate\_accounts} Tabelle geladen.
 	
 	\subsubsection{Schreiben des Kataloggruppensystems}
 	
@@ -806,7 +806,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 	\end{minipage}
 	
-	 Das tatsächliche Abbilden der Katalogstruktur erfolgt in der Methode \texttt{categoryToNode(\ \$category,\$sellerId)}.
+	 Das tatsächliche Abbilden der Katalogstruktur erfolgt in der Methode \texttt{categoryToNode(\$category,\-\$sellerId)}.
 
 
 		 CakePHP bietet die Möglichkeit einem Model ein sogenanntes Tree-Behaviour hinzuzufügen. Dieses basiert auf dem Nested-Set-Konzept, das es ermöglicht hierarchische Strukturen in relationalen Datenbanken abzubilden\footnote{vgl. hierzu: \url{https://www.sitepoint.com/hierarchical-data-database-2/}.(Abgerufen am 27.01.2017).}. Die \texttt{core\_categories} Tabelle bedient sich dieses \enquote{Behavious}, was es ermöglicht diesen Kategoriebaum rekursiv zu durchlaufen und dadurch das Kataloggruppensystem des BMECat abzubilden.
@@ -954,7 +954,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	Anschließend wird mit der von \texttt{CatalogToolsTask} geerbten Funktion \texttt{setLastCatalogUpdate(\$sellerId)} der Timestamp der Katalogerzeugung in die \texttt{core\_configurations} Tabelle geschrieben.
 		
-	Durch Aufruf der Methode \texttt{createBMECatXMLDocument(\$sellerId, \$transactionType, \$prevVersion = null)} des \texttt{BmeCatComponent}-Objektes wird die zu erzeugende XML-Datei geschrieben . Dem Parameter \texttt{transactionType} wird hier der Wert \texttt{T\_NEW\_CATALOG} zugewiesen. Anschließend wird mit \texttt{MercateoProducts->setProductsStatus(\$status)}  der Status aller in \texttt{mercateo\_products} gespeicherten Artikel auf \enquote{\texttt{active}} gesetzt.
+	Durch Aufruf der Methode \texttt{createBMECatXMLDocument(\$sellerId, \$transactionType, \$prevVersion = null)} des \texttt{BmeCatComponent}-Objektes wird die zu erzeugende XML-Datei geschrieben . Dem Parameter \texttt{transactionType} wird hier der Wert \texttt{T\_NEW\_CATALOG} zugewiesen. Anschließend wird mit \texttt{Mercateo\-Products->setProductsStatus(\$status)}  der Status aller in \texttt{mercateo\_products} gespeicherten Artikel auf \enquote{\texttt{active}} gesetzt.
 
 	Die Validierung des soeben erzeugten Dokumentes erfolgt mit dem Schema \texttt{bmecat\_new\_catalog\_1\_2.xsd} durch Aufruf von \texttt{validateXml(\$path, \$schemePath)}.
 	
@@ -1001,7 +1001,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	Die Methode \texttt{getPreviousCatalogVersion(\$sellerId)} liefert den in \texttt{core\_configurations} gespeicherten Wert des bei der Transaktion \texttt{T\_UPDATE\_PRODUCTS} benötigten Attributes \texttt{prev\_version} zurück. Existiert noch kein Eintrag in der Tabelle wird dieser erstellt und der Wert des Attributes auf \enquote{0} gesetzt. Bei der ersten Ausführung von \texttt{T\_UPDATE\_PRODUCTS} wird so stets \enquote{0} zurückgeliefert. Dieser Wert wird in der Variablen \texttt{\$prevCatalogVersion} gespeichert um bei Aufruf der BMECatComponent-Methode \texttt{createBMECatXMLDocument} - diesmal wird der Parameter \texttt{\$transactionType} mit \texttt{T\_UPDATE\_PRODUCTS} initialisiert - übergeben werden zu können.
 	
-	Wurde der Updatekatalog erstellt müssen die Einträge aus der \texttt{mercateo\_products} Tabelle gelöscht werden, deren Status auf \enquote{\texttt{delete}} gesetzt ist. Die Methode \texttt{MercateoProducts->deleteEntries\-WithStatusDeleted(\$sellerId)} setzt dies um.
+	Wurde der Updatekatalog erstellt müssen die Einträge aus der \texttt{mercateo\_products} Tabelle gelöscht werden, deren Status auf \enquote{\texttt{delete}} gesetzt ist. Die Methode \texttt{MercateoProducts->deleteEntries\-WithStatus\-Deleted(\$sellerId)} setzt dies um.
 	
 	Anschließend wird durch Aufruf von \texttt{MercateoProducts->setProductsStatus(\$sellerId)}den verbliebenen Einträgen der Status \enquote{\texttt{active}} zugewiesen. Mit \texttt{setPreviousCatalogVersion(\$seller\-Id)} wird der entsprechende Wert in \texttt{core\_configurations} um \enquote{1} erhöht.
 	
@@ -1019,7 +1019,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\vspace{1em}
 	\end{minipage}	
 	
-	In der \texttt{main()}-Methode wird die Validierung des übergebenen Arguments durchgeführt und der Nutzer gefragt, ob er sich seines Handelns sicher ist. Falls ja, werden mit Aufruf von \texttt{MercateoProducts->deleteSellersArticles(\$sellerId)} die Produkte des entsprechenden Verkäufers aus der \texttt{mercateo\_products}-Tabelle gelöscht.
+	In der \texttt{main()}-Methode wird die Validierung des übergebenen Arguments durchgeführt und der Nutzer gefragt, ob er sich seines Handelns sicher ist. Falls ja, werden mit Aufruf von \texttt{MercateoProducts->deleteSellers\-Articles(\$sellerId)} die Produkte des entsprechenden Verkäufers aus der \texttt{mercateo\_products}-Tabelle gelöscht.
 	\clearpage
 	\subsection{Ressourcenmanagement}
 	
@@ -1060,7 +1060,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	Für das Zurückliefern der Bestandsdaten einer angefragten SKU wird keine View benötigt. CakePHP versucht jedoch automatisch zu jeder aufgerufenen Controllermethode eine entsprechende View zu rendern \footnote{vgl. hierzu Kapitel 2.1.1 - Convention over Configuration in CakePHP}.  Da dennoch auf die \texttt{index(\$sku)} Methode zugegriffen werden soll, wird in der Funktion \texttt{initialize} das automatische Rendern einer View abgeschaltet, sowie der direkte Zugriff auf die \texttt{index(\$sku)} Methode gestattet.
 	
-	Die Funktion \texttt{checkIfProductExists(\$sku)} prüft zunächst ob sich das angefragte Produkt in der \texttt{mercateo\_products} Tabelle finden lässt. Ist dies der Fall, wird zusätzlich geprüft ob es auch in der \texttt{core\_products} Tabelle gefunden werden kann. Falls beides zutrifft, wird \texttt{true} zurückgeliefert, andernfalls \texttt{false}.
+	Die Funktion \texttt{MercateoProducts->checkIfProductExists(\$sku)} prüft zunächst ob sich das angefragte Produkt in der \texttt{mercateo\_products} Tabelle finden lässt. Ist dies der Fall, wird zusätzlich geprüft ob es auch in der \texttt{core\_products} Tabelle gefunden werden kann. Falls beides zutrifft, wird \texttt{true} zurückgeliefert, andernfalls \texttt{false}.
 	
 	Die \texttt{index(\$sku)} Methode verarbeitet die Anfrage. Kann das angefragte Produkt in der Datenbank gefunden werden, wird über Aufruf der Methode \texttt{getProductQuantity(\$sku)}) die Bestandsmenge desselben abgefragt und als Text im Browserfenster ausgegeben. Zusätzlich wird der HTTP-Statuscode \textit{200} zurückgeben um das anfragenden System darüber zu informieren, dass die Anfrage erfolgreich bearbeitet werden konnte.
 	
@@ -1088,13 +1088,13 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\subsection{Die Klasse AvailabilityControllerTest}
 	
-	Um die Methoden \texttt{getProductQuantity} und \texttt{checkIfProductExists} testen zu können müssen Fixtures für die Tabellen \texttt{mercateo\_products}, \texttt{core\_products}, \texttt{core\_marketplaces} und \texttt{core\_product\_quantities} erstellt und mit Testdatensätzen befüllt werden.
-	\texttt{testCheckIfProductExists()} enthält je einen Positiv- und einen Negativtest. Es wird erwartet, dass die Methode \texttt{checkIfProductExists} den booleschen Wert \texttt{true} zurückliefert, falls ein Produkt in der Datenbank gefunden werden konnte und \texttt{false}, wenn nicht.
+	Um die Methode \texttt{getProductQuantity} testen zu können müssen Fixtures für die Tabellen \texttt{core\_products}, \texttt{core\_marketplaces} und \texttt{core\_product\_quantities} erstellt und mit Testdatensätzen befüllt werden.
+
 	Die Methode \texttt{testGetProductQuantity} prüft ob der Rückgabewert dem erwarteten Zahlenwert entspricht und ob er vom Typ \textit{Integer} ist.
 	
 	\subsection{Die Klasse UpdateCatalogTaskTest}
 	
-	In der Klasse \texttt{UpdateCatalogTaskTest} werden folgende Fixtures geladen:
+	In der Klasse \texttt{UpdateCatalogTaskTest} werden Fixtures folgender Tabellen geladen:
 	\begin{itemize}[nosep]
 		\item \texttt{core\_configurations}
 		\item \texttt{core\_sellers}
@@ -1104,15 +1104,29 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	
 	\texttt{testGetPreviousCatalogVersion()} testet positiv und negativ auf einen in der \texttt{core\_configuartions}-Fixture hinterlegten Konfigurationswert. Zudem wird geprüft, ob \enquote{0} zurückgeliefert wird, falls für den angegeben Seller noch kein Konfigurationswert in der Datenbank angelegt wurde.
 	
+	
 
 	
 	\subsection{Die Klasse MercateoAccountsTableTest}
 	
 	Die Funktion \texttt{validateCatalogVersionFormat(\$value)} erweitert die CakePHP Standardvalidatormethoden\footnote{vgl. hierzu: \url{https://api.cakephp.org/3.0/class-Cake.Validation.Validation.html} (Abgerufen am 02.02.2017) }. Mittels regulärem Ausdruck wird geprüft ob die übergeben Zeichenkette dem  geforderten Format entspricht. Es wird jeweils ein Positiv- und ein Negativtest der Funktionalität durchgeführt. 
+	\texttt{testCheckIfProductExists()} enthält je einen Positiv- und einen Negativtest. Es wird erwartet, dass die Methode \texttt{checkIfProductExists} den booleschen Wert \texttt{true} zurückliefert, falls ein Produkt in der Datenbank gefunden werden konnte und \texttt{false}, wenn nicht.
 	
 	\subsection{Die Klasse MercateoProductsTableTest}
 	
+	Es müssen zum erfolgreichen Testen die Fixtures folgender Tabellen geladen werden:
+	\begin{itemize}[nosep]
+	\item mercateo\_products
+    \item core\_products
+    \item core\_configurations
+    \item core\_product\_updates
+    \item core\_product\_quantities
+    \item core\_product\_types
+    \item core\_marketplaces
+	     
+	\end{itemize} 
 	Die Methode \texttt{testContainsSellersProducts()} prüft ob bei Aufruf von \texttt{containsSellersProducts\-(\$sellerId)} \texttt{true} zurückgegeben wird, falls sich entsprechende Daten in der Tabelle finden lassen bzw. \texttt{false}, falls dem nicht so ist. Dazu wird das Fixture der \texttt{mercateo\_products}-Tabelle geladen.
+	\texttt{testCheckIfProductExists()} enthält je einen Positiv- und einen Negativtest. Es wird erwartet, dass die Methode \texttt{checkIfProductExists} den booleschen Wert \texttt{true} zurückliefert, falls ein Produkt in der Datenbank gefunden werden konnte und \texttt{false}, wenn nicht.
 	
 	\subsection{Die Klasse BMECatComponentTest}
 	
@@ -1137,13 +1151,14 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 	\texttt{updateCatalogTask} wird ein Updatekatalog erstellt und \texttt{deleteCatalogTask} entfernt die Produktdaten eines Verkäufers aus der Datenbank.
 	Die Erzeugung des Dokumentes geschieht arbeitsspeicherschonend.
 	Die Produktdaten werden vor dem Export validiert. Es werden nur jene Produkte exportiert, die den genannten Spezifikationen entsprechen. Informationen darüber, welche Produktdaten unvollständig oder fehlerhaft sind, werden beim Erzeugen der XML-Datei in eine Logdatei geschrieben und zugleich auf der Konsole ausgegeben. Es können 'Simple-Products' eines bei Programmaufruf spezifizierten Verkäufers exportiert werden. Die XML-Datei wird nach ihrer Erzeugung mit dem enstprechenden XML-Schema geprüft. 
-	Zudem wird es Mercateo ermöglicht die Lagerstandsdaten zu einem bestimmten Artikel über ein Webinterface abrufen. 
-	Es ist, trotz entsprechender Datensätze in den jeweiligen Fixtures und intensiver Auseinandersetzung mit der Thematik, noch nicht gelungen die Methoden \texttt{createNewProducts(\$sellerId)}, \texttt{markProductsAsDeleted(\$sellerId)} und \texttt{writeUpdatedProducts(\$sellerId)} ausreichend testen zu können. Dies soll, nach Möglichkeit, in Zukunft behoben werden.
+	Zudem wird es Mercateo ermöglicht die Lagerstandsdaten zu einem bestimmten Artikel über einen Webservice abrufen. \\
+	
+	Es ist, trotz entsprechender Datensätze in den jeweiligen Fixtures und intensiver Auseinandersetzung mit der Thematik, noch nicht gelungen die Methoden \texttt{createNewProducts(\$sellerId)}, \texttt{markProductsAsDeleted(\$sellerId)} und \texttt{writeUpdatedProducts(\$sellerId)} der Klasse \texttt{MercateoProductsTable} ausreichend testen zu können. Dies soll, nach Möglichkeit, in Zukunft behoben werden.
 	
 	Neben der besseren Testabdeckung soll es in zukünftigen Versionen der Software möglich sein, nicht nur Katalogdokumente für einen bestimmten Verkäufer zu erzeugen, sondern für alle im System als aktiv markierte.
 	Zum Zeitpunkt der Fertigstellung vorliegender Arbeit können die erzeugten Katalogdokumente noch nicht im Livebetrieb getestet werden, da noch kein Zugang zum Mercateo-System besteht. Dies wird jedoch in naher Zukunft möglich sein.
 	
-	
+
 
 	
 	
@@ -1161,7 +1176,7 @@ Da Mercateo ein API bereitstellt das Produktdaten über einen XML-Katalog empfä
 		\pagebreak
 		\lstlistoflistings
 	\pagebreak
-	\section{Quellen}
+	\section{Literaturverzeichnis}
 		
 		\begin{enumerate}
 		\item Thomas, David / Hunt, Andrew / Braig, Andreas / Gemkow, Steffen: Der Pragmatische Programmierer. München: Hanser, 2003.

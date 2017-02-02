@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.12.27)  2 FEB 2017 13:34
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.12.27)  2 FEB 2017 15:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -949,7 +949,8 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 92.
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 
-(./BA-Hendrik-Style.aux (./leerseite.aux) (./BA-Hendrik-Text.aux
+(./BA-Hendrik-Style.aux (./leerseite.aux) (./danksagung.aux) (./leerseite.aux)
+(./BA-Hendrik-Text.aux
 
 LaTeX Warning: Label `fig:header' multiply defined.
 
@@ -1196,23 +1197,58 @@ Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 188.
  [2
 
-] (./BA-Hendrik-Style.toc
-LaTeX Font Info:    Try loading font information for U+msa on input line 2.
+]
+\openout2 = `danksagung.aux'.
 
+ (./danksagung.tex
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+
+ []
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 13.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 2.
+LaTeX Font Info:    Try loading font information for U+msb on input line 13.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+wasy on input line 2.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 13.
 
 (/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
 Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 16.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 16.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 16.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 16.
+ [3
+
+
+])
+\openout2 = `leerseite.aux'.
+
+
+(./leerseite.tex)
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 196.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 196.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 196.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 196.
+ [4
+
+
+
+] (./BA-Hendrik-Style.toc
+Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 53.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 53.
@@ -1220,38 +1256,38 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 53.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 53.
- [3
+ [5
 
 ])
 \tf@toc=\write5
 \openout5 = `BA-Hendrik-Style.toc'.
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 209.
+(babel)             in language  on input line 216.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 209.
+(babel)             in language  on input line 216.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 209.
+(babel)             in language  on input line 216.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 209.
- [4]
+(babel)             in language  on input line 216.
+ [6]
 \openout2 = `BA-Hendrik-Text.aux'.
 
+ (./BA-Hendrik-Text.tex
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 3.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 3.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 16.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 16.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 16.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 16.
 
-(./BA-Hendrik-Text.tex
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 3.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 3.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 16.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 16.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 16.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 16.
- [1
+[1
 
 ]
 Package babel Info: Redefining ngerman shorthand "|
@@ -1371,7 +1407,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 126.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 126.
- <img/ERD_Seller_User_complete.png, id=408, 1129.21875pt x 466.74374pt>
+ <img/ERD_Seller_User_complete.png, id=416, 1129.21875pt x 466.74374pt>
 File: img/ERD_Seller_User_complete.png Graphic file (type png)
 
 <use img/ERD_Seller_User_complete.png>
@@ -1388,7 +1424,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 142.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 142.
-<img/ERD_Category_Product.png, id=410, 1204.5pt x 286.06876pt>
+<img/ERD_Category_Product.png, id=418, 1204.5pt x 286.06876pt>
 File: img/ERD_Category_Product.png Graphic file (type png)
 
 <use img/ERD_Category_Product.png>
@@ -1400,7 +1436,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 149.
 See the caption package documentation for explanation.
 
-<img/ERD_Seller_Product.png, id=411, 1092.08pt x 406.51875pt>
+<img/ERD_Seller_Product.png, id=419, 1092.08pt x 406.51875pt>
 File: img/ERD_Seller_Product.png Graphic file (type png)
 
 <use img/ERD_Seller_Product.png>
@@ -1426,7 +1462,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 165.
 
-<img/Dashboard.png, id=420, 892.33376pt x 498.86375pt>
+<img/Dashboard.png, id=428, 892.33376pt x 498.86375pt>
 File: img/Dashboard.png Graphic file (type png)
  <use img/Dashboard.png>
 Package pdftex.def Info: img/Dashboard.png used on input line 172.
@@ -1500,7 +1536,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 234.
  [8]
-<img/BMECat_Header.png, id=466, 1882.03125pt x 1016.79875pt>
+<img/BMECat_Header.png, id=475, 1882.03125pt x 1016.79875pt>
 File: img/BMECat_Header.png Graphic file (type png)
 
 <use img/BMECat_Header.png>
@@ -1520,7 +1556,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 304.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 304.
-[9] <img/newCatalog.png, id=510, 1317.92375pt x 451.6875pt>
+[9] <img/newCatalog.png, id=518, 1317.92375pt x 451.6875pt>
 File: img/newCatalog.png Graphic file (type png)
 
 <use img/newCatalog.png>
@@ -1532,7 +1568,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 314.
 See the caption package documentation for explanation.
 
-<img/updateProducts.png, id=512, 1393.205pt x 339.2675pt>
+<img/updateProducts.png, id=520, 1393.205pt x 339.2675pt>
 File: img/updateProducts.png Graphic file (type png)
 
 <use img/updateProducts.png>
@@ -1557,7 +1593,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 343--344
 
  []
 
-<img/catalogGroupSystem.png, id=522, 1806.75pt x 815.045pt>
+<img/catalogGroupSystem.png, id=530, 1806.75pt x 815.045pt>
 File: img/catalogGroupSystem.png Graphic file (type png)
 
 <use img/catalogGroupSystem.png>
@@ -1569,7 +1605,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 351.
 See the caption package documentation for explanation.
 
-<img/Article.png, id=523, 2410.00375pt x 2116.90875pt>
+<img/Article.png, id=531, 2410.00375pt x 2116.90875pt>
 File: img/Article.png Graphic file (type png)
  <use img/Article.png>
 Package pdftex.def Info: img/Article.png used on input line 362.
@@ -1602,7 +1638,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 378--379
 
  []
 
-<img/articleGroupMap.png, id=544, 1355.0625pt x 339.2675pt>
+<img/articleGroupMap.png, id=552, 1355.0625pt x 339.2675pt>
 File: img/articleGroupMap.png Graphic file (type png)
 
 <use img/articleGroupMap.png>
@@ -1623,7 +1659,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 398.
 [13 <./img/articleGroupMap.png>]
-<img/newCatalogLogik.png, id=554, 2433.09pt x 1292.83pt>
+<img/newCatalogLogik.png, id=563, 2433.09pt x 1292.83pt>
 File: img/newCatalogLogik.png Graphic file (type png)
 
 <use img/newCatalogLogik.png>
@@ -1686,26 +1722,27 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 469.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 485.
+(babel)             in language  on input line 484.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 485.
+(babel)             in language  on input line 484.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 488.
+(babel)             in language  on input line 484.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 488.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 501.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 501.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 512.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 512.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 512.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 512.
+(babel)             in language  on input line 484.
  [16]
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 485.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 485.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 488.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 488.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 501.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 501.
+
 Underfull \hbox (badness 10000) in paragraph at lines 517--517
 [][]$\OT1/pcr/m/n/8 http : / / www . mercateo . com / support / verkaufen / kat
 alog-[]allgemeine-[]informationen /
@@ -1719,7 +1756,9 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 520.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 520.
-[17]
+[17
+
+]
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 520.
 Package babel Info: Redefining ngerman shorthand "~
@@ -1728,7 +1767,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 532.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 532.
- <img/VererbungShellSimple.png, id=610, 1656.1875pt x 602.25pt>
+ <img/VererbungShellSimple.png, id=618, 1656.1875pt x 602.25pt>
 File: img/VererbungShellSimple.png Graphic file (type png)
 
 <use img/VererbungShellSimple.png>
@@ -1754,7 +1793,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 547.
 [18 <./img/VererbungShellSimple.png>]
-<img/iToolSeller.png, id=620, 1887.05pt x 462.72874pt>
+<img/iToolSeller.png, id=628, 1887.05pt x 462.72874pt>
 File: img/iToolSeller.png Graphic file (type png)
 
 <use img/iToolSeller.png>
@@ -1801,7 +1840,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 643.
 
-<img/newCatalogComplete.png, id=637, 2898.83pt x 1844.8925pt>
+<img/newCatalogComplete.png, id=646, 2898.83pt x 1844.8925pt>
 File: img/newCatalogComplete.png Graphic file (type png)
 
 <use img/newCatalogComplete.png>
@@ -1822,7 +1861,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 657.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 657.
-<img/productChangeCheck.png, id=638, 2559.5625pt x 1212.53pt>
+<img/productChangeCheck.png, id=647, 2559.5625pt x 1212.53pt>
 File: img/productChangeCheck.png Graphic file (type png)
 
 <use img/productChangeCheck.png>
@@ -1848,7 +1887,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 668.
 [21 <./img/newCatalogComplete.png>]
-<img/updateCatalogComplete.png, id=646, 3199.955pt x 1731.46875pt>
+<img/updateCatalogComplete.png, id=654, 3199.955pt x 1731.46875pt>
 File: img/updateCatalogComplete.png Graphic file (type png)
 
 <use img/updateCatalogComplete.png>
@@ -1896,13 +1935,16 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 691.
 
-Overfull \hbox (66.67137pt too wide) in paragraph at lines 721--722
-\OT1/cmr/m/n/10 Verk[]aufer an-ge-zeigt. Dies ge-schieht in den ein-zel-nen Tas
-ks []uber die ge-erb-te Me-tho-de \OT1/pcr/l/n/10 va-li-da-teAr-gu-ment($coreSe
-llerId)\OT1/cmr/m/n/10 . 
+Underfull \hbox (badness 10000) in paragraph at lines 693--695
+
  []
 
-<img/Aufrufhierarchie.png, id=661, 1656.1875pt x 978.65625pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 721--722
+
+ []
+
+<img/Aufrufhierarchie.png, id=669, 1656.1875pt x 978.65625pt>
 File: img/Aufrufhierarchie.png Graphic file (type png)
 
 <use img/Aufrufhierarchie.png>
@@ -1938,7 +1980,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 764.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 764.
- <img/BMECatComponentUML.png, id=697, 1430.34375pt x 1242.6425pt>
+ <img/BMECatComponentUML.png, id=705, 1430.34375pt x 1242.6425pt>
 File: img/BMECatComponentUML.png Graphic file (type png)
 
 <use img/BMECatComponentUML.png>
@@ -1964,7 +2006,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 776.
 [25 <./img/Aufrufhierarchie.png>]
-<img/createBMECatHierarchie.png, id=709, 1919.17pt x 737.75626pt>
+<img/createBMECatHierarchie.png, id=718, 1919.17pt x 737.75626pt>
 File: img/createBMECatHierarchie.png Graphic file (type png)
 
 <use img/createBMECatHierarchie.png>
@@ -1981,12 +2023,6 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 789.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 789.
-
-Overfull \hbox (6.91437pt too wide) in paragraph at lines 791--793
-\OT1/cmr/m/n/10 Die Funk-ti-on \OT1/pcr/l/n/10 crea-teB-ME-CatXML-Do-cu-ment($s
-ellerName, $sel-le-rId, $tran-sac-ti-on-Ty-pe, $prev-
- []
-
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 793.
 Package babel Info: Redefining ngerman shorthand "~
@@ -2000,19 +2036,12 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 794.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 794.
-
-Overfull \hbox (18.1437pt too wide) in paragraph at lines 796--797
-\OT1/cmr/m/n/10 Die Me-tho-de \OT1/pcr/l/n/10 create-Hea-der($sellerId) \OT1/cm
-r/m/n/10 schreibt die BMECat-Header-Sektion des Do-ku-men-tes. Al-le ben[]otigt
-en
- []
-
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 798.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 798.
 
-<img/CreateCatalogGroupSystemHierarchie.png, id=718, 1695.33376pt x 793.96625pt
+<img/CreateCatalogGroupSystemHierarchie.png, id=727, 1695.33376pt x 793.96625pt
 >
 File: img/CreateCatalogGroupSystemHierarchie.png Graphic file (type png)
  <use img/CreateCatalogGroupSystemHierarchie.png>
@@ -2024,13 +2053,6 @@ ut line 804.
 Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 805.
 See the caption package documentation for explanation.
-
-
-Overfull \hbox (35.52591pt too wide) in paragraph at lines 809--810
-[]\OT1/cmr/m/n/10 Das tats[]achliche Ab-bil-den der Ka-ta-logstruk-tur er-folgt
- in der Me-tho-de \OT1/pcr/l/n/10 ca-te-go-ry-To-No-de( $ca-te-go-ry,$sellerId)
-\OT1/cmr/m/n/10 . 
- []
 
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 818.
@@ -2050,7 +2072,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 833--835
 
  []
 
-<img/createArticleHierarchie.png, id=729, 1543.7675pt x 522.95375pt>
+<img/createArticleHierarchie.png, id=737, 1543.7675pt x 522.95375pt>
 File: img/createArticleHierarchie.png Graphic file (type png)
 
 <use img/createArticleHierarchie.png>
@@ -2088,7 +2110,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 861.
 
-<img/CatalogToolsTaskUML.png, id=751, 828.09375pt x 640.3925pt>
+<img/CatalogToolsTaskUML.png, id=759, 828.09375pt x 640.3925pt>
 File: img/CatalogToolsTaskUML.png Graphic file (type png)
 
 <use img/CatalogToolsTaskUML.png>
@@ -2139,7 +2161,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 905.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 905.
- <img/MercateoProductsTableUML.png, id=764, 1053.9375pt x 941.5175pt>
+ <img/MercateoProductsTableUML.png, id=772, 1053.9375pt x 941.5175pt>
 File: img/MercateoProductsTableUML.png Graphic file (type png)
 
 <use img/MercateoProductsTableUML.png>
@@ -2156,7 +2178,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 929.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 929.
-<img/AddNewCatalogTaskUML.png, id=765, 903.375pt x 526.96875pt>
+<img/AddNewCatalogTaskUML.png, id=773, 903.375pt x 526.96875pt>
 File: img/AddNewCatalogTaskUML.png Graphic file (type png)
 
 <use img/AddNewCatalogTaskUML.png>
@@ -2179,7 +2201,7 @@ Package babel Info: Redefining ngerman shorthand "~
 [31
 
  <./img/MercateoProductsTableUML.png>]
-<img/newCatalogAufrufhierarchie.png, id=781, 3011.25pt x 715.67375pt>
+<img/newCatalogAufrufhierarchie.png, id=790, 3011.25pt x 715.67375pt>
 File: img/newCatalogAufrufhierarchie.png Graphic file (type png)
 
 <use img/newCatalogAufrufhierarchie.png>
@@ -2205,13 +2227,6 @@ Overfull \hbox (4.91444pt too wide) in paragraph at lines 957--958
 L-Do-cu-ment($sellerId, $tran-sac-ti-on-Ty-pe, $prev-Ver-
  []
 
-
-Overfull \hbox (45.1201pt too wide) in paragraph at lines 957--958
-\OT1/cmr/m/n/10 me-ter \OT1/pcr/l/n/10 tran-sac-ti-on-Ty-pe \OT1/cmr/m/n/10 wir
-d hier der Wert \OT1/pcr/l/n/10 T[]-NEW[]-CA-TA-LOG \OT1/cmr/m/n/10 zu-ge-wie-s
-en. An-schlie-^^Yend wird mit \OT1/pcr/l/n/10 MercateoProducts-
- []
-
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 959.
 Package babel Info: Redefining ngerman shorthand "~
@@ -2226,7 +2241,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 963.
 
-<img/UpdateCatalogTaskUML.png, id=790, 1053.9375pt x 715.67375pt>
+<img/UpdateCatalogTaskUML.png, id=799, 1053.9375pt x 715.67375pt>
 File: img/UpdateCatalogTaskUML.png Graphic file (type png)
 
 <use img/UpdateCatalogTaskUML.png>
@@ -2247,7 +2262,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 986.
 [33 <./img/UpdateCatalogTaskUML.png>]
-<img/updateKatalogAufrufhierarchie.png, id=805, 1882.03125pt x 1223.57124pt>
+<img/updateKatalogAufrufhierarchie.png, id=813, 1882.03125pt x 1223.57124pt>
 File: img/updateKatalogAufrufhierarchie.png Graphic file (type png)
 
 <use img/updateKatalogAufrufhierarchie.png>
@@ -2259,13 +2274,6 @@ ne 995.
 Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 996.
 See the caption package documentation for explanation.
-
-
-Overfull \hbox (95.6879pt too wide) in paragraph at lines 1004--1005
-\OT1/cmr/m/n/10 de-ren Sta-tus auf []  \OT1/pcr/l/n/10 de-le-te\OT1/cmr/m/n/10 
-\ ge-setzt ist. Die Me-tho-de \OT1/pcr/l/n/10 MercateoProducts->deleteEntries-W
-ithStatusDeleted($sellerId)
- []
 
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 1006.
@@ -2281,7 +2289,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 1010.
 
-<img/DeleteCatalogTask.png, id=812, 752.8125pt x 414.54875pt>
+<img/DeleteCatalogTask.png, id=820, 752.8125pt x 414.54875pt>
 File: img/DeleteCatalogTask.png Graphic file (type png)
 
 <use img/DeleteCatalogTask.png>
@@ -2292,13 +2300,6 @@ Package pdftex.def Info: img/DeleteCatalogTask.png used on input line 1017.
 Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 1018.
 See the caption package documentation for explanation.
-
-
-Overfull \hbox (105.2835pt too wide) in paragraph at lines 1022--1023
-\OT1/cmr/m/n/10 ob er sich sei-nes Han-delns si-cher ist. Falls ja, wer-den mit
- Auf-ruf von \OT1/pcr/l/n/10 MercateoProducts->deleteSellersArticles($sellerId)
-
- []
 
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 1023.
@@ -2336,7 +2337,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 1049.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 1049.
-<img/AvailabilityControllerUML.png, id=819, 715.67375pt x 526.96875pt>
+<img/AvailabilityControllerUML.png, id=827, 715.67375pt x 526.96875pt>
 File: img/AvailabilityControllerUML.png Graphic file (type png)
 
 <use img/AvailabilityControllerUML.png>
@@ -2373,97 +2374,101 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 1095.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1095.
+(babel)             in language  on input line 1099.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1095.
+(babel)             in language  on input line 1099.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 1099.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 1099.
  [37]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1095.
+(babel)             in language  on input line 1110.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1095.
+(babel)             in language  on input line 1110.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1109.
+(babel)             in language  on input line 1115.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1109.
+(babel)             in language  on input line 1115.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1113.
+(babel)             in language  on input line 1131.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1113.
+(babel)             in language  on input line 1131.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1117.
+(babel)             in language  on input line 1138.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1117.
-
-Overfull \hbox (3.37709pt too wide) in paragraph at lines 1124--1125
+(babel)             in language  on input line 1138.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 1138.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 1138.
+ [38]
+Overfull \hbox (3.37709pt too wide) in paragraph at lines 1138--1139
 []\OT1/pcr/l/n/10 testArticleDataValidator() \OT1/cmr/m/n/10 f[]uhrt einen Posi
 tiv- und einen Ne-ga-tiv-test durch, in-dem je-weils ei-ne []  g[]ultige\
  []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1130.
+(babel)             in language  on input line 1144.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1130.
+(babel)             in language  on input line 1144.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1148--1155
+
+ []
+
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1134.
+(babel)             in language  on input line 1168.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1134.
+(babel)             in language  on input line 1168.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1134.
+(babel)             in language  on input line 1168.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1134.
-[38]
+(babel)             in language  on input line 1168.
+[39]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1153.
+(babel)             in language  on input line 1173.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1153.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1153.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1153.
- [39]
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1158.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1158.
+(babel)             in language  on input line 1173.
  (./BA-Hendrik-Style.lof)
 \tf@lof=\write6
 \openout6 = `BA-Hendrik-Style.lof'.
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1160.
+(babel)             in language  on input line 1175.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1160.
+(babel)             in language  on input line 1175.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1160.
+(babel)             in language  on input line 1175.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1160.
+(babel)             in language  on input line 1175.
 pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1160 		\listoftables
+l.1175 		\listoftables
                        [1]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1160.
+(babel)             in language  on input line 1175.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1160.
+(babel)             in language  on input line 1175.
  (./BA-Hendrik-Style.lot)
 \tf@lot=\write7
 \openout7 = `BA-Hendrik-Style.lot'.
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1162.
+(babel)             in language  on input line 1177.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1162.
+(babel)             in language  on input line 1177.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1162.
+(babel)             in language  on input line 1177.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1162.
+(babel)             in language  on input line 1177.
 pdfTeX warning (ext4): destination with the same identifier (name{page.II}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1162 		\lstlistoflistings
+l.1177 		\lstlistoflistings
                             [2]
 
 Class scrartcl Warning: \float@listhead detected!
@@ -2476,53 +2481,53 @@ Class scrartcl Warning: \float@listhead detected!
 (scrartcl)              Loading of package `scrhack' may help to
 (scrartcl)              avoid this warning, if you are using a
 (scrartcl)              a package that still implements the
-(scrartcl)              deprecated \float@listhead interface  on input line 116
-2.
+(scrartcl)              deprecated \float@listhead interface  on input line 117
+7.
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1162.
+(babel)             in language  on input line 1177.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1162.
+(babel)             in language  on input line 1177.
 (./BA-Hendrik-Style.lol)
 \tf@lol=\write8
 \openout8 = `BA-Hendrik-Style.lol'.
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1164.
+(babel)             in language  on input line 1179.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1164.
+(babel)             in language  on input line 1179.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1164.
+(babel)             in language  on input line 1179.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1164.
+(babel)             in language  on input line 1179.
 pdfTeX warning (ext4): destination with the same identifier (name{page.III}) ha
 s been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1164 	\section
-                {Quellen} [3]
+l.1179 	\section
+                {Literaturverzeichnis} [3]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1164.
+(babel)             in language  on input line 1179.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1164.
+(babel)             in language  on input line 1179.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1173.
+(babel)             in language  on input line 1188.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1173.
+(babel)             in language  on input line 1188.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1173.
+(babel)             in language  on input line 1188.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1173.
+(babel)             in language  on input line 1188.
 pdfTeX warning (ext4): destination with the same identifier (name{page.IV}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1173 	\section
+l.1188 	\section
                 {Eigenständigkeitserklärung} [4]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1173.
+(babel)             in language  on input line 1188.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1173.
+(babel)             in language  on input line 1188.
 
 
 ! Package array Error:  Illegal pream-token (2em): `c' used.
@@ -2531,45 +2536,57 @@ See the array package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1181 		\begin{tabular}{c{2em}c}
+l.1196 		\begin{tabular}{c{2em}c}
                                  
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1193.
+(babel)             in language  on input line 1208.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1193.
+(babel)             in language  on input line 1208.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1193.
+(babel)             in language  on input line 1208.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1193.
-[5])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 287.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 287.
- (./BA-Hendrik-Style.aux (./leerseite.aux) (./BA-Hendrik-Text.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 287.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 287.
-Package rerunfilecheck Info: File `BA-Hendrik-Style.out' has not changed.
-(rerunfilecheck)             Checksum: 07AE5AF82302802B0F614F7B3A081038;4704.
+(babel)             in language  on input line 1208.
+pdfTeX warning (ext4): destination with the same identifier (name{page.V}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1208 	\clearpage
+                   [5])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 294.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 294.
+ (./BA-Hendrik-Style.aux (./leerseite.aux)
+(./danksagung.aux) (./leerseite.aux) (./BA-Hendrik-Text.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 294.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 294.
 
+
+Package rerunfilecheck Warning: File `BA-Hendrik-Style.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `BA-Hendrik-Style.out':
+(rerunfilecheck)             Before: 07AE5AF82302802B0F614F7B3A081038;4704
+(rerunfilecheck)             After:  0E260D8F56F55BBED9C0CC0A0E6B3354;4717.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 287.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 294.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 791 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 17875 strings out of 493304
- 269778 string characters out of 6139870
- 740705 words of memory out of 5000000
- 20615 multiletter control sequences out of 15000+600000
+ 17893 strings out of 493304
+ 270046 string characters out of 6139870
+ 741288 words of memory out of 5000000
+ 20619 multiletter control sequences out of 15000+600000
  18658 words of font info for 73 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  50i,13n,54p,1024b,3119s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2592,10 +2609,10 @@ ist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
 /courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/wasy/wasy
 10.pfb>
-Output written on BA-Hendrik-Style.pdf (48 pages, 1891044 bytes).
+Output written on BA-Hendrik-Style.pdf (50 pages, 1889026 bytes).
 PDF statistics:
- 1088 PDF objects out of 1200 (max. 8388607)
- 951 compressed objects within 10 object streams
- 364 named destinations out of 1000 (max. 500000)
+ 1096 PDF objects out of 1200 (max. 8388607)
+ 957 compressed objects within 10 object streams
+ 365 named destinations out of 1000 (max. 500000)
  647 words of extra memory for PDF output out of 10000 (max. 10000000)
 

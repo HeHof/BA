@@ -22,9 +22,9 @@
 \contentsline {subsubsection}{\numberline {3.1.1}Funktionale Anforderungen}{15}{subsubsection.3.1.1}
 \contentsline {subsubsection}{\numberline {3.1.2}Nichtfunktionale Anforderungen}{15}{subsubsection.3.1.2}
 \contentsline {subsection}{\numberline {3.2}Zielstellung}{16}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Einsch\IeC {\"a}tzung der verwendeten Technologien}{16}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Das BMECat Format}{16}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Daten\IeC {\"u}bertragung zu Mercateo}{16}{subsubsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3}Einsch\IeC {\"a}tzung der verwendeten Technologien}{17}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Das BMECat Format}{17}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Daten\IeC {\"u}bertragung zu Mercateo}{17}{subsubsection.3.3.2}
 \contentsline {section}{\numberline {4}Entwurf}{18}{section.4}
 \contentsline {subsection}{\numberline {4.1}Katalogerstellung}{18}{subsection.4.1}
 \contentsline {subsubsection}{\numberline {4.1.1}Die Tabelle \texttt {mercateo\_accounts}}{19}{subsubsection.4.1.1}
@@ -59,5 +59,5 @@
 \contentsline {section}{\numberline {A}Abbildungsverzeichnis}{I}{appendix.A}
 \contentsline {section}{\numberline {B}Tabellenverzeichnis}{II}{appendix.B}
 \contentsline {section}{\numberline {C}Listings}{III}{appendix.C}
-\contentsline {section}{\numberline {D}Quellen}{IV}{appendix.D}
+\contentsline {section}{\numberline {D}Literaturverzeichnis}{IV}{appendix.D}
 \contentsline {section}{\numberline {E}Eigenst\IeC {\"a}ndigkeitserkl\IeC {\"a}rung}{V}{appendix.E}
