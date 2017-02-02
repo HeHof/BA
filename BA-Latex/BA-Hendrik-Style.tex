@@ -1,4 +1,4 @@
-\documentclass[9.5pt,a4paper,bibliography=totocnumbered,listof=totocnumbered]{scrartcl}
+\documentclass[10pt,a4paper,bibliography=totocnumbered,listof=totocnumbered]{scrartcl}
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
@@ -15,6 +15,7 @@
 \usepackage[printonlyused]{acronym}
 \usepackage{subfig}
 \usepackage{floatflt}
+\usepackage{float}
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{colortbl}
 \usepackage{paralist}
@@ -129,39 +130,62 @@
 			\includegraphics[width=.4\textwidth]{img/HTW-quer-rgb.pdf} %\\[10cm]
 		\end{flushright}
 	\vspace*{3cm}
-	\Large
-	\textbf{Fachbereich IV}\\
-	\textbf{Angewandte Informatik}\\
+%	\Large
+%	\textbf{Fachbereich IV}\\
+%	\textbf{Angewandte Informatik}\\
 	\vspace*{2cm}
 	{\rule{\linewidth}{0.5mm}}
-	\Huge
-	\textbf{Bachelorarbeit}\\
+	
+
+	
 	\vspace*{0.5cm}
+	\LARGE
+	\textbf{Konzeption und prototypische Entwicklung einer Schnittstelle zwischen der Multichannel Marketing Solution \enquote{iTool3} und dem Mercateo Marketplace}\\
+	\vspace*{0.6cm}
+	\Large
+	Abschlussarbeit\\
 	\large
-	über das Thema\\
-	\vspace*{1cm}
-	\textbf{Konzeption und prototypische Entwicklung einer Schnittstelle zwischen der Multichannel Marketing Solution \textit{iTool 3} und dem Mercateo Maketplace}\\
+	\vspace*{0.3cm}
+	zur Erlangung des akademischen Grades\\
+	Bachelor of Science (B.Sc.)\\
+	\vspace*{0.2cm}
+	an der \\
+		\vspace*{0.2cm}
+	Hochschule für Technik und Wirtschaft\\
+	Fachbereich Wirtschaftswissenschaften II\\
+	Studiengang Angewandte Informatik \\
+	\vspace*{0.5cm}
 	{\rule{\linewidth}{0.5mm}}
 	\vspace*{2cm}
 	
 	\vfill
+	\end{center}
+	
 	\normalsize
-		\begin{minipage}[t]{0.4\textwidth}
+		\begin{minipage}[t]{0.7\textwidth}
+		\begin{addmargin}[1cm]{1cm}
 			\begin{flushleft} %\large
-				%\emph{Author:}\\
-				
-				Hendrik Hofmann\\ Matr.Nr.: 539721 \\{\today}
-				
-			\end{flushleft}
+					%\emph{Author:}\\
+			 1. Prüfer: Prof. Dr.-Ing. habil. Dierk Langbein \\ 
+			 2. Prüfer: M.Sc. Valeri Deleske
+					
+					
+				\end{flushleft}
+		\end{addmargin}
+		
 		\end{minipage}
 		\begin{minipage}[t]{0.3\textwidth}
+			\begin{addmargin}[1cm]{1cm}
 			\begin{flushright} %\large
-				  Prüfer: \\Prof. Dr.-Ing. habil. \\Dierk Langbein, \\ 
+				Eingereicht von Hendrik Hofmann \\{\today}
 			\end{flushright}
+			\end{addmargin}
 		\end{minipage}
-\end{center}
-\pagebreak
 
+\pagebreak
+\newpage
+\thispagestyle{empty}
+\include{leerseite}
 
 
 % ----------------------------------------------------------------------------------------------------------
@@ -239,19 +263,21 @@
 % ----------------------------------------------------------------------------------------------------------
 % Literatur
 % ----------------------------------------------------------------------------------------------------------
-\renewcommand\refname{Quellenverzeichnis}
-\bibliographystyle{myalpha}
-\bibliography{bibo}
-\vspace{10px}
-\begin{enumerate}
+%\renewcommand\refname{Quellenverzeichnis}
+%\bibliographystyle{myalpha}
+%\bibliography{bibo}
+%\vspace{10px}
+%\begin{enumerate}
 	
 
-	\item Martin, Robert C.: Clean Code - Refactoring, Patterns, Testen und Techniken für sauberen Code : Deutsche Ausgabe. 1. Aufl.. Heidelberg: MITP-Verlags GmbH \& Co. KG, 2013.
+	%\item Martin, Robert C.: Clean Code - Refactoring, Patterns, Testen und Techniken für sauberen Code : Deutsche Ausgabe. 1. Aufl.. Heidelberg: MITP-Verlags GmbH \& Co. KG, 2013.
 
-\end{enumerate}
+%\end{enumerate}
 
 
 \pagebreak
+
+
 
 % ----------------------------------------------------------------------------------------------------------
 % Anhang
